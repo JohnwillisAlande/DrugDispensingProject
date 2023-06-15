@@ -1,0 +1,395 @@
+<html>
+
+<head>
+    <title>REGISTRATION</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.5.1/css/ionicons.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+        }
+
+        h1 ion-icon {
+            margin-right: 10px;
+        }
+
+        p ion-icon {
+            margin-right: 5px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        #userTypeSelection {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        #userTypeSelection label {
+            margin-right: 20px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            min-width: 500px,
+
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .inputFields {
+            flex-direction: row;
+            justify-content: center;
+            background-color: 'rgb(12,2,2)';
+            left: 300px
+        }
+    </style>
+</head>
+
+<script>
+    let userType;
+
+    function choose(choice) {
+        userType = choice;
+
+        // Show or hide input fields based on the selected user type
+        const patientFields = document.getElementById("patientFields");
+        const doctorFields = document.getElementById("doctorFields");
+        const supervisorFields = document.getElementById("supervisorFields");
+        const pharmacyFields = document.getElementById("pharmacyFields");
+        const companyFields = document.getElementById("companyFields");
+
+        patientFields.style.display = (choice === "Patient") ? "block" : "none";
+        doctorFields.style.display = (choice === "Doctor") ? "block" : "none";
+        supervisorFields.style.display = (choice === "Supervisor") ? "block" : "none";
+        pharmacyFields.style.display = (choice === "Pharmacy") ? "block" : "none";
+        companyFields.style.display = (choice === "Pharmaceutical Company") ? "block" : "none";
+    }
+
+
+
+    function sendData() {
+        const isBlank = /^\s*$|^\s{2,}/;
+        const PASSREGEX = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{8,}$/;
+        let data = {};
+
+        if (userType === "Patient") {
+            var name = document.getElementById("patientName").value;
+            var ssn = document.getElementById("patientSSN").value;
+            var age = document.getElementById("patientEmail").value;
+            var email = document.getElementById("patientEmail").value;
+            var contact = document.getElementById("patientContact").value;
+            var doctorName = document.getElementById("patientDoctorName").value;
+            var password = document.getElementById('patientPassword').value;
+            var address = document.getElementById("patientAddress").value;
+
+            if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(age) && !isBlank.test(email) && !isBlank.test(contact) && !isBlank.test(doctorSSN) && !isBlank.test(address) && !isBlank.test(password)) {
+                if (PASSREGEX.test(password)) {
+                    data = {
+                        Name: name,
+                        SSN: ssn,
+                        Age: age,
+                        Email: email,
+                        Password: password,
+                        Contact: contact,
+                        DoctorName: doctorName,
+                        Address: address
+                    };
+                    fetch('CreateUser.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }).then((response) => {
+                        console.log(response)
+                    }).catch((error) => {
+                        console.error(error)
+                    })
+                } else {
+                    console.log("Invalid password");
+                }
+            } else {
+                console.log("Incomplete credentials");
+            }
+        } else if (userType === "Doctor") {
+            var name = document.getElementById("doctorName").value;
+            var ssn = document.getElementById("doctorSSN").value;
+            var email = document.getElementById("doctorEmail").value;
+            var password = document.getElementById("doctorPassword").value;
+            var specialty = document.getElementById("doctorSpecialty").value;
+            var contact = document.getElementById("doctorContact").value;
+
+            if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(specialty) && !isBlank.test(contact)) {
+                if (PASSREGEX.test(password)) {
+                    data = {
+                        Name: name,
+                        SSN: ssn,
+                        Email: email,
+                        Password: password,
+                        Specialty: specialty,
+                        Contact: contact
+                    };
+                    fetch('CreateUser.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }).then((response) => {
+                        console.log(response)
+                    }).catch((error) => {
+                        console.error(error)
+                    })
+                } else {
+                    console.log("Invalid credentials");
+                }
+            } else {
+                console.log("Incomplete credentials");
+            }
+        } else if (userType === "Supervisor") {
+            var name = document.getElementById("supervisorName").value;
+            var email = document.getElementById("supervisorEmail").value;
+            var password = document.getElementById("supervisorPassword").value;
+            var contact = document.getElementById("supervisorContact").value;
+
+            if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact)) {
+                if (PASSREGEX.test(password)) {
+                    data = {
+                        Name: name,
+                        Email: email,
+                        Password: password,
+                        Contact: contact
+                    };
+                } else {
+                    console.log("Invalid credentials");
+                }
+                fetch('CreateUser.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).then((response) => {
+                    console.log(response)
+                }).catch((error) => {
+                    console.error(error)
+                })
+            } else {
+                console.log("Incomplete credentials");
+            }
+        } else if (userType === "Pharmacy") {
+            var name = document.getElementById("pharmacyName").value;
+            var email = document.getElementById("pharmacyEmail").value;
+            var password = document.getElementById("pharmacyPassword").value;
+            var contact = document.getElementById("pharmacyContact").value;
+            var pharmacyAddress = document.getElementById("pharmacyAddress").value;
+
+            if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact) && !isBlank.test(pharmacyAddress)) {
+                if (PASSREGEX.test(password)) {
+                    data = {
+                        Name: name,
+                        Email: email,
+                        Password: password,
+                        Contact: contact,
+                        PharmacyAddress: pharmacyAddress,
+                    };
+                    fetch('CreateUser.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }).then((response) => {
+                        console.log(response)
+                    }).catch((error) => {
+                        console.error(error)
+                    })
+                } else {
+                    console.log("Invalid credentials");
+                }
+            } else {
+                console.log("Incomplete credentials");
+            }
+        } else if (userType === "Pharmaceutical Company") {
+            var password = document.getElementById("companyPassword").value;
+            var name = document.getElementById("companyName").value
+            var email = document.getElementById("companyEmail").value
+            var password = document.getElementById("companyPassword").value
+            var contact = document.getElementById("companyContact").value
+            if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact)) {
+                if (PASSREGEX.test(password)) {
+                    data = {
+                        Name: name,
+                        Email: email,
+                        Password: password,
+                        Contact: contact
+                    };
+                    fetch('CreateUser.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    }).then((response) => {
+                        console.log(response)
+                    }).catch((error) => {
+                        console.error(error)
+                    })
+                } else {
+                    console.log("Invalid crededtionals")
+                }
+            }
+        } else {
+            console.log("Incomplete credentials")
+        }
+
+
+    }
+
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+<body>
+    <h1>REGISTRATION <ion-icon name="people-circle-outline"></ion-icon>
+    </h1>
+    <p>Welcome Kindly Register Your Details Below <ion-icon name="pencil-outline"></ion-icon>
+    </p>
+    <form onsubmit="event.preventDefault(); sendData();">
+        <!-- User type selection -->
+        <div id="userTypeSelection">
+            <label onclick="choose('Patient')">
+                <input type="radio" name="userType" value="Patient">
+                <ion-icon name="person"></ion-icon> Patient
+            </label>
+            <label onclick="choose('Doctor')">
+                <input type="radio" name="userType" value="Doctor">
+                <ion-icon name="medkit-outline"></ion-icon> Doctor
+            </label>
+            <label onclick="choose('Supervisor')">
+                <input type="radio" name="userType" value="Supervisor">
+                <ion-icon name="people"></ion-icon> Supervisor
+            </label>
+            <label onclick="choose('Pharmacy')">
+                <input type="radio" name="userType" value="Pharmacy">
+                <ion-icon name="cart"></ion-icon> Pharmacy
+            </label>
+            <label onclick="choose('Pharmaceutical Company')">
+                <input type="radio" name="userType" value="Pharmaceutical Company">
+                <ion-icon name="business"></ion-icon> Pharmaceutical Company
+            </label>
+        </div>
+        <div class="inputFields">
+            <!-- Patient fields -->
+            <div id="patientFields" style="display: none;">
+                <input type="text" id="patientName" placeholder="Name">
+                <br>
+                <input type="nuber" id="patientSSN" placeholder="SSN">
+                <br>
+                <input type="number" id="patientAge" placeholder="Age">
+                <br>
+                <input type="text" id="patientEmail" placeholder="Email">
+                <br>
+                <input type="password" id="patientPassword" placeholder="Password">
+                <br>
+                <input type="number" id="patientContact" placeholder="Contact">
+                <br>
+                <input type="text" id="patientDoctorName" placeholder="Doctor Name">
+                <br>
+                <input type="text" id="patientAddress" placeholder="Address">
+                <br>
+                <button type="submit">Register</button>
+
+            </div>
+
+            <!-- Doctor fields -->
+            <div id="doctorFields" style="display: none;">
+                <br>
+                <input type="text" id="doctorName" placeholder="Name">
+                <br>
+                <input type="number" id="doctorSSN" placeholder="SSN">
+                <br>
+                <input type="text" id="doctorEmail" placeholder="Email">
+                <br>
+                <input type="password" id="doctorPassword" placeholder="Password">
+                <br>
+                <input type="text" id="doctorSpecialty" placeholder="Specialty">
+                <br>
+                <input type="number" id="doctorContact" placeholder="Contact">
+                <br>
+                <button type="submit">Register</button>
+
+            </div>
+
+            <!-- Supervisor fields -->
+            <div id="supervisorFields" style="display: none;">
+                <br>
+                <input type="text" id="supervisorName" placeholder="Name">
+                <br>
+                <input type="text" id="supervisorEmail" placeholder="Email">
+                <br>
+                <input type="password" id="supervisorPassword" placeholder="Password">
+                <br>
+                <input type="number" id="supervisorContact" placeholder="Contact">
+                <br>
+                <button type="submit">Register</button>
+
+            </div>
+
+            <!-- Pharmacy fields -->
+            <div id="pharmacyFields" style="display: none;">
+                <br>
+                <input type="text" id="pharmacyName" placeholder="Name">
+                <br>
+                <input type="text" id="pharmacyEmail" placeholder="Email">
+                <br>
+                <input type="password" id="pharmacyPassword" placeholder="Password">
+                <br>
+                <input type="number" id="pharmacyContact" placeholder="Contact">
+                <br>
+                <input type="text" id="pharmacyAddress" placeholder="Address">
+                <button type="submit">Register</button>
+
+            </div>
+
+            <!-- Pharmaceutical Company fields -->
+            <div id="companyFields" style="display: none;">
+                <br>
+                <input type="text" id="companyName" placeholder="Name">
+                <br>
+                <input type="text" id="companyEmail" placeholder="Email">
+                <br>
+                <input type="password" id="companyPassword" placeholder="Password">
+                <br>
+                <input type="number" id="companyContact" placeholder="Contact">
+                <br>
+                <button type="submit">Register</button>
+
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
