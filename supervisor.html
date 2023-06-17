@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <body>
@@ -8,14 +9,12 @@
     <!-- Other HTML content -->
 
     <script>
-        // Retrieve the name value from the cookie
+        // Retrieve the value of a specific cookie
         function getCookie(name) {
-            console.log('called')
             const cookies = document.cookie.split(';');
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
                 if (cookie.startsWith(name + '=')) {
-                    console.log(cookie.substring(name.length + 1))
                     return cookie.substring(name.length + 1);
                 }
             }
@@ -25,9 +24,13 @@
         // Get the name value from the cookie
         const name = getCookie('name');
 
-        // Display the name on the page
-        const supervisorNameElement = document.getElementById('supervisorName');
-        supervisorNameElement.textContent = 'Supervisor Name: ' + name;
+        if (name) {
+            // Display the name on the page
+            const supervisorNameElement = document.getElementById('supervisorName');
+            supervisorNameElement.textContent = 'Supervisor Name: ' + name;
+        } else {
+            window.location.href="login.html"
+        }
     </script>
 </body>
 

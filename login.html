@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            padding: 15px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            width:200px;
+            margin-left:150px
+        }
+
+        #form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-left: 300px;
+            padding: 20px;
+            width: 500px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            min-width: 400px;
+            border-radius: 20px;
+            border-width:0.2px
+
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .heading {
+            margin-left: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="heading">SIGN IN</h1>
+    <div>
+        <form onsubmit="handleSubmit(); event.preventDefault();" id="form">
+            <input type="email" placeholder="Email" id="email" />
+            <input type="password" placeholder="Password" id="password" />
+            <button type="submit" id="button">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        const handleSubmit = () => {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            const isBlank = /^\s*$|^\s{2,}/;
+            if (!isBlank.test(email) && !isBlank.test(password)) {
+                var data = {
+                    Email: email,
+                    Password: password
+                };
+                fetch('login.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data === 'NoUser') {
+                            console.log('User not found');
+                        } else if(data.status==="success") {
+                            const d = new Date();
+                            d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                            let expires = "expires=" + d.toUTCString();
+                            document.cookie = "name=" + data.Name + ";" + expires;
+                            document.cookie = "email=" + data.Email + ";" + expires;
+                            document.cookie = "userType=" + data.UserType + ";" + expires;
+                            window.location.href = `${data.UserType}.html`;
+                        }else{
+                            console.log("wrong password")
+                        }
+                    })
+                    .catch(error => {
+                        console.error('An error occurred:', error);
+                    });
+
+            }
+            return false; // Prevent form submission
+        };
+    </script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 <html>
 
 <body>
-    <div id="doctorName">
+    <div id="pharmaceuticalCompanyName">
         Name
     </div>
 
@@ -21,10 +21,10 @@
             return null;
         }
 
-        // Check if the user is authenticated as a doctor
+        // Check if the user is authenticated as a pharmaceutical company
         function checkAuthentication() {
             const userType = getCookie('userType');
-            if (userType !== 'doctor') {
+            if (userType !== 'pharmaceuticalCompany') {
                 window.location.href = 'login.html';
             }
         }
@@ -34,8 +34,8 @@
 
         if (name) {
             // Display the name on the page
-            const doctorNameElement = document.getElementById('doctorName');
-            doctorNameElement.textContent = 'Doctor Name: ' + name;
+            const pharmaceuticalCompanyNameElement = document.getElementById('pharmaceuticalCompanyName');
+            pharmaceuticalCompanyNameElement.textContent = 'Pharmaceutical Company Name: ' + name;
         } else {
             // No name found, redirect to login page
             window.location.href = 'login.html';

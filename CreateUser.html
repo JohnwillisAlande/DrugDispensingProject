@@ -13,15 +13,19 @@
         h1 {
             display: flex;
             align-items: center;
+            margin-left: 400px;
         }
 
         h1 ion-icon {
             margin-right: 10px;
         }
 
-        p ion-icon {
-            margin-right: 5px;
+        .para{
+          margin-left:100px
         }
+
+
+
 
         form {
             margin-top: 20px;
@@ -30,6 +34,7 @@
         #userTypeSelection {
             display: flex;
             margin-bottom: 10px;
+            margin-left:100px
         }
 
         #userTypeSelection label {
@@ -39,21 +44,30 @@
         input {
             margin-bottom: 10px;
             padding: 8px;
-            border-radius: 5px;
-            min-width: 500px,
-
         }
 
-        button[type="submit"] {
+        input[type='number'],
+        input[type='text'],
+        input[type='password'] {
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 20px;
+            display: block;
+            width: 400px;
+            border-width: 0.2
+        }
+
+        button {
             padding: 10px 20px;
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-left: 20px;
         }
 
-        button[type="submit"]:hover {
+        button :hover {
             background-color: #0056b3;
         }
 
@@ -61,7 +75,10 @@
             flex-direction: row;
             justify-content: center;
             background-color: 'rgb(12,2,2)';
-            left: 300px
+            margin-left: 300px;
+            margin-top: 20px;
+            width: 450px;
+
         }
     </style>
 </head>
@@ -291,7 +308,7 @@
                                 document.cookie = "name =" + name + ";" + expires;
                                 document.cookie = "email =" + email + ";" + expires;
                                 document.cookie = "userType =" + userType + ";" + expires;
-                                window.location.href = "pharamcy.html";
+                                window.location.href = "pharmacy.html";
 
                             } else {
                                 console.error(data.message);
@@ -362,8 +379,11 @@
         } else {
             console.log("Incomplete credentials");
         }
-    }
 
+    }
+    function handleNav() {
+        window.location.href="login.html";
+    }
 
 </script>
 
@@ -373,7 +393,7 @@
 <body>
     <h1>REGISTRATION <ion-icon name="people-circle-outline"></ion-icon>
     </h1>
-    <p>Welcome Kindly Register Your Details Below <ion-icon name="pencil-outline"></ion-icon>
+    <p class="para">Welcome Kindly Register Your Details Below
     </p>
     <form onsubmit="event.preventDefault(); sendData();">
         <!-- User type selection -->
@@ -418,7 +438,10 @@
                 <br>
                 <input type="text" id="patientAddress" placeholder="Address">
                 <br>
-                <button type="submit">Register</button>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit">Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                </div>
 
             </div>
 
@@ -437,7 +460,10 @@
                 <br>
                 <input type="number" id="doctorContact" placeholder="Contact">
                 <br>
-                <button type="submit">Register</button>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit">Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                </div>
 
             </div>
 
@@ -452,7 +478,10 @@
                 <br>
                 <input type="number" id="supervisorContact" placeholder="Contact">
                 <br>
-                <button type="submit">Register</button>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit">Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                </div>
 
             </div>
 
@@ -468,7 +497,11 @@
                 <input type="number" id="pharmacyContact" placeholder="Contact">
                 <br>
                 <input type="text" id="pharmacyAddress" placeholder="Address">
-                <button type="submit">Register</button>
+                <br />
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit">Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                </div>
 
             </div>
 
@@ -483,7 +516,10 @@
                 <br>
                 <input type="number" id="companyContact" placeholder="Contact">
                 <br>
-                <button type="submit">Register</button>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit">Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                </div>
 
             </div>
         </div>
