@@ -86,46 +86,58 @@
         companyFields.style.display = (choice === "Pharmaceutical Company") ? "block" : "none";
     }
 
-
-
     function sendData() {
         const isBlank = /^\s*$|^\s{2,}/;
-        const PASSREGEX = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{8,}$/;
-        let data = {};
+        const PASSREGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,24}$/;
 
         if (userType === "Patient") {
             var name = document.getElementById("patientName").value;
             var ssn = document.getElementById("patientSSN").value;
-            var age = document.getElementById("patientEmail").value;
+            var age = document.getElementById("patientAge").value;
             var email = document.getElementById("patientEmail").value;
             var contact = document.getElementById("patientContact").value;
             var doctorName = document.getElementById("patientDoctorName").value;
             var password = document.getElementById('patientPassword').value;
             var address = document.getElementById("patientAddress").value;
 
-            if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(age) && !isBlank.test(email) && !isBlank.test(contact) && !isBlank.test(doctorSSN) && !isBlank.test(address) && !isBlank.test(password)) {
+            if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(age) && !isBlank.test(email) && !isBlank.test(contact) && !isBlank.test(doctorName) && !isBlank.test(address) && !isBlank.test(password)) {
                 if (PASSREGEX.test(password)) {
-                    data = {
+                    let data = {
                         Name: name,
                         SSN: ssn,
-                        Age: age,
                         Email: email,
                         Password: password,
+                        Specialty: '',
+                        Address: address,
+                        Age: age,
                         Contact: contact,
                         DoctorName: doctorName,
-                        Address: address
+                        UserType: userType
                     };
                     fetch('CreateUser.php', {
-                        method: 'POST',
-                        headers: {
+                        'method': 'POST',
+                        'headers': {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
-                    }).then((response) => {
-                        console.log(response)
-                    }).catch((error) => {
-                        console.error(error)
+                        'body': JSON.stringify(data)
                     })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                const d = new Date();
+                                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name =" + name + ";" + expires;
+                                document.cookie = "email =" + email + ";" + expires;
+                                document.cookie = "userType =" + userType + ";" + expires;
+                                window.location.href = "patient.html";
+
+                            } else {
+                                console.error(data.message);
+                            }
+                        })
                 } else {
                     console.log("Invalid password");
                 }
@@ -142,25 +154,45 @@
 
             if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(specialty) && !isBlank.test(contact)) {
                 if (PASSREGEX.test(password)) {
-                    data = {
+                    let data = {
                         Name: name,
                         SSN: ssn,
                         Email: email,
                         Password: password,
                         Specialty: specialty,
-                        Contact: contact
+                        Address: "",
+                        Age: 0,
+                        Contact: contact,
+                        DoctorName: "",
+                        UserType: userType
                     };
                     fetch('CreateUser.php', {
-                        method: 'POST',
-                        headers: {
+                        'method': 'POST',
+                        'headers': {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
-                    }).then((response) => {
-                        console.log(response)
-                    }).catch((error) => {
-                        console.error(error)
+                        'body': JSON.stringify(data)
                     })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                const d = new Date();
+                                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name =" + name + ";" + expires;
+                                document.cookie = "email =" + email + ";" + expires;
+                                document.cookie = "userType =" + userType + ";" + expires;
+                                window.location.href = "doctor.html";
+
+                            } else {
+                                console.error(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('An error occurred:', error);
+                        });
                 } else {
                     console.log("Invalid credentials");
                 }
@@ -175,26 +207,48 @@
 
             if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact)) {
                 if (PASSREGEX.test(password)) {
-                    data = {
+                    let data = {
                         Name: name,
+                        SSN: 0,
                         Email: email,
                         Password: password,
-                        Contact: contact
+                        Specialty: '',
+                        Address: "",
+                        Age: 0,
+                        Contact: contact,
+                        DoctorName: "",
+                        UserType: userType
                     };
+                    fetch('CreateUser.php', {
+                        'method': 'POST',
+                        'headers': {
+                            'Content-Type': 'application/json'
+                        },
+                        'body': JSON.stringify(data)
+                    })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                const d = new Date();
+                                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name =" + name + ";" + expires;
+                                document.cookie = "email =" + email + ";" + expires;
+                                document.cookie = "userType =" + userType + ";" + expires;
+                                window.location.href = "supervisor.html";
+
+                            } else {
+                                console.error(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('An error occurred:', error);
+                        });
                 } else {
                     console.log("Invalid credentials");
                 }
-                fetch('CreateUser.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                }).then((response) => {
-                    console.log(response)
-                }).catch((error) => {
-                    console.error(error)
-                })
             } else {
                 console.log("Incomplete credentials");
             }
@@ -207,24 +261,45 @@
 
             if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact) && !isBlank.test(pharmacyAddress)) {
                 if (PASSREGEX.test(password)) {
-                    data = {
+                    let data = {
                         Name: name,
+                        SSN: 0,
                         Email: email,
                         Password: password,
-                        Contact: contact,
-                        PharmacyAddress: pharmacyAddress,
+                        Specialty: '',
+                        Address: pharmacyAddress,
+                        Age: 0,
+                        Contact: 0,
+                        DoctorName: "",
+                        UserType: userType
                     };
                     fetch('CreateUser.php', {
-                        method: 'POST',
-                        headers: {
+                        'method': 'POST',
+                        'headers': {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
-                    }).then((response) => {
-                        console.log(response)
-                    }).catch((error) => {
-                        console.error(error)
+                        'body': JSON.stringify(data)
                     })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                const d = new Date();
+                                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name =" + name + ";" + expires;
+                                document.cookie = "email =" + email + ";" + expires;
+                                document.cookie = "userType =" + userType + ";" + expires;
+                                window.location.href = "pharamcy.html";
+
+                            } else {
+                                console.error(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('An error occurred:', error);
+                        });
                 } else {
                     console.log("Invalid credentials");
                 }
@@ -233,39 +308,62 @@
             }
         } else if (userType === "Pharmaceutical Company") {
             var password = document.getElementById("companyPassword").value;
-            var name = document.getElementById("companyName").value
-            var email = document.getElementById("companyEmail").value
-            var password = document.getElementById("companyPassword").value
-            var contact = document.getElementById("companyContact").value
+            var name = document.getElementById("companyName").value;
+            var email = document.getElementById("companyEmail").value;
+            var contact = document.getElementById("companyContact").value;
+
             if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact)) {
                 if (PASSREGEX.test(password)) {
-                    data = {
+                    let data = {
                         Name: name,
+                        SSN: 0,
                         Email: email,
                         Password: password,
-                        Contact: contact
+                        Specialty: '',
+                        Address: "",
+                        Age: 0,
+                        Contact: 0,
+                        DoctorName: "",
+                        UserType: userType
                     };
                     fetch('CreateUser.php', {
-                        method: 'POST',
-                        headers: {
+                        'method': 'POST',
+                        'headers': {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(data)
-                    }).then((response) => {
-                        console.log(response)
-                    }).catch((error) => {
-                        console.error(error)
+                        'body': JSON.stringify(data)
                     })
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                const d = new Date();
+                                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name =" + name + ";" + expires;
+                                document.cookie = "email =" + email + ";" + expires;
+                                document.cookie = "userType =" + userType + ";" + expires;
+                                window.location.href = "pharmaceuticalCompany.html";
+
+                            } else {
+                                console.error(data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('An error occurred:', error);
+                        });
                 } else {
-                    console.log("Invalid crededtionals")
+                    console.log("Invalid credentials");
                 }
+            } else {
+                console.log("Incomplete credentials");
             }
         } else {
-            console.log("Incomplete credentials")
+            console.log("Incomplete credentials");
         }
-
-
     }
+
 
 </script>
 
@@ -306,7 +404,7 @@
             <div id="patientFields" style="display: none;">
                 <input type="text" id="patientName" placeholder="Name">
                 <br>
-                <input type="nuber" id="patientSSN" placeholder="SSN">
+                <input type="number" id="patientSSN" placeholder="SSN">
                 <br>
                 <input type="number" id="patientAge" placeholder="Age">
                 <br>

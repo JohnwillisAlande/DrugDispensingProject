@@ -1,29 +1,29 @@
 <?php
 require_once 'Connect.php';
-
-/*function generateRandomID() {
+$inputJSON = file_get_contents('php://input');
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+function generateRandomID() {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $length = 10;
     $randomID = '';
-
     for ($i = 0; $i < $length; $i++) {
         $randomID .= $characters[rand(0, strlen($characters) - 1)];
     }
-
     return $randomID;
 }
-
-$name = $_POST['Name'];
-$age = $_POST['Quantity'];
-$email = $_POST['Email'];
-$password = $_POST['Password'];
-$contact = $_POST['Phone'];
+$data = json_decode($inputJSON, true);
+$name = $data['Name'];
+$age = $data['Age'];
+$email = $data['Email'];
+$password = $data['Password'];
+$contact = $data['Contact'];
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-$userType = $_POST["UserType"];
-$doctorID = $_POST["DoctorID"];
-$address = $_POST["Address"];
-$specialty = $_POST["Specialty"];
-$SSN = $_POST["SSN"];
+$userType = $data["UserType"];
+$doctorName = $data["DoctorName"];
+$address = $data["Address"];
+$specialty = $data["Specialty"];
+$SSN = $data["SSN"];
 $storeID = generateRandomID();
 $patientPin = generateRandomID();
 
@@ -42,63 +42,17 @@ if ($userType === "Patient") {
 } elseif ($userType === "Pharmaceutical Company") {
     $sql = "INSERT INTO PharmaceuticalCompany (CompanyID, CompanyName, Email, Password, Contact) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
 }
-*/
 
-$sql="CREATE TABLE Patients (
-  PatientID INT PRIMARY KEY,
-  PatientSSN VARCHAR(10),
-  PatientName VARCHAR(255),
-  Age INT,
-  Email VARCHAR(255),
-  Password VARCHAR(255),
-  Contact VARCHAR(255),
-  DoctorName VARCHAR(255),
-  Address VARCHAR(255),
-  Pin VARCHAR(255)
-);
-CREATE TABLE Doctors (
-  DoctorID INT PRIMARY KEY,
-  DoctorSSN VARCHAR(10),
-  DoctorName VARCHAR(255),
-  Email VARCHAR(255),
-  Password VARCHAR(255),
-  Specialty VARCHAR(255),
-  Contact VARCHAR(255)
-);
-CREATE TABLE Supervisor (
-  SupervisorID INT PRIMARY KEY,
-  SupervisorName VARCHAR(255),
-  Email VARCHAR(255),
-  Password VARCHAR(255),
-  Contact VARCHAR(255)
-);
-CREATE TABLE Pharmacy (
-  PharmacyID INT PRIMARY KEY,
-  PharmacyName VARCHAR(255),
-  Email VARCHAR(255),
-  Password VARCHAR(255),
-  Contact VARCHAR(255),
-  PharmacyAddress VARCHAR(255),
-  StoreID VARCHAR(255)
-);
-CREATE TABLE PharmaceuticalCompany (
-  CompanyID INT PRIMARY KEY,
-  CompanyName VARCHAR(255),
-  Email VARCHAR(255),
-  Password VARCHAR(255),
-  Contact VARCHAR(255)
-);
-";
-
-
-// Perform the insertion
-if ($conn->multi_query($sql) === TRUE) {
-    $response = "Record created successfully";
+if ($conn->query($sql) === TRUE) {
+    $response = array("status" => "success", "message" => "Record inserted successfully");
 } else {
-    $response = "Error creating record: " . $conn->error;
+    $response = array("status" => "error", "message" => "Error inserting record: " . $conn->error);
 }
 
 $conn->close();
 
-echo $response;
+// Return the response as JSON
+header('Content-Type: application/json');
+echo json_encode($response);
+
 ?>
