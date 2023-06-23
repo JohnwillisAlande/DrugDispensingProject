@@ -1,21 +1,87 @@
 <!DOCTYPE html>
 <html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #doctorTable {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #doctorTable th,
+    #doctorTable td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #doctorTable th {
+        background-color: #f2f2f2;
+    }
+
+    button {
+        padding: 10px 40px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-left: 200px
+    }
+
+    .BtnRow {
+        flex-direction: 'row';
+        display: flex;
+        left: '10%';
+        justify-content: 'space-between'
+    }
+</style>
 
 <body>
     <div id="doctorName">
         Name
     </div>
-
+    <div>
+        <h2>CHANGE DETAILS</h2>
+    </div>
+    <div>
+        <table id="doctorTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Speciality</th>
+                    <th>DoctorSSN</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <!-- Other HTML content -->
+    <div class="BtnRow">
+        <div>
+            <button onclick="handleSaveChanges()">SAVE CHANGES</button>
+        </div>
+        <div>
+            <button onclick="deleteAccount()">DELETE ACCOUNT</button>
+        </div>
+    </div>
 
     <script>
+        var ID;
+
         // Retrieve the value of a specific cookie
-        function getCookie(name) {
+        function getCookie(key) {
             const cookies = document.cookie.split(';');
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + '=')) {
-                    return cookie.substring(name.length + 1);
+                if (cookie.startsWith(key + '=')) {
+                    return cookie.substring(key.length + 1);
                 }
             }
             return null;
@@ -40,9 +106,122 @@
             // No name found, redirect to login page
             window.location.href = 'login.html';
         }
-
         // Check authentication on page load
         checkAuthentication();
+
+        const doctorTable = document.getElementById('doctorTable');
+        const tbody = doctorTable.querySelector('tbody');
+
+        function createEditableCell(value) {
+            const cell = document.createElement('td');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = value;
+            cell.classList.add('editable');
+            cell.appendChild(input);
+            return cell;
+        }
+
+        function createRow(details) {
+            const row = document.createElement('tr');
+            row.dataset.id = details.DoctorID;
+            row.appendChild(createEditableCell(details.DoctorName));
+            row.appendChild(createEditableCell(details.Email));
+            row.appendChild(createEditableCell(details.Specialty));
+            row.appendChild(createEditableCell(details.DoctorSSN));
+            row.appendChild(createEditableCell(details.Contact));
+            return row;
+        }
+        const getUserData = () => {
+            const email = getCookie('email');
+            console.log(email);
+            const data = { Email: email };
+            const params = new URLSearchParams(data); // Convert data to URL parameters
+            fetch(`doctor.php?${params}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        const details = data.data;
+                        console.log(data);
+                        ID = data.data.DoctorID;
+                        displayDoctorDetails(details);
+                    } else {
+                        console.log('error');
+                    }
+                });
+        };
+
+        // Display the doctor details in the table
+        const displayDoctorDetails = (details) => {
+            const row = createRow(details);
+            tbody.appendChild(row);
+        };
+
+        function handleSaveChanges() {
+            const rows = tbody.querySelectorAll('tr');
+            const updatedData = [];
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('.editable');
+                const updatedRow = {
+                    DoctorID: row.dataset.id,
+                    DoctorName: cells[0].querySelector('input').value,
+                    Email: cells[1].querySelector('input').value,
+                    Specialty: cells[2].querySelector('input').value,
+                    DoctorSSN: cells[3].querySelector('input').value,
+                    Contact: cells[4].querySelector('input').value
+                };
+                updatedData.push(updatedRow);
+            });
+            console.log(updatedData[0])
+            fetch('Doctor.php', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData[0])
+            })
+                .then(response => {
+
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+        getUserData();
+
+        const deleteAccount = () => {
+            console.log(ID)
+            fetch('Doctor.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ID)
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.status === 'success') {
+                        window.location.href='login.html'
+                    } else {
+                        console.error(data.message);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                }
+                )
+        }
     </script>
 </body>
 

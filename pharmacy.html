@@ -1,21 +1,86 @@
 <!DOCTYPE html>
 <html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #pharmacyTable {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #pharmacyTable th,
+    #pharmacyTable td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #pharmacyTable th {
+        background-color: #f2f2f2;
+    }
+
+    button {
+        padding: 10px 40px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-left: 200px
+    }
+
+    .BtnRow {
+        flex-direction: 'row';
+        display: flex;
+        left: '10%';
+        justify-content: 'space-between'
+    }
+</style>
 
 <body>
     <div id="pharmacyName">
         Name
     </div>
-
+    <div>
+        <h2>CHANGE DETAILS</h2>
+    </div>
+    <div>
+        <table id="pharmacyTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <!-- Other HTML content -->
+    <div class="BtnRow">
+        <div>
+            <button onclick="handleSaveChanges()">SAVE CHANGES</button>
+        </div>
+        <div>
+            <button onclick="deleteAccount()">DELETE ACCOUNT</button>
+        </div>
+    </div>
 
     <script>
+        var ID;
+
         // Retrieve the value of a specific cookie
-        function getCookie(name) {
+        function getCookie(key) {
             const cookies = document.cookie.split(';');
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + '=')) {
-                    return cookie.substring(name.length + 1);
+                if (cookie.startsWith(key + '=')) {
+                    return cookie.substring(key.length + 1);
                 }
             }
             return null;
@@ -35,14 +100,126 @@
         if (name) {
             // Display the name on the page
             const pharmacyNameElement = document.getElementById('pharmacyName');
-            pharmacyNameElement.textContent = 'Pharmacy Name: ' + name;
+            pharmacyNameElement.textContent = 'pharmacy Name: ' + name;
         } else {
             // No name found, redirect to login page
             window.location.href = 'login.html';
         }
-
         // Check authentication on page load
         checkAuthentication();
+
+        const pharmacyTable = document.getElementById('pharmacyTable');
+        const tbody = pharmacyTable.querySelector('tbody');
+
+        function createEditableCell(value) {
+            const cell = document.createElement('td');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = value;
+            cell.classList.add('editable');
+            cell.appendChild(input);
+            return cell;
+        }
+
+        function createRow(details) {
+            const row = document.createElement('tr');
+            row.dataset.id = details.pharmacyID;
+            row.appendChild(createEditableCell(details.PharmacyName));
+            row.appendChild(createEditableCell(details.Email));
+            row.appendChild(createEditableCell(details.Contact));
+            row.appendChild(createEditableCell(details.PharmacyAddress));
+
+            return row;
+        }
+        const getUserData = () => {
+            const email = getCookie('email');
+            console.log(email);
+            const data = { Email: email };
+            const params = new URLSearchParams(data); // Convert data to URL parameters
+            fetch(`pharmacy.php?${params}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        const details = data.data;
+                        console.log(data);
+                        ID = data.data.PharmacyID;
+                        displaypharmacyDetails(details);
+                    } else {
+                        console.log('error');
+                    }
+                });
+        };
+
+        // Display the pharmacy details in the table
+        const displaypharmacyDetails = (details) => {
+            const row = createRow(details);
+            tbody.appendChild(row);
+        };
+
+        function handleSaveChanges() {
+            const rows = tbody.querySelectorAll('tr');
+            const updatedData = [];
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('.editable');
+                const updatedRow = {
+                    PharmacyID: ID,
+                    PharmacyName: cells[0].querySelector('input').value,
+                    Email: cells[1].querySelector('input').value,
+                    Contact: cells[2].querySelector('input').value,
+                    Address: cells[3].querySelector('input').value,
+                };
+                updatedData.push(updatedRow);
+            });
+            console.log(updatedData[0])
+            fetch('pharmacy.php', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData[0])
+            })
+                .then(response => {
+
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+        getUserData();
+
+        const deleteAccount = () => {
+            console.log(ID)
+            fetch('pharmacy.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ID)
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.status === 'success') {
+                        window.location.href = 'login.html'
+                    } else {
+                        console.error(data.message);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                }
+                )
+        }
     </script>
 </body>
 

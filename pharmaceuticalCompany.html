@@ -1,27 +1,91 @@
 <!DOCTYPE html>
 <html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    #pharmaceuticalCompanyTable {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    #pharmaceuticalCompanyTable th,
+    #pharmaceuticalCompanyTable td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    #pharmaceuticalCompanyTable th {
+        background-color: #f2f2f2;
+    }
+
+    button {
+        padding: 10px 40px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        margin-left: 200px
+    }
+
+    .BtnRow {
+        flex-direction: 'row';
+        display: flex;
+        left: '10%';
+        justify-content: 'space-between'
+    }
+</style>
 
 <body>
     <div id="pharmaceuticalCompanyName">
         Name
     </div>
-
+    <div>
+        <h2>CHANGE DETAILS</h2>
+    </div>
+    <div>
+        <table id="pharmaceuticalCompanyTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <!-- Other HTML content -->
+    <div class="BtnRow">
+        <div>
+            <button onclick="handleSaveChanges()">SAVE CHANGES</button>
+        </div>
+        <div>
+            <button onclick="deleteAccount()">DELETE ACCOUNT</button>
+        </div>
+    </div>
 
     <script>
+        var ID;
+
         // Retrieve the value of a specific cookie
-        function getCookie(name) {
+        function getCookie(key) {
             const cookies = document.cookie.split(';');
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].trim();
-                if (cookie.startsWith(name + '=')) {
-                    return cookie.substring(name.length + 1);
+                if (cookie.startsWith(key + '=')) {
+                    return cookie.substring(key.length + 1);
                 }
             }
             return null;
         }
 
-        // Check if the user is authenticated as a pharmaceutical company
+        // Check if the user is authenticated as a pharmaceuticalCompany
         function checkAuthentication() {
             const userType = getCookie('userType');
             if (userType !== 'pharmaceuticalCompany') {
@@ -35,14 +99,124 @@
         if (name) {
             // Display the name on the page
             const pharmaceuticalCompanyNameElement = document.getElementById('pharmaceuticalCompanyName');
-            pharmaceuticalCompanyNameElement.textContent = 'Pharmaceutical Company Name: ' + name;
+            pharmaceuticalCompanyNameElement.textContent = 'PharmaceuticalCompany Name: ' + name;
         } else {
             // No name found, redirect to login page
             window.location.href = 'login.html';
         }
-
         // Check authentication on page load
         checkAuthentication();
+
+        const pharmaceuticalCompanyTable = document.getElementById('pharmaceuticalCompanyTable');
+        const tbody = pharmaceuticalCompanyTable.querySelector('tbody');
+
+        function createEditableCell(value) {
+            const cell = document.createElement('td');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = value;
+            cell.classList.add('editable');
+            cell.appendChild(input);
+            return cell;
+        }
+
+        function createRow(details) {
+            const row = document.createElement('tr');
+            row.dataset.id = details.CompanyID;
+            row.appendChild(createEditableCell(details.CompanyName));
+            row.appendChild(createEditableCell(details.Email));
+            row.appendChild(createEditableCell(details.Contact));
+
+            return row;
+        }
+        const getUserData = () => {
+            const email = getCookie('email');
+            console.log(email);
+            const data = { Email: email };
+            const params = new URLSearchParams(data); // Convert data to URL parameters
+            fetch(`pharmaceuticalCompany.php?${params}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        const details = data.data;
+                        console.log(data);
+                        ID = data.data.CompanyID;
+                        displaypharmaceuticalCompanyDetails(details);
+                    } else {
+                        console.log('error');
+                    }
+                });
+        };
+
+        // Display the pharmaceuticalCompany details in the table
+        const displaypharmaceuticalCompanyDetails = (details) => {
+            const row = createRow(details);
+            tbody.appendChild(row);
+        };
+
+        function handleSaveChanges() {
+            const rows = tbody.querySelectorAll('tr');
+            const updatedData = [];
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('.editable');
+                const updatedRow = {
+                    CompanyID: ID,
+                    CompanyName: cells[0].querySelector('input').value,
+                    Email: cells[1].querySelector('input').value,
+                    Contact: cells[2].querySelector('input').value,
+                };
+                updatedData.push(updatedRow);
+            });
+            console.log(updatedData[0])
+            fetch('pharmaceuticalCompany.php', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData[0])
+            })
+                .then(response => {
+
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+        getUserData();
+
+        const deleteAccount = () => {
+            console.log(ID)
+            fetch('pharmaceuticalCompany.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ID)
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.status === 'success') {
+                        window.location.href = 'login.html'
+                    } else {
+                        console.error(data.message);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                }
+                )
+        }
     </script>
 </body>
 
