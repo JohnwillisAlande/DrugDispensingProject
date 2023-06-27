@@ -88,8 +88,8 @@
         // Check if the user is authenticated as a Supervisor
         function checkAuthentication() {
             const userType = getCookie('userType');
+            console.log(userType)
             if (userType !== 'supervisor') {
-                window.location.href = 'login.html';
             }
         }
 
