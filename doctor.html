@@ -91,6 +91,7 @@
         function checkAuthentication() {
             const userType = getCookie('userType');
             if (userType !== 'Doctor') {
+                window.location.href = 'login.html';
             }
         }
 
@@ -103,6 +104,7 @@
             doctorNameElement.textContent = 'Doctor Name: ' + name;
         } else {
             // No name found, redirect to login page
+            window.location.href = 'login.html';
         }
         // Check authentication on page load
         checkAuthentication();
@@ -156,7 +158,71 @@
                 });
         };
 
-        </script>
+        // Display the doctor details in the table
+        const displayDoctorDetails = (details) => {
+            const row = createRow(details);
+            tbody.appendChild(row);
+        };
+
+        function handleSaveChanges() {
+            const rows = tbody.querySelectorAll('tr');
+            const updatedData = [];
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('.editable');
+                const updatedRow = {
+                    DoctorID: row.dataset.id,
+                    DoctorName: cells[0].querySelector('input').value,
+                    Email: cells[1].querySelector('input').value,
+                    Specialty: cells[2].querySelector('input').value,
+                    DoctorSSN: cells[3].querySelector('input').value,
+                    Contact: cells[4].querySelector('input').value
+                };
+                updatedData.push(updatedRow);
+            });
+            console.log(updatedData[0])
+            fetch('Doctor.php', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedData[0])
+            })
+                .then(response => {
+
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
+        getUserData();
+
+        const deleteAccount = () => {
+            console.log(ID)
+            fetch('Doctor.php', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(ID)
+            }).then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.status === 'success') {
+                        window.location.href = 'login.html'
+                    } else {
+                        console.error(data.message);
+                    }
+                }).catch(error => {
+                    console.log(error);
+                }
+                )
+        }
+    </script>
 </body>
 
 </html>

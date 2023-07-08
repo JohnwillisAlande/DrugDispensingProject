@@ -89,6 +89,7 @@
         function checkAuthentication() {
             const userType = getCookie('userType');
             if (userType !== 'Supervisor') {
+                window.location.href = 'login.html';
             }
         }
 

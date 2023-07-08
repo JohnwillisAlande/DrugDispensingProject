@@ -90,7 +90,6 @@
         function checkAuthentication() {
             const userType = getCookie('userType');
             if (userType !== 'Pharmacy') {
-                console.log(false)
                 window.location.href = 'login.html';
             }
         }
