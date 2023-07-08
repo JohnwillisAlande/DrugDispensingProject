@@ -89,7 +89,7 @@
         // Check if the user is authenticated as a pharmacy
         function checkAuthentication() {
             const userType = getCookie('userType');
-            if (userType !== 'pharmacy') {
+            if (userType !== 'Pharmacy') {
                 console.log(false)
                 window.location.href = 'login.html';
             }

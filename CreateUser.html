@@ -100,7 +100,7 @@
         doctorFields.style.display = (choice === "Doctor") ? "block" : "none";
         supervisorFields.style.display = (choice === "Supervisor") ? "block" : "none";
         pharmacyFields.style.display = (choice === "Pharmacy") ? "block" : "none";
-        companyFields.style.display = (choice === "Pharmaceutical Company") ? "block" : "none";
+        companyFields.style.display = (choice === "PharmaceuticalCompany") ? "block" : "none";
     }
 
     function sendData() {
@@ -149,7 +149,7 @@
                                 document.cookie = "name=" + name + ";" + expires;
                                 document.cookie = "email=" + email + ";" + expires;
                                 document.cookie = "userType=" + userType + ";" + expires;
-                                window.location.href = "patient.html";
+                                window.location.href = "Patient.html";
 
                             } else {
                                 console.error(data.message);
@@ -201,7 +201,7 @@
                                 document.cookie = "name=" + name + ";" + expires;
                                 document.cookie = "email=" + email + ";" + expires;
                                 document.cookie = "userType=" + userType + ";" + expires;
-                                window.location.href = "doctor.html";
+                                window.location.href = "Doctor.html";
 
                             } else {
                                 console.error(data.message);
@@ -254,7 +254,7 @@
                                 document.cookie = "name=" + name + ";" + expires;
                                 document.cookie = "email=" + email + ";" + expires;
                                 document.cookie = "userType=" + userType + ";" + expires;
-                                window.location.href = "supervisor.html";
+                                window.location.href = "Supervisor.html";
 
                             } else {
                                 console.error(data.message);
@@ -308,7 +308,7 @@
                                 document.cookie = "name=" + name + ";" + expires;
                                 document.cookie = "email=" + email + ";" + expires;
                                 document.cookie = "userType=" + userType + ";" + expires;
-                                window.location.href = "pharmacy.html";
+                                window.location.href = "Pharmacy.html";
 
                             } else {
                                 console.error(data.message);
@@ -323,12 +323,12 @@
             } else {
                 console.log("Incomplete credentials");
             }
-        } else if (userType === "Pharmaceutical Company") {
+        } else if (userType === "PharmaceuticalCompany") {
             var password = document.getElementById("companyPassword").value;
             var name = document.getElementById("companyName").value;
             var email = document.getElementById("companyEmail").value;
             var contact = document.getElementById("companyContact").value;
-
+            console.log(userType)
             if (!isBlank.test(name) && !isBlank.test(email) && !isBlank.test(password) && !isBlank.test(contact)) {
                 if (PASSREGEX.test(password)) {
                     let data = {
@@ -361,7 +361,7 @@
                                 document.cookie = "name=" + name + ";" + expires;
                                 document.cookie = "email=" + email + ";" + expires;
                                 document.cookie = "userType=" + userType + ";" + expires;
-                                window.location.href = "pharmaceuticalCompany.html";
+                                window.location.href = "PharmaceuticalCompany.html";
 
                             } else {
                                 console.error(data.message);
@@ -414,8 +414,8 @@
                 <input type="radio" name="userType" value="Pharmacy">
                 <ion-icon name="cart"></ion-icon> Pharmacy
             </label>
-            <label onclick="choose('Pharmaceutical Company')">
-                <input type="radio" name="userType" value="Pharmaceutical Company">
+            <label onclick="choose('PharmaceuticalCompany')">
+                <input type="radio" name="userType" value="PharmaceuticalCompany">
                 <ion-icon name="business"></ion-icon> Pharmaceutical Company
             </label>
         </div>

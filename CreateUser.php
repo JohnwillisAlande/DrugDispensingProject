@@ -39,7 +39,7 @@ if ($userType === "Patient") {
     $sql = "INSERT INTO Supervisor (SupervisorID, SupervisorName, Email, Password, Contact) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
 } elseif ($userType === "Pharmacy") {
     $sql = "INSERT INTO Pharmacy (PharmacyID, PharmacyName, Email, Password, Contact, PharmacyAddress, StoreID) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact', '$address', '$storeID')";
-} elseif ($userType === "Pharmaceutical Company") {
+} elseif ($userType === "PharmaceuticalCompany") {
     $sql = "INSERT INTO PharmaceuticalCompany (CompanyID, CompanyName, Email, Password, Contact) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
 }
 

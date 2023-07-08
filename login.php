@@ -29,7 +29,7 @@ if ($result1->num_rows > 0) {
         $response = array(
         "status" => "success",
         "message" => "Record inserted successfully",
-        "UserType" => "patient",
+        "UserType" => "Patient",
         "Name" => $row['PatientName'],
         "Email" => $row['Email']
     );    
@@ -45,7 +45,7 @@ if ($result1->num_rows > 0) {
         $response = array(
         "status" => "success",
         "message" => "Record inserted successfully",
-        "UserType" => "doctor",
+        "UserType" => "Doctor",
         "Name" => $row['DoctorName'],
         "Email" => $row['Email']
     );    
@@ -60,7 +60,7 @@ if ($result1->num_rows > 0) {
         $response = array(
         "status" => "success",
         "message" => "Record inserted successfully",
-        "UserType" => "supervisor",
+        "UserType" => "Supervisor",
         "Name" => $row['SupervisorName'],
         "Email" => $row['Email']
     );    
@@ -75,7 +75,7 @@ if ($result1->num_rows > 0) {
         $response = array(
         "status" => "success",
         "message" => "Record inserted successfully",
-        "UserType" => "pharmacy",
+        "UserType" => "Pharmacy",
         "Name" => $row['PharmacyName'],
         "Email" => $row['Email']
     );    
@@ -90,7 +90,7 @@ if ($result1->num_rows > 0) {
         $response = array(
         "status" => "success",
         "message" => "Record inserted successfully",
-        "UserType" => "pharmaceuticalCompany",
+        "UserType" => "PharmaceuticalCompany",
         "Name" => $row['CompanyName'],
         "Email" => $row['Email']
     );    

@@ -92,7 +92,7 @@
         // Check if the user is authenticated as a patient
         function checkAuthentication() {
             const userType = getCookie('userType');
-            if (userType !== 'patient') {
+            if (userType !== 'Patient') {
                 window.location.href = 'login.html';
             }
         }
