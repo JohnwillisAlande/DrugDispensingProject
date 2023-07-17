@@ -2,26 +2,8 @@
 <html>
 
 <head>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #ADD8E6;
-    }
-    </style>
+    <title>Admin</title>
+    <link rel="stylesheet" href="styles.css">
     <script>
     function updateEditSQL(row) {
         var cells = row.getElementsByTagName("td");
@@ -74,14 +56,14 @@
         }
     }
 
-    echo '<div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;">
+    echo '<div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;" class="navbar">
             <div><a href="?table=Patients">Patients</a></div>
             <div><a href="?table=Doctors">Doctor</a></div>
             <div><a href="?table=Supervisor">Supervisor</a></div>
             <div><a href="?table=Pharmacy">Pharmacy</a></div>
             <div><a href="?table=PharmaceuticalCompany">Pharmaceutical Company</a></div>
         </div>';
-
+        
     function deleteAccount($conn, $tableName, $id) {
         $query = "DELETE FROM $tableName WHERE " . mysqli_real_escape_string($conn, $tableName) . "ID = '$id'";
         $result = mysqli_query($conn, $query);
@@ -171,6 +153,7 @@
 
     getTableData($conn, $tableName);
     ?>
+    
 
 
     <script>
