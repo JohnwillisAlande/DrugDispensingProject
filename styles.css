@@ -1,0 +1,223 @@
+/*body {
+  background-image: url(images/heartbeat.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#header-image-menu {
+    position: relative;
+}
+
+#header-image-menu::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(images/logo.jpg);
+    background-size: cover;
+    z-index: -1;
+}
+
+body {
+    background-color: mediumaquamarine;
+    color: #000; 
+}
+
+body {
+    text-align: center;
+}
+
+form div {
+    text-align: center;
+}
+
+.form-container {
+    background-color: mediumaquamarine;
+    border: 4px solid purple;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container input[type="text"],
+.form-container input[type="number"],
+.form-container input[type="date"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="tel"] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 7px;
+}
+
+h1 {
+    color: purple;
+    background-color: mediumaquamarine;
+    border: 4px solid purple;
+}
+
+p {
+    color: darkblue;
+}
+
+a:link {
+    color: green
+}
+
+a:visited {
+    color: purple
+}
+
+.special{
+    color: purple;
+    font-weight: bold;
+}
+
+input[type=text], input[type=date], input[type=number], input[type=email], input[type=password], input[type=tel]{
+    width: 20%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid purple;
+    border-radius: 4px;
+    background-color: lightcyan;
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, input[type=tel]:focus {
+    background-color: cyan;
+}
+
+input[type=button], button[type=submit], input[type=reset] {
+    background-color: purple;
+    border: none;
+    color: white;
+    padding: 16px 16px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }*/
+
+
+  *{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  .banner{
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(images/heartbeat.jpg);
+    background-size: cover;
+    background-image: center;
+  }
+  .navbar{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo{
+    width: 120px;
+    cursor: pointer;
+  }
+  .navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+  }
+  .navbar ul li{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .navbar ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+   }
+   .navbar ul li:hover:after{
+    width: 100%;
+   }
+   .content{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+   }
+   .content h1{
+    font-size: 70px;
+    margin-top: 80px;
+   }
+   .content h2{
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+   } 
+   button{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+   }
+   span{
+    background: #009688;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+   }
+   button:hover span{
+    width: 100%;
+   }
+   button:hover{
+    border: none;
+   }
+   table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #009688;
+    color: white;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
