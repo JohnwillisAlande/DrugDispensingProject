@@ -8,23 +8,26 @@ require_once 'Connect.php';
 <head>
     <title>Contract List</title>
     <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    .table-container {
+    .contract-container {
         margin-bottom: 20px;
+    }
+
+    .contract {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .contract label {
+        font-weight: bold;
+        flex-basis: 150px;
+    }
+
+    .contract span {
+        flex-grow: 1;
+        padding: 5px;
+        border: 1px solid #ccc;
+        background-color: #f2f2f2;
     }
     </style>
 </head>
@@ -40,7 +43,7 @@ require_once 'Connect.php';
 
     <h1>ALL CONTRACTS</h1>
 
-    <div class="table-container">
+    <div class="contract-container">
         <?php
         // Check if the cookie is set
         if (isset($_COOKIE['userType']) && $_COOKIE['userType'] == "PharmaceuticalCompany") {
@@ -51,32 +54,18 @@ require_once 'Connect.php';
 
             // Check if any contracts exist
             if (mysqli_num_rows($result) > 0) {
-                // Display the contracts in an HTML table
-                echo "<table>";
-                echo "<tr>
-                        <th>Contract ID</th>
-                        <th>Start Date</th>
-                        <th>Ending Date</th>
-                        <th>Pharmacy Name</th>
-                        <th>Company Name</th>
-                        <th>Supervisor Name</th>
-                        <th>Contract Details</th>
-                      </tr>";
-
-                // Iterate over each row of the result set
+                // Display the contracts
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['ContractID'] . "</td>";
-                    echo "<td>" . $row['StartDate'] . "</td>";
-                    echo "<td>" . $row['EndingDate'] . "</td>";
-                    echo "<td>" . $row['PharmacyName'] . "</td>";
-                    echo "<td>" . $row['CompanyName'] . "</td>";
-                    echo "<td>" . $row['SupervisorName'] . "</td>";
-                    echo "<td>" . $row['ContractDetails'] . "</td>";
-                    echo "</tr>";
+                    echo "<div class='contract'>";
+                    echo "<label>Contract ID:</label><span>" . $row['ContractID'] . "</span>";
+                    echo "<label>Start Date:</label><span>" . $row['StartDate'] . "</span>";
+                    echo "<label>Ending Date:</label><span>" . $row['EndingDate'] . "</span>";
+                    echo "<label>Pharmacy Name:</label><span>" . $row['PharmacyName'] . "</span>";
+                    echo "<label>Company Name:</label><span>" . $row['CompanyName'] . "</span>";
+                    echo "<label>Supervisor Name:</label><span>" . $row['SupervisorName'] . "</span>";
+                    echo "<label>Contract Details:</label><span>" . $row['ContractDetails'] . "</span>";
+                    echo "</div>";
                 }
-
-                echo "</table>";
             } else {
                 echo "<p>No contracts found.</p>";
             }

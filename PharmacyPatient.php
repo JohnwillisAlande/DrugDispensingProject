@@ -37,6 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     .container {
+        margin: 0 auto;
         padding: 20px;
     }
 
