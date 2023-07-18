@@ -59,7 +59,7 @@ function deleteData($conn) {
     global $DoctorID;
     $response = array(); // Define the $response array
 
-    $sql = "DELETE FROM DOCTORS WHERE DoctorID='$DoctorID'";
+    $sql = "UPDATE DOCTORS SET IsDisabled=true WHERE DoctorID='$DoctorID'";
 
     if ($conn->query($sql) === TRUE) {
         $response = array("status" => "success", "message" => "Record deleted successfully");

@@ -56,7 +56,7 @@ function deleteData($conn) {
     global $CompanyID;
     $response = array(); // Define the $response array
 
-    $sql = "DELETE FROM PHARMACEUTICALCOMPANY WHERE CompanyID='$CompanyID'";
+    $sql = "UPDATE PHARMACEUTICALCOMPANY SET IsDisabled=true  WHERE CompanyID='$CompanyID'";
 
     if ($conn->query($sql) === TRUE) {
         $response = array("status" => "success", "message" => "Record deleted successfully");

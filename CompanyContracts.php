@@ -11,6 +11,7 @@ require_once 'Connect.php';
 </head>
 
 <body>
+<<<<<<< HEAD
 <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
@@ -20,6 +21,15 @@ require_once 'Connect.php';
                 <li><a href="CompanyContracts.php">Contracts</a></li>
             </ul>
         </div>
+=======
+    <div>
+        <ul>
+            <li><a href='./PharmaceuticalCompany.html'>Dashboard</a></li>
+            <li><a href='./CompanyDrugs.php'>Drug</a></li>
+            <li><a href='./CompanyContracts.php'>Contracts</a></li>
+        </ul>
+    </div>
+>>>>>>> a801101ff32fee1d5f857c5e83c132e6aea01c8a
 
     <h1>ALL CONTRACTS</h1>
 
