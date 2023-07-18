@@ -38,7 +38,7 @@
 
         <div>
             <button onclick="handleSaveChanges()"><span></span>SAVE CHANGES</button>
-            <button onclick="deleteAccount()"><span></span>DELETE ACCOUNT</button>
+            <button onclick="sendAlert()"><span></span>DELETE ACCOUNT</button>
         </div>
     </div>
 </div>
@@ -171,6 +171,16 @@
 
         }
         getUserData();
+
+                const sendAlert = () => {
+                        let text;
+                        if (confirm("Are you sure you want to delete this account!") == true) {
+                            text = "You pressed OK!";
+                            deleteAccount();
+                        } else {
+                            text = "You canceled!";
+                        }
+                    }
 
         const deleteAccount = () => {
             console.log(ID)

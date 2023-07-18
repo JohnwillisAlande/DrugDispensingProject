@@ -59,7 +59,7 @@ require_once 'Connect.php';
     <div class="contract-container">
         <?php
         // Check if the cookie is set
-        if (isset($_COOKIE['userType']) && $_COOKIE['userType'] == "PharmaceuticalCompany") {
+        if (isset($_COOKIE['userType']) && $_COOKIE['userType'] == "Pharmacy") {
             // Retrieve the value of the cookie
             $name = $_COOKIE['name'];
             $sqlGetContracts = "SELECT * FROM CONTRACTS WHERE CompanyName='$name'";

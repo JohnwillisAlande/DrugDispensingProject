@@ -56,7 +56,7 @@ function deleteData($conn) {
     global $SupervisorID;
     $response = array(); // Define the $response array
 
-    $sql = "DELETE FROM Supervisor WHERE SupervisorID='$SupervisorID'";
+    $sql = "UPDATE SUPERVISOR SET IsDisabled=trueWHERE SupervisorID='$SupervisorID'";
 
     if ($conn->query($sql) === TRUE) {
         $response = array("status" => "success", "message" => "Record deleted successfully");

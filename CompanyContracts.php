@@ -36,7 +36,7 @@ require_once 'Connect.php';
     <div>
         <ul>
             <li><a href='./PharmaceuticalCompany.html'>Dashboard</a></li>
-            <li><a href='./CompanyDrug.php'>Drug</a></li>
+            <li><a href='./CompanyDrugs.php'>Drug</a></li>
             <li><a href='./CompanyContracts.php'>Contracts</a></li>
         </ul>
     </div>
