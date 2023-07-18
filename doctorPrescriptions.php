@@ -85,7 +85,7 @@ $result = mysqli_query($conn,$sql1);
 </head>
 
 <body>
-<div class="banner" style="position: absolute; top: -10; right: 5; padding: 10px;">
+<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
@@ -113,7 +113,7 @@ $result = mysqli_query($conn,$sql1);
     </form>
 
     <br>
-    <h2>Prescriptions History</h2>
+    <h1>Prescriptions History</h1>
     <table>
         <tr>
             <th>Prescription ID</th>
@@ -143,7 +143,7 @@ $result = mysqli_query($conn,$sql1);
         }
         ?>
     </table>
-    </div>
+</div>
 </body>
 
 </html>

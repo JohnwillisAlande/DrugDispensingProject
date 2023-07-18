@@ -5,14 +5,16 @@
 <html>
 
 <body>
-    <div>
-        <ul>
-            <li><a href='./Patient.html'>Dashboard</a></li>
-            <li><a href='./PatientPrescriptionHistory.php'>Drug</a></li>
-        </ul>
-    </div>
+<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="pharmacy.html">Dashboard</a></li>
+                <li><a href="PatientPrescriptionHistory.php">Prescriptions</a></li>
+            </ul>
+        </div>
 
-    <h2>ALL PATIENT PRESCRIPTION HISTORY</h2>
+    <h1>PATIENT PRESCRIPTION HISTORY</h1>
     <div>
         <?php
         if(isset($_COOKIE['userType'])&& $_COOKIE['userType']=="Patient"){

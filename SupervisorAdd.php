@@ -51,38 +51,20 @@ $companyNames = mysqli_fetch_all($resultCompanyNames, MYSQLI_ASSOC);
 
 <head>
     <title>Contract List</title>
-    <style>
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .contract {
-        margin-bottom: 20px;
-    }
-
-    .contract label {
-        font-weight: bold;
-        margin-right: 10px;
-    }
-
-    .contract input[type="text"] {
-        width: 300px;
-        padding: 5px;
-        margin-right: 10px;
-    }
-
-    .contract button {
-        padding: 5px 10px;
-    }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>ALL CONTRACTS</h1>
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="supervisor.html">Dashboard</a></li>
+                <li><a href="SupervisorAdd.php">New Contract</a></li>
+                <li><a href="SupervisorContracts.php">Contracts</a></li>
+            </ul>
+        </div>
+        <h1>NEW CONTRACT</h1>
 
         <?php
         // Check if the cookie is set

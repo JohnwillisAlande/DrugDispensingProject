@@ -58,20 +58,20 @@ $result = mysqli_query($conn,$sql1);
 </head>
 
 <body>
-<div class="banner" style="position: absolute; top: -10; right: 5; padding: 10px;">
+<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
                 <li><a href="pharmacy.html">Dashboard</a></li>
                 <li><a href="pharmacyStock.php">Stock</a></li>
-                <li><a href="#">Patient</a></li>
+                <li><a href="PharmacyPatient.php">Patient</a></li>
                 <li><a href="pharmacyDispense.php">Dispense</a></li>
-                <li><a href="#">Contracts</a></li>
+                <li><a href="pharmacyContracts.php">Contracts</a></li>
             </ul>
         </div>
     <h1>Pharmacy Stock</h1>
 
-    <form method="post" action="pharmacyStock.php">
+    <form method="post" action="pharmacyStock.php" class="form-container">
         <!-- Your HTML form for inputting tradename, quantity, and price -->
         <label for="tradename">Trade Name:</label>
         <input type="text" name="tradename" required><br>
@@ -86,7 +86,7 @@ $result = mysqli_query($conn,$sql1);
     </form>
 
     <br>
-    <h2>Pharmacy Stock Table</h2>
+    <h1>Pharmacy Stock Table</h1>
     <table>
         <tr>
             <th>Pharmacy ID</th>

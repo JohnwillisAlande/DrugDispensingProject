@@ -1,60 +1,26 @@
 <!DOCTYPE html>
 <html>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    #SupervisorTable {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    #SupervisorTable th,
-    #SupervisorTable td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-    }
-
-    #SupervisorTable th {
-        background-color: #f2f2f2;
-    }
-
-    button {
-        padding: 10px 40px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-        margin-left: 200px
-    }
-
-    .BtnRow {
-        flex-direction: 'row';
-        display: flex;
-        left: '10%';
-        justify-content: 'space-between'
-    }
-</style>
-
+    <head>
+        <title>Supervisor Dashboard</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 <body>
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="supervisor.html">Dashboard</a></li>
+                <li><a href="SupervisorAdd.php">New Contract</a></li>
+                <li><a href="SupervisorContracts.php">Contracts</a></li>
+            </ul>
+        </div>
+
+    <div class="content">
     <div id="SupervisorName">
         Name
     </div>
     <div>
-        <ul>
-            <li><a href='./Supervisor.html'>Dashboard</a></li>
-            <li><a href='./SupervisorContracts.php'>Contracts</a></li>
-            <li><a href='./SupervisorAdd.php'>Add Contract</a></li>
-        </ul>
-    </div>
-    <div>
-        <h2>CHANGE DETAILS</h2>
-    </div>
-    <div>
+        <h2>SUPERVISOR DETAILS</h2>
         <table id="SupervisorTable">
             <thead>
                 <tr>
@@ -66,15 +32,12 @@
             <tbody>
             </tbody>
         </table>
-    </div>
-    <!-- Other HTML content -->
-    <div class="BtnRow">
+
         <div>
             <button onclick="handleSaveChanges()">SAVE CHANGES</button>
-        </div>
-        <div>
             <button onclick="deleteAccount()">DELETE ACCOUNT</button>
         </div>
+    </div>
     </div>
 
     <script>
@@ -106,7 +69,7 @@
         if (name) {
             // Display the name on the page
             const SupervisorNameElement = document.getElementById('SupervisorName');
-            SupervisorNameElement.textContent = 'Supervisor Name: ' + name;
+            SupervisorNameElement.textContent = 'Welcome Supervisor ' + name;
         } else {
             // No name found, redirect to login page
             window.location.href = 'login.html';

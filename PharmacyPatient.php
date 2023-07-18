@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (empty($searchValue)) {
         echo "Error: Please fill in all the fields.";
     } else {
-        $sqlGetPatient = "SELECT * FROM PRESCRIPTION WHERE PatientSSN='$searchValue'";
+        $sqlGetPatient = "SELECT * FROM Prescriptions WHERE PatientSSN='$searchValue'";
         $result = $conn->query($sqlGetPatient);
     }
 }
@@ -19,80 +19,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <head>
     <title>Patient Records</title>
-    <style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    th {
-        background-color: #f2f2f2;
-    }
-
-    .container {
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .search-form {
-        margin-bottom: 20px;
-    }
-
-    .search-form input[type="text"] {
-        padding: 8px;
-        width: 200px;
-    }
-
-    .search-form input[type="submit"] {
-        padding: 8px 16px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-
-    .search-results {
-        margin-top: 20px;
-    }
-
-    .search-results table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .search-results th,
-    .search-results td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-
-    .search-results th {
-        background-color: #f2f2f2;
-    }
-
-    .no-results {
-        margin-top: 10px;
-        color: #f00;
-    }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>PATIENT RECORDS</h1>
-        <ul>
-            <li><a href="./Pharmacy.html">Dashboard</a></li>
-            <li><a href="./PharmacyStock.php">Stock</a></li>
-            <li><a href="./PharmacyPatient.php">Patients</a></li>
-            <li><a href="./PharmacyContracts.php">Contracts</a></li>
-        </ul>
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="pharmacy.html">Dashboard</a></li>
+                <li><a href="pharmacyStock.php">Stock</a></li>
+                <li><a href="PharmacyPatient.php">Patient</a></li>
+                <li><a href="pharmacyDispense.php">Dispense</a></li>
+                <li><a href="pharmacyContracts.php">Contracts</a></li>
+            </ul>
+        </div>
         <div class="search-form">
             <form method="post" action="PharmacyPatient.php">
                 <input type="text" name="searchValue" placeholder="Search for patient...">
@@ -104,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php
             // Display the search results below the search button
             if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($searchValue)) {
-                echo "<h2>Search Results</h2>";
+                echo "<h1>Search Results</h1>";
                 // Display the table only if there are results
                 if ($result->num_rows > 0) {
                     echo "<table>";
@@ -117,10 +58,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
-                        echo "<td>" . $row['tradeName'] . "</td>";
-                        echo "<td>" . $row['quantity'] . "</td>";
-                        echo "<td>" . $row['doctorID'] . "</td>";
-                        echo "<td>" . $row['patientSSN'] . "</td>";
+                        echo "<td>" . $row['TradeName'] . "</td>";
+                        echo "<td>" . $row['Quantity'] . "</td>";
+                        echo "<td>" . $row['DoctorID'] . "</td>";
+                        echo "<td>" . $row['PatientSSN'] . "</td>";
                         echo "</tr>";
                     }
 

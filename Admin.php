@@ -29,6 +29,14 @@
 </head>
 
 <body>
+<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="login.html">LogOut</a></li>
+            </ul>
+        </div>
+    </div>
     <?php
     require_once 'Connect.php';
 

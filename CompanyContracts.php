@@ -6,40 +6,20 @@ require_once 'Connect.php';
 <html>
 
 <head>
-    <title>Contract List</title>
-    <style>
-    .contract-container {
-        margin-bottom: 20px;
-    }
-
-    .contract {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-
-    .contract label {
-        font-weight: bold;
-        flex-basis: 150px;
-    }
-
-    .contract span {
-        flex-grow: 1;
-        padding: 5px;
-        border: 1px solid #ccc;
-        background-color: #f2f2f2;
-    }
-    </style>
+<title>Pharmacy Contracts</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div>
-        <ul>
-            <li><a href='./PharmaceuticalCompany.html'>Dashboard</a></li>
-            <li><a href='./CompanyDrug.php'>Drug</a></li>
-            <li><a href='./CompanyContracts.php'>Contracts</a></li>
-        </ul>
-    </div>
+<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="pharmaceuticalCompany.html">Dashboard</a></li>
+                <li><a href="companydrugs.php">Stock</a></li>
+                <li><a href="CompanyContracts.php">Contracts</a></li>
+            </ul>
+        </div>
 
     <h1>ALL CONTRACTS</h1>
 

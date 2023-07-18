@@ -87,20 +87,20 @@ $dispensingResult = $conn->query($sql);
     </script>
 </head>
 <body>
-<div class="banner" style="position: absolute; top: -10; right: 5; padding: 10px;">
+<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
                 <li><a href="pharmacy.html">Dashboard</a></li>
                 <li><a href="pharmacyStock.php">Stock</a></li>
-                <li><a href="#">Patient</a></li>
+                <li><a href="PharmacyPatient.php">Patient</a></li>
                 <li><a href="pharmacyDispense.php">Dispense</a></li>
-                <li><a href="#">Contracts</a></li>
+                <li><a href="pharmacyContracts.php">Contracts</a></li>
             </ul>
         </div>
     <h1>Pharmacy Dispense</h1>
 
-    <form method="post" action="pharmacyDispense.php">
+    <form method="post" action="pharmacyDispense.php" class="form-container">
         <!-- Your HTML form for inputting tradename and quantity -->
         <label for="tradename">Trade Name:</label>
         <input type="text" name="tradename" required><br>
@@ -112,7 +112,7 @@ $dispensingResult = $conn->query($sql);
     </form>
 
     <br>
-    <h2>Pharmacy Stock Table</h2>
+    <h1>Pharmacy Stock Table</h1>
     <table>
         <tr>
             <th>Trade Name</th>
@@ -136,7 +136,7 @@ $dispensingResult = $conn->query($sql);
     </table>
 
     <br>
-    <h2>Pharmacy Dispensing Table</h2>
+    <h1>Pharmacy Dispensing Table</h1>
     <table>
         <tr>
             <th>Trade Name</th>

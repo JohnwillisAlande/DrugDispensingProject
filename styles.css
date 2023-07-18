@@ -111,7 +111,7 @@ input[type=button], button[type=submit], input[type=reset] {
   .banner{
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(images/heartbeat.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(32, 207, 210, 0.75)),url(images/heartbeat.jpg);
     background-size: cover;
     background-image: center;
   }
@@ -135,7 +135,7 @@ input[type=button], button[type=submit], input[type=reset] {
   }
   .navbar ul li{
     text-decoration: none;
-    color: #fff;
+    color: #49e2d3;
     text-transform: uppercase;
   }
   .navbar ul li::after{
@@ -150,6 +150,8 @@ input[type=button], button[type=submit], input[type=reset] {
    }
    .navbar ul li:hover:after{
     width: 100%;
+    background: #fff;
+    color: #640d9e;
    }
    .content{
     width: 100%;
@@ -160,6 +162,7 @@ input[type=button], button[type=submit], input[type=reset] {
     color: #fff;
     background-attachment: fixed, scroll;
     background-repeat: no-repeat, repeat-y;
+    padding-top: 50px;
    }
    .content h1{
     font-size: 70px;
@@ -206,12 +209,14 @@ input[type=button], button[type=submit], input[type=reset] {
     border-collapse: collapse;
     border-radius: 5px;
     margin-top: 20px;
+    background: transparent;
   }
   
   th, td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    background: transparent;
   }
   
   th {
@@ -219,11 +224,11 @@ input[type=button], button[type=submit], input[type=reset] {
     color: white;
   }
   
-  tr:nth-child(even) {
+  /*tr:nth-child(even) {
     background-color: #f2f2f2;
-  }
+  }*/
   
-  /*input[type=text], input[type=date], input[type=number], input[type=email], input[type=password], input[type=tel]{
+  /*input[type=email], input[type=password]{
     width: 20%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -233,7 +238,7 @@ input[type=button], button[type=submit], input[type=reset] {
     background-color: lightcyan;
 }
 
-input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, input[type=tel]:focus {
+input[type=email]:focus, input[type=password]:focus{
   background-color: cyan;
 }*/
 
@@ -246,8 +251,6 @@ form div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-attachment: fixed, scroll;
-  background-repeat: no-repeat, repeat-y;
 }
 
 .form-container input[type="text"],
@@ -256,9 +259,45 @@ form div {
 .form-container input[type="email"],
 .form-container input[type="password"],
 .form-container input[type="tel"] {
-  width: 50%;
+  width: 30%;
   box-sizing: border-box;
   margin-bottom: 10px;
   padding: 7px;
+  background-color: #49e2d3;
+}
+
+.background-container {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.75),rgba(83, 193, 195, 0.75)), url(images/heartbeat.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -1; /* Ensure the background is behind other content */
+}
+
+h1 {
+  color: black;
+  text-align: center;
+}
+
+p {
+  color: #009688;
+}
+
+input[type=text], input[type=date], input[type=number], input[type=email], input[type=password], input[type=tel]{
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #009688;
+  border-radius: 4px;
+  background-color: lightcyan;
+}
+
+input[type=text]:focus, input[type=number]:focus, input[type=email]:focus, input[type=password]:focus, input[type=tel]:focus {
   background-color: cyan;
 }

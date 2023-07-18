@@ -4,62 +4,29 @@ require_once 'Connect.php';
 
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Contract List</title>
-    <style>
-    .contract-container {
-        margin-bottom: 20px;
-    }
-
-    .contract {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-
-    .contract label {
-        font-weight: bold;
-        flex-basis: 150px;
-    }
-
-    .contract span {
-        flex-grow: 1;
-        padding: 5px;
-        border: 1px solid #ccc;
-        background-color: #f2f2f2;
-    }
-
-    .contract span input {
-        border: none;
-        background-color: transparent;
-        width: 100%;
-        padding: 3px;
-        box-sizing: border-box;
-    }
-
-    .contract button {
-        margin-top: 10px;
-        padding: 5px 10px;
-    }
-    </style>
+    <title>Contracts</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <div>
-        <ul>
-            <li><a href='./PharmaceuticalCompany.html'>Dashboard</a></li>
-            <li><a href='./CompanyDrug.php'>Drug</a></li>
-            <li><a href='./CompanyContracts.php'>Contracts</a></li>
-        </ul>
-    </div>
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="pharmacy.html">Dashboard</a></li>
+                <li><a href="pharmacyStock.php">Stock</a></li>
+                <li><a href="PharmacyPatient.php">Patient</a></li>
+                <li><a href="pharmacyDispense.php">Dispense</a></li>
+                <li><a href="pharmacyContracts.php">Contracts</a></li>
+            </ul>
+        </div>
 
     <h1>ALL CONTRACTS</h1>
 
     <div class="contract-container">
         <?php
         // Check if the cookie is set
-        if (isset($_COOKIE['userType']) && $_COOKIE['userType'] == "PharmaceuticalCompany") {
+        if (isset($_COOKIE['userType']) && $_COOKIE['userType'] == "Pharmacy") {
             // Retrieve the value of the cookie
             $name = $_COOKIE['name'];
             $sqlGetContracts = "SELECT * FROM CONTRACTS WHERE CompanyName='$name'";

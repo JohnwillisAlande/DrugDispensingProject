@@ -2,8 +2,10 @@
 <html>
 <head>
 	<title>Pharmacy Dispense</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+	<div class="content">
 	<h1>Pharmacy Dispense</h1>
 
 	<?php
