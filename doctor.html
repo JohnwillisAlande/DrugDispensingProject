@@ -1,53 +1,25 @@
 <!DOCTYPE html>
 <html>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-    }
-
-    #doctorTable {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    #doctorTable th,
-    #doctorTable td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: left;
-    }
-
-    #doctorTable th {
-        background-color: #f2f2f2;
-    }
-
-    button {
-        padding: 10px 40px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-        margin-left: 200px
-    }
-
-    .BtnRow {
-        flex-direction: 'row';
-        display: flex;
-        left: '10%';
-        justify-content: 'space-between'
-    }
-</style>
-
+    <head>
+        <title>Dashboard</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
 <body>
+    <div class="banner" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="doctor.html">Dashboard</a></li>
+                <li><a href="doctorPrescriptions.php">Prescriptions</a></li>
+            </ul>
+        </div>
+
+    <div class="content">
     <div id="doctorName">
         Name
     </div>
     <div>
-        <h2>CHANGE DETAILS</h2>
-    </div>
-    <div>
+        <h2>DOCTOR DETAILS</h2>
         <table id="doctorTable">
             <thead>
                 <tr>
@@ -61,15 +33,12 @@
             <tbody>
             </tbody>
         </table>
+   
+        <div>
+            <button onclick="handleSaveChanges()"><span></span>SAVE CHANGES</button>
+            <button onclick="deleteAccount()"><span></span>DELETE ACCOUNT</button>
+        </div>
     </div>
-    <!-- Other HTML content -->
-    <div class="BtnRow">
-        <div>
-            <button onclick="handleSaveChanges()">SAVE CHANGES</button>
-        </div>
-        <div>
-            <button onclick="deleteAccount()">DELETE ACCOUNT</button>
-        </div>
     </div>
 
     <script>
@@ -101,7 +70,7 @@
         if (name) {
             // Display the name on the page
             const doctorNameElement = document.getElementById('doctorName');
-            doctorNameElement.textContent = 'Doctor Name: ' + name;
+            doctorNameElement.textContent = 'Welcome Doctor, ' + name;
         } else {
             // No name found, redirect to login page
             window.location.href = 'login.html';

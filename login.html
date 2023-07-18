@@ -2,59 +2,26 @@
 <html>
 
 <head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        button {
-            padding: 15px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            width:200px;
-            margin-left:150px
-        }
-
-        #form {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin-left: 300px;
-            padding: 20px;
-            width: 500px;
-        }
-
-        input {
-            margin-bottom: 10px;
-            padding: 15px;
-            border-radius: 5px;
-            min-width: 400px;
-            border-radius: 20px;
-            border-width:0.2px
-
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        .heading {
-            margin-left: 500px;
-        }
-    </style>
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <h1 class="heading">SIGN IN</h1>
-    <div>
+    <div class="banner" style="position: absolute; top: -10; right: 5; padding: 10px;">
+        <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li><a href="CreateUser.html">SignUp</a></li>
+            </ul>
+        </div>
+    <div class="content">
+        <h1 class="heading">SIGN IN</h1>
         <form onsubmit="handleSubmit(); event.preventDefault();" id="form">
             <input type="email" placeholder="Email" id="email" />
             <input type="password" placeholder="Password" id="password" />
-            <button type="submit" id="button">Submit</button>
+            <button type="submit" id="button"><span></span>Submit</button>
         </form>
+    </div>
     </div>
 
     <script>
