@@ -29,6 +29,19 @@ require_once 'Connect.php';
         border: 1px solid #ccc;
         background-color: #f2f2f2;
     }
+
+    .contract span input {
+        border: none;
+        background-color: transparent;
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+    .contract button {
+        margin-top: 10px;
+        padding: 5px 10px;
+    }
     </style>
 </head>
 
@@ -58,12 +71,13 @@ require_once 'Connect.php';
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<div class='contract'>";
                     echo "<label>Contract ID:</label><span>" . $row['ContractID'] . "</span>";
-                    echo "<label>Start Date:</label><span>" . $row['StartDate'] . "</span>";
-                    echo "<label>Ending Date:</label><span>" . $row['EndingDate'] . "</span>";
-                    echo "<label>Pharmacy Name:</label><span>" . $row['PharmacyName'] . "</span>";
-                    echo "<label>Company Name:</label><span>" . $row['CompanyName'] . "</span>";
-                    echo "<label>Supervisor Name:</label><span>" . $row['SupervisorName'] . "</span>";
-                    echo "<label>Contract Details:</label><span>" . $row['ContractDetails'] . "</span>";
+                    echo "<label>Start Date:</label><span><input type='text' value='" . $row['StartDate'] . "' readonly></span>";
+                    echo "<label>Ending Date:</label><span><input type='text' value='" . $row['EndingDate'] . "' readonly></span>";
+                    echo "<label>Pharmacy Name:</label><span><input type='text' value='" . $row['PharmacyName'] . "' readonly></span>";
+                    echo "<label>Company Name:</label><span><input type='text' value='" . $row['CompanyName'] . "' readonly></span>";
+                    echo "<label>Supervisor Name:</label><span><input type='text' value='" . $row['SupervisorName'] . "' readonly></span>";
+                    echo "<label>Contract Details:</label><span><input type='text' value='" . $row['ContractDetails'] . "' readonly></span>";
+                    echo "<button type='button'>Edit</button>";
                     echo "</div>";
                 }
             } else {
