@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <title>Homepage</title>
-    <link rel="stylesheet" href="styles.css">
+<title>Homepage</title>
+<link rel="stylesheet" href="styles.css">
+
 <head>
-    
+
 </head>
 
 <body>

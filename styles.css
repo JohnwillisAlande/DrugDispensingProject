@@ -177,11 +177,12 @@ form div {
 .form-container input[type="email"],
 .form-container input[type="password"],
 .form-container input[type="tel"] {
-  width: 30%;
+  width: 50%;
   box-sizing: border-box;
   margin-bottom: 10px;
   padding: 7px;
   background-color: #49e2d3;
+  border-radius:10
 }
 
 .background-container {
@@ -424,7 +425,7 @@ form div {
   margin: 8px 0;
   box-sizing: border-box;
   border: 3px solid #009688;
-  border-radius: 4px;
+  border-radius: 20px;
   background-color: lightcyan;
 }
 
