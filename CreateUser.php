@@ -32,15 +32,15 @@ $ID = generateRandomID();
 $response = '';
 
 if ($userType === "Patient") {
-    $sql = "INSERT INTO Patients (PatientID, PatientSSN, PatientName, Age, Email, Password, Contact, DoctorName, Address, Pin) VALUES ('$ID', '$SSN', '$name', '$age', '$email', '$hashedPassword', '$contact', '$doctorName', '$address', '$patientPin')";
+    $sql = "INSERT INTO Patients (PatientID, PatientSSN, PatientName, Age, Email, Password, Contact, DoctorName, Address, Pin,isDisabled) VALUES ('$ID', '$SSN', '$name', '$age', '$email', '$hashedPassword', '$contact', '$doctorName', '$address', '$patientPin',false)";
 } elseif ($userType === "Doctor") {
-    $sql = "INSERT INTO Doctors (DoctorID, DoctorSSN, DoctorName, Email, Password, Specialty, Contact) VALUES ('$ID', '$SSN', '$name', '$email', '$hashedPassword', '$specialty', '$contact')";
+    $sql = "INSERT INTO Doctors (DoctorID, DoctorSSN, DoctorName, Email, Password, Specialty, Contact,isDisabled) VALUES ('$ID', '$SSN', '$name', '$email', '$hashedPassword', '$specialty', '$contact',false)";
 } elseif ($userType === "Supervisor") {
-    $sql = "INSERT INTO Supervisor (SupervisorID, SupervisorName, Email, Password, Contact) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
+    $sql = "INSERT INTO Supervisor (SupervisorID, SupervisorName, Email, Password, Contact,isDisabled) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
 } elseif ($userType === "Pharmacy") {
-    $sql = "INSERT INTO Pharmacy (PharmacyID, PharmacyName, Email, Password, Contact, PharmacyAddress, StoreID) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact', '$address', '$storeID')";
+    $sql = "INSERT INTO Pharmacy (PharmacyID, PharmacyName, Email, Password, Contact, PharmacyAddress, StoreID,isDisabled) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact', '$address', '$storeID',false)";
 } elseif ($userType === "PharmaceuticalCompany") {
-    $sql = "INSERT INTO PharmaceuticalCompany (CompanyID, CompanyName, Email, Password, Contact) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
+    $sql = "INSERT INTO PharmaceuticalCompany (CompanyID, CompanyName, Email, Password, Contact,isDisabled) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact',false)";
 }
 
 if ($conn->query($sql) === TRUE) {

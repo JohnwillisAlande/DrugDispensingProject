@@ -8,11 +8,11 @@ $data = json_decode($inputJSON, true);
 $email = $data['Email'];
 $password = $data['Password']; // Fixed typo in variable name
 
-$sql1 = "SELECT * FROM Patients WHERE Email = '$email' AND IsDisabled=NULL"; // Fixed missing "=" sign
-$sql2 = "SELECT * FROM Doctors WHERE Email = '$email' AND IsDisabled=NULL"; // Fixed missing "=" sign
-$sql3 = "SELECT * FROM Supervisor WHERE Email = '$email' AND IsDisabled=NULL"; // Fixed missing "=" sign
-$sql4 = "SELECT * FROM Pharmacy WHERE Email = '$email' AND IsDisabled=NULL"; // Fixed missing "=" sign
-$sql5 = "SELECT * FROM PharmaceuticalCompany WHERE Email = '$email' AND IsDisabled=NULL"; // Fixed missing "=" sign
+$sql1 = "SELECT * FROM Patients WHERE Email = '$email' AND isDisabled=false";
+$sql2 = "SELECT * FROM Doctors WHERE Email = '$email' AND isDisabled=false ";
+$sql3 = "SELECT * FROM Supervisor WHERE Email = '$email' AND isDisabled=false";
+$sql4 = "SELECT * FROM Pharmacy WHERE Email = '$email' AND isDisabled=false ";
+$sql5 = "SELECT * FROM PharmaceuticalCompany WHERE Email = '$email' AND isDisabled=false";
 
 
 
