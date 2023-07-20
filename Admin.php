@@ -9,7 +9,7 @@
         var cells = row.getElementsByTagName("td");
         var editSQL = "";
 
-        for (var i = 0; i < cells.length - 1; i++) { // Exclude the last cell with edit and delete links
+        for (var i = 0; i < cells.length - 1; i++) { 
             var cell = cells[i];
             var columnName = cell.getAttribute("data-column");
             var cellValue = cell.textContent;
@@ -17,7 +17,7 @@
             editSQL += columnName + "='" + cellValue + "', ";
         }
 
-        editSQL = editSQL.slice(0, -2); // Remove the trailing comma and space
+        editSQL = editSQL.slice(0, -2); 
 
         var editLink = row.querySelector("a.edit-link");
         var editURL = editLink.getAttribute("href");
@@ -37,17 +37,27 @@
             </ul>
         </div>
     </div>
+
+    <div class="form-container">
+    <div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;">
+        <div><a href="?table=Patients">Patients</a></div>
+        <div><a href="?table=Doctors">Doctor</a></div>
+        <div><a href="?table=Supervisor">Supervisor</a></div>
+        <div><a href="?table=Pharmacy">Pharmacy</a></div>
+        <div><a href="?table=PharmaceuticalCompany">Pharmaceutical Company</a></div>
+    </div>
+</div>
+
     <?php
     require_once 'Connect.php';
 
-    $tableName = "Patients"; // Default table name when the file is loaded
+    $tableName = "Patients"; 
 
     if (isset($_GET['table'])) {
         $table = $_GET['table'];
-        // Update the table name based on the clicked div
         if ($table === "Patients" || $table === "Doctors" || $table === "Supervisor" || $table === "Pharmacy" || $table === "PharmaceuticalCompany") {
             $tableName = $table;
-            // Modify the query to exclude the password field
+          
             if ($tableName === "Doctors") {
                 $query = "SELECT DoctorID, DoctorSSN, DoctorName, Email, Specialty, Contact FROM $tableName";
             } elseif ($tableName === "Supervisor") {
@@ -64,13 +74,6 @@
         }
     }
 
-    echo '<div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;" class="navbar">
-            <div><a href="?table=Patients">Patients</a></div>
-            <div><a href="?table=Doctors">Doctor</a></div>
-            <div><a href="?table=Supervisor">Supervisor</a></div>
-            <div><a href="?table=Pharmacy">Pharmacy</a></div>
-            <div><a href="?table=PharmaceuticalCompany">Pharmaceutical Company</a></div>
-        </div>';
         
     function deleteAccount($conn, $tableName, $id) {
         $query = "DELETE FROM $tableName WHERE " . mysqli_real_escape_string($conn, $tableName) . "ID = '$id'";
@@ -111,17 +114,17 @@
 
     function getTableData($conn, $tableName)
     {
-        // Query the SQL table to fetch the desired data
+        
         $query = "SELECT * FROM $tableName";
         $result = mysqli_query($conn, $query);
 
-        // Check if the query was successful
+        
         if ($result) {
-            // Create an HTML table to display the data
+           
             echo '<table>';
             echo '<tr>';
 
-            // Get the field names from the result set and display as table headers
+            
             $fieldNames = mysqli_fetch_fields($result);
             foreach ($fieldNames as $field) {
                 if ($field->name !== 'Password') {
@@ -131,22 +134,22 @@
 
             echo '</tr>';
 
-            // Fetch the data from the result set and populate the table rows
+            
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<tr>';
-                $id = $row[array_keys($row)[0]]; // Set the ID as the first element of the columns
+                $id = $row[array_keys($row)[0]]; 
 
-                $editSQL = ""; // Initialize the $editSQL variable
+                $editSQL = ""; 
 
                 foreach ($row as $key => $value) {
-                    // Exclude the password field
+                    
                     if ($key !== 'Password') {
                         echo '<td contenteditable="true" data-column="' . $key . '">' . $value . '</td>';
-                        $editSQL .= "$key='$value', "; // Append each column and value to the $editSQL variable
+                        $editSQL .= "$key='$value', "; 
                     }
                 }
 
-                $editSQL = rtrim($editSQL, ', '); // Remove the trailing comma and space
+                $editSQL = rtrim($editSQL, ', '); 
 
                 echo '<td><a class="edit-link" href="?action=edit&table=' . $tableName . '&id=' . $id . '&editSQL=' . urlencode($editSQL) . '">Edit</a> <a href="?action=delete&table=' . $tableName . '&id=' . $id . '">Delete Account</a></td>';
                 echo '</tr>';
@@ -154,7 +157,7 @@
 
             echo '</table>';
         } else {
-            // Handle the query error
+           
             echo "Error: " . mysqli_error($conn);
         }
     }
@@ -168,7 +171,7 @@
     var table = document.querySelector("table");
     var rows = table.getElementsByTagName("tr");
 
-    for (var i = 1; i < rows.length; i++) { // Start from index 1 to exclude the table header row
+    for (var i = 1; i < rows.length; i++) { 
         var row = rows[i];
         row.addEventListener("input", function() {
             updateEditSQL(this);

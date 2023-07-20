@@ -6,28 +6,45 @@ $tradename = "";
 $quantity = "";
 $price = "";
 
+$email = $_COOKIE["email"];
+
+// Check if cookies are set and get values from cookies
+if (isset($_COOKIE["email"])) {
+    $email = $_COOKIE["email"];
+
+    // Get the pharmacy ID from the database
+    $sql = "SELECT pharmacyID FROM pharmacy WHERE email='$email'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $pharmacyID = $row["pharmacyID"];
+    } else {
+        die("Error: Pharmacy ID not found in the database.");
+    }
+} else {
+    die("Error: Pharmacy ID not found in cookies.");
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Validate and sanitize user inputs
     $tradename = $_POST["tradename"] ?? null;
     $quantity = $_POST["quantity"] ?? null;
     $price = $_POST["price"] ?? null;
 
-    // Check if the inputs are not empty
     if (empty($tradename) || empty($quantity) || empty($price)) {
         echo "Error: Please fill in all the fields.";
     } else {
-        // Check if cookies are set and get values from cookies
+
         if (isset($_COOKIE["email"])) {
             $email = $_COOKIE["email"];
 
-            // Get the pharmacy ID from the database
+            
             $sql = "SELECT pharmacyID FROM pharmacy WHERE email='$email'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $pharmacyID = $row["pharmacyID"];
 
-                // Store data in the 'drugs' table
                 $sql = "INSERT INTO stock (pharmacyID, tradename, quantity, price) VALUES ('$pharmacyID', '$tradename', '$quantity', '$price')";
 
                 if ($conn->query($sql) === TRUE) {
@@ -45,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 // Retrieve data from the 'stock' table
-$sql1 = "SELECT * FROM stock";
+$sql1 = "SELECT * FROM stock WHERE pharmacyID='$pharmacyID'";
 $result = mysqli_query($conn,$sql1);
 ?>
 

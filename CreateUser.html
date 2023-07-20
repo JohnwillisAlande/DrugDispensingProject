@@ -313,7 +313,7 @@
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 <body>
-    <div class="banner" style="position: absolute; top: -10; right: 5; padding: 10px;">
+    <section class="background-containers">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
@@ -352,25 +352,25 @@
         <div id="userTypeSelection" >
             <!-- Patient fields -->
             <div id="patientFields" style="display: none;">
-                <input type="text" id="patientName" placeholder="Name">
+                <input type="text" class="login-input" id="patientName" placeholder="Name">
                 <br>
-                <input type="number" id="patientSSN" placeholder="SSN">
+                <input type="number" class="login-input" id="patientSSN" placeholder="SSN">
                 <br>
-                <input type="number" id="patientAge" placeholder="Age">
+                <input type="number" class="login-input" id="patientAge" placeholder="Age">
                 <br>
-                <input type="text" id="patientEmail" placeholder="Email">
+                <input type="text" class="login-input" id="patientEmail" placeholder="Email">
                 <br>
-                <input type="password" id="patientPassword" placeholder="Password">
+                <input type="password" class="login-input" id="patientPassword" placeholder="Password">
                 <br>
-                <input type="number" id="patientContact" placeholder="Contact">
+                <input type="number" class="login-input" id="patientContact" placeholder="Contact">
                 <br>
-                <input type="text" id="patientDoctorName" placeholder="Doctor Name">
+                <input type="text" class="login-input" id="patientDoctorName" placeholder="Doctor Name">
                 <br>
-                <input type="text" id="patientAddress" placeholder="Address">
+                <input type="text" class="login-input" id="patientAddress" placeholder="Address">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
-                    <button type="submit">Register</button>
-                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
                 </div>
 
             </div>
@@ -378,21 +378,21 @@
             <!-- Doctor fields -->
             <div id="doctorFields" style="display: none;">
                 <br>
-                <input type="text" id="doctorName" placeholder="Name">
+                <input type="text" class="login-input" id="doctorName" placeholder="Name">
                 <br>
-                <input type="number" id="doctorSSN" placeholder="SSN">
+                <input type="number" class="login-input" id="doctorSSN" placeholder="SSN">
                 <br>
-                <input type="text" id="doctorEmail" placeholder="Email">
+                <input type="text" class="login-input" id="doctorEmail" placeholder="Email">
                 <br>
-                <input type="password" id="doctorPassword" placeholder="Password">
+                <input type="password" class="login-input" id="doctorPassword" placeholder="Password">
                 <br>
-                <input type="text" id="doctorSpecialty" placeholder="Specialty">
+                <input type="text" class="login-input" id="doctorSpecialty" placeholder="Specialty">
                 <br>
-                <input type="number" id="doctorContact" placeholder="Contact">
+                <input type="number" class="login-input" id="doctorContact" placeholder="Contact">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
-                    <button type="submit">Register</button>
-                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
                 </div>
 
             </div>
@@ -400,17 +400,17 @@
             <!-- Supervisor fields -->
             <div id="supervisorFields" style="display: none;">
                 <br>
-                <input type="text" id="supervisorName" placeholder="Name">
+                <input type="text" class="login-input" id="supervisorName" placeholder="Name">
                 <br>
-                <input type="text" id="supervisorEmail" placeholder="Email">
+                <input type="text" class="login-input" id="supervisorEmail" placeholder="Email">
                 <br>
-                <input type="password" id="supervisorPassword" placeholder="Password">
+                <input type="password" class="login-input" id="supervisorPassword" placeholder="Password">
                 <br>
-                <input type="number" id="supervisorContact" placeholder="Contact">
+                <input type="number" class="login-input" id="supervisorContact" placeholder="Contact">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
-                    <button type="submit">Register</button>
-                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
                 </div>
 
             </div>
@@ -418,19 +418,19 @@
             <!-- Pharmacy fields -->
             <div id="pharmacyFields" style="display: none;">
                 <br>
-                <input type="text" id="pharmacyName" placeholder="Name">
+                <input type="text" class="login-input" id="pharmacyName" placeholder="Name">
                 <br>
-                <input type="text" id="pharmacyEmail" placeholder="Email">
+                <input type="text" class="login-input" id="pharmacyEmail" placeholder="Email">
                 <br>
-                <input type="password" id="pharmacyPassword" placeholder="Password">
+                <input type="password" class="login-input" id="pharmacyPassword" placeholder="Password">
                 <br>
-                <input type="number" id="pharmacyContact" placeholder="Contact">
+                <input type="number" class="login-input" id="pharmacyContact" placeholder="Contact">
                 <br>
-                <input type="text" id="pharmacyAddress" placeholder="Address">
+                <input type="text" class="login-input" id="pharmacyAddress" placeholder="Address">
                 <br />
                 <div style="flex-direction: row; justify-content:space-between;">
-                    <button type="submit">Register</button>
-                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
                 </div>
 
             </div>
@@ -438,22 +438,27 @@
             <!-- Pharmaceutical Company fields -->
             <div id="companyFields" style="display: none;">
                 <br>
-                <input type="text" id="companyName" placeholder="Name">
+                <input type="text" class="login-input" id="companyName" placeholder="Name">
                 <br>
-                <input type="text" id="companyEmail" placeholder="Email">
+                <input type="text" class="login-input" id="companyEmail" placeholder="Email">
                 <br>
-                <input type="password" id="companyPassword" placeholder="Password">
+                <input type="password" class="login-input" id="companyPassword" placeholder="Password">
                 <br>
-                <input type="number" id="companyContact" placeholder="Contact">
+                <input type="number" class="login-input" id="companyContact" placeholder="Contact">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
-                    <button type="submit">Register</button>
-                    <button style="margin-left:200px" onclick="handleNav()">Login</button>
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
                 </div>
 
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="purpose">
+        <h1>Kindly Register Your Details Above</h1>
+        <p>We are pleased to have you all trust our platform</p>
+    </section>
     </form>
 </body>
 

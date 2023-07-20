@@ -9,7 +9,7 @@ $data = json_decode($inputJSON, true);
 $email = isset($_GET['Email']) ? $_GET['Email'] : null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
-    // Assign the PUT data to the corresponding variables
+    
     $DoctorName = isset($data['DoctorName']) ? $data['DoctorName'] : null;
     $Specialty = isset($data['Specialty']) ? $data['Specialty'] : null;
     $DoctorSSN = isset($data['DoctorSSN']) ? $data['DoctorSSN'] : null;

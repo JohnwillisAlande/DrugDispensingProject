@@ -74,12 +74,12 @@ $companyNames = mysqli_fetch_all($resultCompanyNames, MYSQLI_ASSOC);
 
             echo "<form method='POST'>";
             echo "<div class='contract'>";
-            echo "<label>Start Date:</label><input type='text' name='startDate'><br>";
-            echo "<label>Ending Date:</label><input type='text' name='endingDate'><br>";
+            echo "<label>Start Date:</label><input type='text' class='login-input' name='startDate'><br>";
+            echo "<label>Ending Date:</label><input type='text' class='login-input' name='endingDate'><br>";
             
             // Dropdown for pharmacy names
             echo "<label>Pharmacy Name:</label>";
-            echo "<select name='pharmacyName'>";
+            echo "<select name='pharmacyName' class='login-input'>";
             foreach ($pharmacyNames as $pharmacy) {
                 echo "<option value='" . $pharmacy['PharmacyName'] . "'>" . $pharmacy['PharmacyName'] . "</option>";
             }
@@ -87,14 +87,14 @@ $companyNames = mysqli_fetch_all($resultCompanyNames, MYSQLI_ASSOC);
             
             // Dropdown for company names
             echo "<label>Company Name:</label>";
-            echo "<select name='companyName'>";
+            echo "<select name='companyName' class='login-input'>";
             foreach ($companyNames as $company) {
                 echo "<option value='" . $company['CompanyName'] . "'>" . $company['CompanyName'] . "</option>";
             }
             echo "</select><br>";
             
-            echo "<label>Contract Details:</label><input type='text' name='contractDetails'><br>";
-            echo "<button type='submit' name='contractID'>Save Changes</button>";
+            echo "<label>Contract Details:</label><input type='text' class='login-input' name='contractDetails'><br>";
+            echo "<button type='submit' name='contractID'><span></span>Save Changes</button>";
             echo "</div>";
             echo "</form>";
         } else {

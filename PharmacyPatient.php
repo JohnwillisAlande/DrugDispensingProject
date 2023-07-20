@@ -34,18 +34,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <li><a href="pharmacyContracts.php">Contracts</a></li>
             </ul>
         </div>
-        <div class="search-form">
+        <div class="content">
             <form method="post" action="PharmacyPatient.php">
-                <input type="text" name="searchValue" placeholder="Search for patient...">
-                <input type="submit" value="Submit">
+                <input type="text" class="login-input" name="searchValue" placeholder="Search for patient...">
+                <button type="submit" value="Submit"><span></span>Submit</button>
             </form>
-        </div>
+        
 
         <div class="search-results">
             <?php
             // Display the search results below the search button
             if ($_SERVER["REQUEST_METHOD"] === "POST" && !empty($searchValue)) {
-                echo "<h1>Search Results</h1>";
+                echo "<h3>Search Results</h3>";
                 // Display the table only if there are results
                 if ($result->num_rows > 0) {
                     echo "<table>";
@@ -71,6 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
             }
             ?>
+        </div>
         </div>
     </div>
 

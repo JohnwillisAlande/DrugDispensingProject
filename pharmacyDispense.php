@@ -101,7 +101,7 @@ $dispensingResult = $conn->query($sql);
     <h1>Pharmacy Dispense</h1>
 
     <form method="post" action="pharmacyDispense.php" class="form-container">
-        <!-- Your HTML form for inputting tradename and quantity -->
+        
         <label for="tradename">Trade Name:</label>
         <input type="text" name="tradename" required><br>
 

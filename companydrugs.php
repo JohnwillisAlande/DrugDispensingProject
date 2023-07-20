@@ -63,14 +63,14 @@ $result = mysqli_query($conn,$sql1);
             <img src="images/afyahealth.png" class="logo">
             <ul>
                 <li><a href="pharmaceuticalCompany.html">Dashboard</a></li>
-                <li><a href="companydrugs.php">Stock</a></li>
+                <li><a href="companydrugs.php">Drugs</a></li>
                 <li><a href="CompanyContracts.php">Contracts</a></li>
             </ul>
         </div>
     <h1>Pharmaceutical Company Drugs</h1>
 
     <form method="post" action="companydrugs.php" class="form-container">
-        <!-- Your HTML form for inputting tradename, formula, and price -->
+      
         <label for="tradename">Trade Name:</label>
         <input type="text" name="tradename" required><br>
 
@@ -93,7 +93,7 @@ $result = mysqli_query($conn,$sql1);
             <th>Price</th>
         </tr>
         <?php
-        // Display data from the 'drugs' table
+        
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";

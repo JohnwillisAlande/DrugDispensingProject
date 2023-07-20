@@ -35,14 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (isset($_COOKIE["email"])) {
             $email = $_COOKIE["email"];
 
-            // Get the pharmacy ID from the database
+            
             $sql = "SELECT doctorID FROM doctors WHERE email='$email'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $doctorID = $row["doctorID"];
 
-                // Select patientID from patients table based on patientSSN
+               
             $sql = "SELECT patientID FROM patients WHERE patientSSN='$patientSSN'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 $prescriptionID = generateRandomID();
 
-                // Store data in the 'drugs' table
+        
                 $sql = "INSERT INTO prescriptions (prescriptionID, doctorID, patientID, patientSSN, tradename, quantity, datePrescribed) VALUES ('$prescriptionID', '$doctorID', '$patientID', '$patientSSN', '$tradename', '$quantity', '$datePrescribed')";
 
                 if ($conn->query($sql) === TRUE) {
@@ -71,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// Retrieve data from the 'stock' table
 $sql1 = "SELECT * FROM prescriptions";
 $result = mysqli_query($conn,$sql1);
 ?>
@@ -96,7 +95,7 @@ $result = mysqli_query($conn,$sql1);
     <h1>Prescriptions History</h1>
 
     <form method="post" action="doctorPrescriptions.php" class="form-container">
-        <!-- Your HTML form for inputting tradename, quantity, and price -->
+       
         <label for="patientSSN">Patient SSN:</label>
         <input type="text" name="patientSSN" required><br>
 
