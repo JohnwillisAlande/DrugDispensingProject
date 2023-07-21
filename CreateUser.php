@@ -15,6 +15,7 @@ function generateRandomID() {
 $data = json_decode($inputJSON, true);
 $name = $data['Name'];
 $age = $data['Age'];
+$DOB=$data["DOB"];
 $email = $data['Email'];
 $password = $data['Password'];
 $contact = $data['Contact'];
@@ -32,11 +33,11 @@ $ID = generateRandomID();
 $response = '';
 
 if ($userType === "Patient") {
-    $sql = "INSERT INTO Patients (PatientID, PatientSSN, PatientName, Age, Email, Password, Contact, DoctorName, Address, Pin,isDisabled) VALUES ('$ID', '$SSN', '$name', '$age', '$email', '$hashedPassword', '$contact', '$doctorName', '$address', '$patientPin',false)";
+    $sql = "INSERT INTO Patients (PatientID, PatientSSN, PatientName,DOB,Age, Email, Password, Contact, DoctorName, Address, Pin,isDisabled) VALUES ('$ID', '$SSN', '$name','$DOB' ,'$age', '$email', '$hashedPassword', '$contact', '$doctorName', '$address', '$patientPin',false)";
 } elseif ($userType === "Doctor") {
     $sql = "INSERT INTO Doctors (DoctorID, DoctorSSN, DoctorName, Email, Password, Specialty, Contact,isDisabled) VALUES ('$ID', '$SSN', '$name', '$email', '$hashedPassword', '$specialty', '$contact',false)";
 } elseif ($userType === "Supervisor") {
-    $sql = "INSERT INTO Supervisor (SupervisorID, SupervisorName, Email, Password, Contact,isDisabled) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact')";
+    $sql = "INSERT INTO Supervisor (SupervisorID, SupervisorName, Email, Password, Contact,isDisabled) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact',false)";
 } elseif ($userType === "Pharmacy") {
     $sql = "INSERT INTO Pharmacy (PharmacyID, PharmacyName, Email, Password, Contact, PharmacyAddress, StoreID,isDisabled) VALUES ('$ID', '$name', '$email', '$hashedPassword', '$contact', '$address', '$storeID',false)";
 } elseif ($userType === "PharmaceuticalCompany") {
