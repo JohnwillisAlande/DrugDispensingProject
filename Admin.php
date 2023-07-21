@@ -1,3 +1,10 @@
+<?php
+if (isset($_COOKIE["userType"]) && $_COOKIE["userType"] !== "Admin") {
+    header("Location: login.html");
+    exit; // Make sure to include exit or die to prevent further script execution
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +16,7 @@
         var cells = row.getElementsByTagName("td");
         var editSQL = "";
 
-        for (var i = 0; i < cells.length - 1; i++) { 
+        for (var i = 0; i < cells.length - 1; i++) {
             var cell = cells[i];
             var columnName = cell.getAttribute("data-column");
             var cellValue = cell.textContent;
@@ -17,7 +24,7 @@
             editSQL += columnName + "='" + cellValue + "', ";
         }
 
-        editSQL = editSQL.slice(0, -2); 
+        editSQL = editSQL.slice(0, -2);
 
         var editLink = row.querySelector("a.edit-link");
         var editURL = editLink.getAttribute("href");
@@ -29,7 +36,7 @@
 </head>
 
 <body>
-<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
@@ -46,7 +53,6 @@
         <div class="navbar2"><a href="?table=Pharmacy">Pharmacies</a></div>
         <div class="navbar2"><a href="?table=PharmaceuticalCompany">Pharmaceutical Companies</a></div>
     </div>
-</div>
 
     <?php
     require_once 'Connect.php';
@@ -76,7 +82,23 @@
 
         
     function deleteAccount($conn, $tableName, $id) {
-        $query = "DELETE FROM $tableName WHERE " . mysqli_real_escape_string($conn, $tableName) . "ID = '$id'";
+        $NameID;
+        if($tableName=="Doctors"){
+            $NameID="DoctorID";
+
+        }if($tableName=="Patients"){
+            $NameID="PatientID";
+
+        }if($tableName=="Pharmacy"){
+            $NameID="PharmacyID";
+
+        }if($tableName=="PharmaceuticalCompany"){
+             $NameID="CompanyID";
+
+        }if($tableName==="Supervisor"){
+             $NameID="SupervisorID";
+        }
+        $query = "UPDATE  $tableName SET isDisabled=true WHERE '$NameID'  = '$id'";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -87,8 +109,24 @@
     }
 
     function editAccount($conn, $table, $id, $editSQL) {
+        $NameID;
+        if($table=="Doctors"){
+            $NameID="DoctorID";
+            
+        }if($table=="Patients"){
+            $NameID="PatientID";
+
+        }if($table=="Pharmacy"){
+            $NameID="PharmacyID";
+
+        }if($table=="PharmaceuticalCompany"){
+             $NameID="CompanyID";
+
+        }if($table==="Supervisor"){
+             $NameID="SupervisorID";
+        }
         $tableName = mysqli_real_escape_string($conn, $table);
-        $query = "UPDATE $tableName SET $editSQL WHERE " . mysqli_real_escape_string($conn, $tableName) . "ID = '$id'";
+        $query = "UPDATE $tableName SET $editSQL WHERE '$NameID' = '$id'";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -164,20 +202,30 @@
 
     getTableData($conn, $tableName);
     ?>
-    
-
 
     <script>
-    var table = document.querySelector("table");
-    var rows = table.getElementsByTagName("tr");
+    function updateEditSQL(row) {
+        var cells = row.getElementsByTagName("td");
+        var editSQL = "";
 
-    for (var i = 1; i < rows.length; i++) { 
-        var row = rows[i];
-        row.addEventListener("input", function() {
-            updateEditSQL(this);
-        });
+        for (var i = 0; i < cells.length - 1; i++) {
+            var cell = cells[i];
+            var columnName = cell.getAttribute("data-column");
+            var cellValue = cell.textContent;
+
+            editSQL += columnName + "='" + cellValue + "', ";
+        }
+
+        editSQL = editSQL.slice(0, -2);
+
+        var editLink = row.querySelector("a.edit-link");
+        var editURL = editLink.getAttribute("href");
+        var updatedURL = editURL.split("editSQL=")[0] + "editSQL=" + encodeURIComponent(editSQL);
+        editLink.setAttribute("href", updatedURL);
     }
     </script>
+
+
 </body>
 
 </html>

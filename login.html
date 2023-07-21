@@ -47,12 +47,22 @@
                             console.log('User not found');
                         } else if(data.status==="success") {
                             const d = new Date();
-                            d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
-                            let expires = "expires=" + d.toUTCString();
-                            document.cookie = "name=" + data.Name + ";" + expires;
-                            document.cookie = "email=" + data.Email + ";" + expires;
-                            document.cookie = "userType=" + data.UserType + ";" + expires;
-                            window.location.href = `${data.UserType}.html`;
+                            if(data.UserType!=="Admin"){
+                                d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name=" + data.Name + ";" + expires;
+                                document.cookie = "email=" + data.Email + ";" + expires;
+                                document.cookie = "userType=" + data.UserType + ";" + expires;
+                                window.location.href = `${data.UserType}.html`;
+                            }else{
+                                  d.setTime(d.getTime() + (1 * 24 * 60 * 60 * 1000));
+                                let expires = "expires=" + d.toUTCString();
+                                document.cookie = "name=" + data.Name + ";" + expires;
+                                document.cookie = "email=" + data.Email + ";" + expires;
+                                document.cookie = "userType=" + data.UserType + ";" + expires;
+                                window.location.href = `${data.UserType}.php`;
+                            }
+                          
                         }else{
                             console.log("wrong password")
                         }

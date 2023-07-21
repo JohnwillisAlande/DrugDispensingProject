@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $prescriptionID = generateRandomID();
 
         
-                $sql = "INSERT INTO prescriptions (prescriptionID, doctorID, patientID, patientSSN, tradename, quantity, datePrescribed) VALUES ('$prescriptionID', '$doctorID', '$patientID', '$patientSSN', '$tradename', '$quantity', '$datePrescribed')";
+                $sql = "INSERT INTO prescription (prescriptionID, doctorID, patientID, patientSSN, tradename, quantity, datePrescribed) VALUES ('$prescriptionID', '$doctorID', '$patientID', '$patientSSN', '$tradename', '$quantity', '$datePrescribed')";
 
                 if ($conn->query($sql) === TRUE) {
                     echo "Data stored successfully.";
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-$sql1 = "SELECT * FROM prescriptions";
+$sql1 = "SELECT * FROM prescription";
 $result = mysqli_query($conn,$sql1);
 ?>
 
@@ -84,7 +84,7 @@ $result = mysqli_query($conn,$sql1);
 </head>
 
 <body>
-<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
@@ -92,38 +92,38 @@ $result = mysqli_query($conn,$sql1);
                 <li><a href="doctorPrescriptions.php">Prescriptions</a></li>
             </ul>
         </div>
-    <h1>Prescriptions History</h1>
+        <h1>Prescriptions History</h1>
 
-    <form method="post" action="doctorPrescriptions.php" class="form-container">
-       
-        <label for="patientSSN">Patient SSN:</label>
-        <input type="text" name="patientSSN" required><br>
+        <form method="post" action="doctorPrescriptions.php" class="form-container">
 
-        <label for="tradename">Trade Name:</label>
-        <input type="text" name="tradename" required><br>
+            <label for="patientSSN">Patient SSN:</label>
+            <input type="text" name="patientSSN" required><br>
 
-        <label for="quantity">Quantity:</label>
-        <input type="text" name="quantity" required><br>
+            <label for="tradename">Trade Name:</label>
+            <input type="text" name="tradename" required><br>
 
-        <label for="datePrescribed">Date Prescribed:</label>
-        <input type="date" name="datePrescribed" required><br>
+            <label for="quantity">Quantity:</label>
+            <input type="text" name="quantity" required><br>
 
-        <input type="submit" value="Submit">
-    </form>
+            <label for="datePrescribed">Date Prescribed:</label>
+            <input type="date" name="datePrescribed" required><br>
 
-    <br>
-    <h1>Prescriptions History</h1>
-    <table>
-        <tr>
-            <th>Prescription ID</th>
-            <th>Doctor ID</th>
-            <th>Patient ID</th>
-            <th>Patient SSN</th>
-            <th>Trade Name</th>
-            <th>Quantity</th>
-            <th>Date Prescribed</th>
-        </tr>
-        <?php
+            <input type="submit" value="Submit">
+        </form>
+
+        <br>
+        <h1>Prescriptions History</h1>
+        <table>
+            <tr>
+                <th>Prescription ID</th>
+                <th>Doctor ID</th>
+                <th>Patient ID</th>
+                <th>Patient SSN</th>
+                <th>Trade Name</th>
+                <th>Quantity</th>
+                <th>Date Prescribed</th>
+            </tr>
+            <?php
         // Display data from the 'drugs' table
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -141,8 +141,8 @@ $result = mysqli_query($conn,$sql1);
             echo "<tr><td colspan='7'>No data found</td></tr>";
         }
         ?>
-    </table>
-</div>
+        </table>
+    </div>
 </body>
 
 </html>

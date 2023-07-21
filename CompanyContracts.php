@@ -52,12 +52,11 @@ require_once 'Connect.php';
             echo "<p>Cookie 'userType' not set or invalid.</p>";
         }
         ?>
-        </div>
+            </div>
 
     <?php
    
     mysqli_close($conn);
-    ?>
-</body>
+    ?> </body>
 
 </html>

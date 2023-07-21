@@ -32,14 +32,25 @@
         if (userType === "Patient") {
             var name = document.getElementById("patientName").value;
             var ssn = document.getElementById("patientSSN").value;
-            var age = document.getElementById("patientAge").value;
+            var DOB = document.getElementById("patientDOB").value;
             var email = document.getElementById("patientEmail").value;
             var contact = document.getElementById("patientContact").value;
             var doctorName = document.getElementById("patientDoctorName").value;
             var password = document.getElementById('patientPassword').value;
             var address = document.getElementById("patientAddress").value;
+            var dob = new Date(DOB);
 
-            if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(age) && !isBlank.test(email) && !isBlank.test(contact) && !isBlank.test(doctorName) && !isBlank.test(address) && !isBlank.test(password)) {
+            // Calculate age based on DOB
+            var today = new Date();
+            var age = today.getFullYear() - dob.getFullYear();
+            var monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--; // Adjust the age if the birthdate has not been reached this year
+            }
+
+            var formattedDOB = dob.toISOString().split('T')[0];
+
+            if (!isBlank.test(name) && !isBlank.test(ssn) && !isBlank.test(DOB) && !isBlank.test(email) && !isBlank.test(contact) && !isBlank.test(doctorName) && !isBlank.test(address) && !isBlank.test(password)) {
                 if (PASSREGEX.test(password)) {
                     let data = {
                         Name: name,
@@ -49,6 +60,7 @@
                         Specialty: '',
                         Address: address,
                         Age: age,
+                        DOB:formattedDOB,
                         Contact: contact,
                         DoctorName: doctorName,
                         UserType: userType
@@ -356,13 +368,13 @@
                 <br>
                 <input type="number" class="login-input" id="patientSSN" placeholder="SSN">
                 <br>
-                <input type="number" class="login-input" id="patientAge" placeholder="Age">
+                <input type="date" class="login-input" id="patientDOB" placeholder="DOB">
                 <br>
                 <input type="text" class="login-input" id="patientEmail" placeholder="Email">
                 <br>
                 <input type="password" class="login-input" id="patientPassword" placeholder="Password">
                 <br>
-                <input type="number" class="login-input" id="patientContact" placeholder="Contact">
+                <input type="text" class="login-input" id="patientContact" placeholder="Contact">
                 <br>
                 <input type="text" class="login-input" id="patientDoctorName" placeholder="Doctor Name">
                 <br>
@@ -388,7 +400,7 @@
                 <br>
                 <input type="text" class="login-input" id="doctorSpecialty" placeholder="Specialty">
                 <br>
-                <input type="number" class="login-input" id="doctorContact" placeholder="Contact">
+                <input type="text" class="login-input" id="doctorContact" placeholder="Contact">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
                     <button type="submit"><span></span>Register</button>
@@ -406,7 +418,7 @@
                 <br>
                 <input type="password" class="login-input" id="supervisorPassword" placeholder="Password">
                 <br>
-                <input type="number" class="login-input" id="supervisorContact" placeholder="Contact">
+                <input type="text" class="login-input" id="supervisorContact" placeholder="Contact">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
                     <button type="submit"><span></span>Register</button>
@@ -424,7 +436,7 @@
                 <br>
                 <input type="password" class="login-input" id="pharmacyPassword" placeholder="Password">
                 <br>
-                <input type="number" class="login-input" id="pharmacyContact" placeholder="Contact">
+                <input type="text" class="login-input" id="pharmacyContact" placeholder="Contact">
                 <br>
                 <input type="text" class="login-input" id="pharmacyAddress" placeholder="Address">
                 <br />
@@ -444,7 +456,7 @@
                 <br>
                 <input type="password" class="login-input" id="companyPassword" placeholder="Password">
                 <br>
-                <input type="number" class="login-input" id="companyContact" placeholder="Contact">
+                <input type="text" class="login-input" id="companyContact" placeholder="Contact">
                 <br>
                 <div style="flex-direction: row; justify-content:space-between;">
                     <button type="submit"><span></span>Register</button>
