@@ -13,6 +13,7 @@ $sql2 = "SELECT * FROM Doctors WHERE Email = '$email' AND isDisabled=false ";
 $sql3 = "SELECT * FROM Supervisor WHERE Email = '$email' AND isDisabled=false";
 $sql4 = "SELECT * FROM Pharmacy WHERE Email = '$email' AND isDisabled=false ";
 $sql5 = "SELECT * FROM PharmaceuticalCompany WHERE Email = '$email' AND isDisabled=false";
+$sql6="SELECT * FROM Admin WHERE Email = '$email'";
 
 
 
@@ -24,6 +25,8 @@ $result2 = $conn->query($sql2);
 $result3 = $conn->query($sql3);
 $result4 = $conn->query($sql4);
 $result5 = $conn->query($sql5);
+$result6 = $conn->query($sql6);
+
 
 if ($result1->num_rows > 0) {
     // Patient found
@@ -95,6 +98,19 @@ if ($result1->num_rows > 0) {
         "message" => "Record inserted successfully",
         "UserType" => "PharmaceuticalCompany",
         "Name" => $row['CompanyName'],
+        "Email" => $row['Email']
+    );    
+    }
+}
+     else if ($result6->num_rows > 0) {
+    // Pharmaceutical Company found
+    $row = $result6->fetch_assoc();
+    if($password=$row["Password"]){
+        $response = array(
+        "status" => "success",
+        "message" => "Record inserted successfully",
+        "UserType" => "Admin",
+        "Name" => $row['AdminName'],
         "Email" => $row['Email']
     );    
     }
