@@ -84,7 +84,7 @@ $result = mysqli_query($conn,$sql1);
     </form>
 
     <br>
-    <h2>Drug Data Table</h2>
+    <h1>Drug Data Table</h1>
     <table>
         <tr>
             <th>Company ID</th>

@@ -40,11 +40,11 @@
 
     <div class="form-container">
     <div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;">
-        <div><a href="?table=Patients">Patients</a></div>
-        <div><a href="?table=Doctors">Doctor</a></div>
-        <div><a href="?table=Supervisor">Supervisor</a></div>
-        <div><a href="?table=Pharmacy">Pharmacy</a></div>
-        <div><a href="?table=PharmaceuticalCompany">Pharmaceutical Company</a></div>
+        <div class="navbar2"><a href="?table=Patients">Patients</a></div>
+        <div class="navbar2"><a href="?table=Doctors">Doctors</a></div>
+        <div class="navbar2"><a href="?table=Supervisor">Supervisors</a></div>
+        <div class="navbar2"><a href="?table=Pharmacy">Pharmacies</a></div>
+        <div class="navbar2"><a href="?table=PharmaceuticalCompany">Pharmaceutical Companies</a></div>
     </div>
 </div>
 
@@ -151,7 +151,7 @@
 
                 $editSQL = rtrim($editSQL, ', '); 
 
-                echo '<td><a class="edit-link" href="?action=edit&table=' . $tableName . '&id=' . $id . '&editSQL=' . urlencode($editSQL) . '">Edit</a> <a href="?action=delete&table=' . $tableName . '&id=' . $id . '">Delete Account</a></td>';
+                echo '<td><a class="edit-link" href="?action=edit&table=' . $tableName . '&id=' . $id . '&editSQL=' . urlencode($editSQL) . '">Edit  |</a> <a href="?action=delete&table=' . $tableName . '&id=' . $id . '">Delete Account</a></td>';
                 echo '</tr>';
             }
 

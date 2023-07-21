@@ -11,7 +11,6 @@ require_once 'Connect.php';
 </head>
 
 <body>
-<<<<<<< HEAD
 <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
@@ -19,30 +18,13 @@ require_once 'Connect.php';
                 <li><a href="pharmaceuticalCompany.html">Dashboard</a></li>
                 <li><a href="companydrugs.php">Drugs</a></li>
                 <li><a href="CompanyContracts.php">Contracts</a></li>
-=======
-    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
-        <div class="navbar">
-            <img src="images/afyahealth.png" class="logo">
-            <ul>
-                <li><a href='./PharmaceuticalCompany.html'>Dashboard</a></li>
-                <li><a href='./CompanyDrugs.php'>Drug</a></li>
-                <li><a href='./CompanyContracts.php'>Contracts</a></li>
->>>>>>> 51e754bdd2bc37f9e662c58f73f3741f0a9e2849
             </ul>
         </div>
 
 
-<<<<<<< HEAD
     <div class="contract-container">
         <?php
         
-=======
-        <h1>ALL CONTRACTS</h1>
-
-        <div class="contract-container">
-            <?php
-        // Check if the cookie is set
->>>>>>> 51e754bdd2bc37f9e662c58f73f3741f0a9e2849
         if (isset($_COOKIE['userType']) && $_COOKIE['userType'] == "PharmaceuticalCompany") {
            
             $name = $_COOKIE['name'];
@@ -72,13 +54,8 @@ require_once 'Connect.php';
         ?>
         </div>
 
-<<<<<<< HEAD
     <?php
    
-=======
-        <?php
-    // Close the database connection
->>>>>>> 51e754bdd2bc37f9e662c58f73f3741f0a9e2849
     mysqli_close($conn);
     ?>
 </body>
