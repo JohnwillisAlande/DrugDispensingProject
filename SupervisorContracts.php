@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get the updated contract data from the form
     $contractID = $_POST["contractID"];
     $startDate = $_POST["startDate"] ?? '';
-    $endingDate = $_POST["endingDate"] ?? '';
+    $endingDate = $_POST["endDate"] ?? '';
     $pharmacyName = $_POST["pharmacyName"] ?? '';
     $companyName = $_POST["companyName"] ?? '';
     $supervisorName = $_POST["supervisorName"] ?? '';
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Update the contract data in the database
     $sqlUpdateContract = "UPDATE CONTRACTS SET
         StartDate='$startDate',
-        EndingDate='$endingDate',
+        EndDate='$endingDate',
         PharmacyName='$pharmacyName',
         CompanyName='$companyName',
         SupervisorName='$supervisorName',
@@ -64,14 +64,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<form method='POST'>";
                     echo "<div class='contract'>";
-                    echo "<label>Contract ID:</label><span>" . $row['ContractID'] . "</span><br>";
-                    echo "<label>Start Date:</label><input type='text' name='startDate' value='" . $row['StartDate'] . "'><br>";
-                    echo "<label>Ending Date:</label><input type='text' name='endingDate' value='" . $row['EndingDate'] . "'><br>";
-                    echo "<label>Pharmacy Name:</label><input type='text' name='pharmacyName' value='" . $row['PharmacyName'] . "'><br>";
-                    echo "<label>Company Name:</label><input type='text' name='companyName' value='" . $row['CompanyName'] . "'><br>";
-                    echo "<label>Supervisor Name:</label><input type='text' name='supervisorName' value='" . $row['SupervisorName'] . "'><br>";
-                    echo "<label>Contract Details:</label><input type='text' name='contractDetails' value='" . $row['ContractDetails'] . "'><br>";
-                    echo "<button type='submit' name='contractID' value='" . $row['ContractID'] . "'>Save Changes</button>";
+                    echo "<label>Starting Date:     </label><input type='text' name='startDate' class='login-input' value='" . $row['StartDate'] . "'><br>";
+                    echo "<label>Ending Date:      </label><input type='text' name='endDate' class='login-input' value='" . $row['EndDate'] . "'><br>";
+                    echo "<label>Pharmacy Name:</label><input type='text' name='pharmacyName' class='login-input' value='" . $row['PharmacyName'] . "'><br>";
+                    echo "<label>Company Name:</label><input type='text' name='companyName' class='login-input' value='" . $row['CompanyName'] . "'><br>";
+                    echo "<label>Supervisor Name:</label><input type='text' name='supervisorName' class='login-input' value='" . $row['SupervisorName'] . "'><br>";
+                    echo "<label>Contract Details:</label><input type='text' name='contractDetails' class='login-input' value='" . $row['ContractDetails'] . "'><br>";
+                    echo "<button type='submit' name='contractID' value='" . $row['ContractID'] . "'><span></span>Save Changes</button>";
                     echo "</div>";
                     echo "</form>";
                 }

@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $prescriptionID = generateRandomID();
 
         
-                $sql = "INSERT INTO prescription (prescriptionID, doctorID, patientID, patientSSN, tradename, quantity, datePrescribed) VALUES ('$prescriptionID', '$doctorID', '$patientID', '$patientSSN', '$tradename', '$quantity', '$datePrescribed')";
+                $sql = "INSERT INTO prescriptions (prescriptionID, doctorID, patientID, patientSSN, tradename, quantity, datePrescribed) VALUES ('$prescriptionID', '$doctorID', '$patientID', '$patientSSN', '$tradename', '$quantity', '$datePrescribed')";
 
                 if ($conn->query($sql) === TRUE) {
                     echo "Data stored successfully.";
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-$sql1 = "SELECT * FROM prescription";
+$sql1 = "SELECT * FROM prescriptions";
 $result = mysqli_query($conn,$sql1);
 ?>
 

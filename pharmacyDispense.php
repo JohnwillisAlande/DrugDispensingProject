@@ -1,7 +1,6 @@
 <?php
 require_once("connect.php");
 
-// Check if cookies are set and get values from cookies
 if (isset($_COOKIE["email"])) {
     $email = $_COOKIE["email"];
 
@@ -20,18 +19,17 @@ if (isset($_COOKIE["email"])) {
 
 $dispensed = false; // Initialize the $dispensed variable
 
-// Handle dispense form submission
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Validate and sanitize user inputs
+    
     $tradename = $_POST["tradename"] ?? "";
     $quantity = filter_var($_POST["quantity"] ?? "", FILTER_SANITIZE_NUMBER_INT);
 
-    // Check if the inputs are not empty
     if (empty($tradename) || empty($quantity)) {
         die("Error: Please fill in all the fields.");
     }
 
-    // Check if the pharmacy has enough stock for the drug
+    
     $sql = "SELECT * FROM stock WHERE pharmacyID='$pharmacyID' AND tradename='$tradename'";
     $result = $conn->query($sql);
     if ($result->num_rows === 0) {
@@ -43,15 +41,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Error: Insufficient stock.");
     }
 
-    // Update the stock table
+    
     $updatedQuantity = $stockQuantity - $quantity;
     $sql = "UPDATE stock SET quantity='$updatedQuantity' WHERE pharmacyID='$pharmacyID' AND tradename='$tradename'";
     if ($conn->query($sql) === TRUE) {
-        // Insert data into the dispensing table
+        
         $price = $row["Price"] * $quantity;
         $sql = "INSERT INTO dispensing (pharmacyID, tradename, quantity, price) VALUES ('$pharmacyID', '$tradename', '$quantity', '$price')";
         if ($conn->query($sql) === TRUE) {
-            $dispensed = true; // Set the variable to true if drugs are successfully dispensed
+            $dispensed = true; 
             echo "Data stored successfully.";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
@@ -61,11 +59,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// Retrieve data from the 'stock' table for the pharmacy
+
 $sql = "SELECT * FROM stock WHERE pharmacyID='$pharmacyID'";
 $result = $conn->query($sql);
 
-// Retrieve data from the 'dispensing' table for the pharmacy
+
 $sql = "SELECT * FROM dispensing WHERE pharmacyID='$pharmacyID'";
 $dispensingResult = $conn->query($sql);
 ?>
@@ -76,7 +74,7 @@ $dispensingResult = $conn->query($sql);
     <title>Pharmacy Dispense</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        // Dynamically update the price input field when the quantity changes
+        
         function updatePrice() {
             const priceInput = document.getElementById("price");
             const quantityInput = document.getElementById("quantity");
@@ -120,7 +118,7 @@ $dispensingResult = $conn->query($sql);
             <th>Price</th>
         </tr>
         <?php
-        // Display data from the 'stock' table for the pharmacy
+    
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -145,7 +143,7 @@ $dispensingResult = $conn->query($sql);
             <th>Action</th>
         </tr>
         <?php
-        // Display data from the 'dispensing' table for the pharmacy
+        
         if ($dispensingResult->num_rows > 0) {
             while ($row = $dispensingResult->fetch_assoc()) {
                 echo "<tr>";
@@ -163,7 +161,7 @@ $dispensingResult = $conn->query($sql);
 
     <?php
     if ($dispensed) {
-        // Get data from the 'dispensing' table for the pharmacy
+        
         $sql = "SELECT tradename, SUM(quantity) as total_quantity, SUM(price) as total_price FROM dispensing WHERE pharmacyID='$pharmacyID' GROUP BY tradename";
         $receiptResult = $conn->query($sql);
         if ($receiptResult->num_rows > 0) {
