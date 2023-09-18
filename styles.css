@@ -512,12 +512,12 @@ input[type=email]:focus, input[type=password]:focus{
     margin-top: 30;
     font-size: small;
     border-color: white;
-    background-color: #640d9e;
+    background-color: #009688;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 10px;
     padding-bottom: 10px;
-    color: white;
+    color: #640d9e;
     display: inline-block;
     cursor: pointer;
     border-radius: 20px;
