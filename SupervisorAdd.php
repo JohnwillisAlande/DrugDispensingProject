@@ -5,7 +5,7 @@ require_once 'Connect.php';
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Get the updated contract data from the form
     $startDate = $_POST["startDate"] ?? '';
-    $endingDate = $_POST["endingDate"] ?? '';
+    $endingDate = $_POST["endDate"] ?? '';
     $pharmacyName = $_POST["pharmacyName"] ?? '';
     $companyName = $_POST["companyName"] ?? '';
     $contractDetails = $_POST["contractDetails"] ?? '';
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $supervisorName = $_COOKIE["name"];
 
     // Update the contract data in the database
-    $sqlAddContract = "INSERT INTO CONTRACTS (ContractID, StartDate, EndingDate, PharmacyName, CompanyName, SupervisorName, ContractDetails) VALUES ('$ContractID', '$startDate', '$endingDate', '$pharmacyName', '$companyName', '$supervisorName', '$contractDetails')";
+    $sqlAddContract = "INSERT INTO CONTRACTS (ContractID, StartDate, EndDate, PharmacyName, CompanyName, SupervisorName, ContractDetails) VALUES ('$ContractID', '$startDate', '$endingDate', '$pharmacyName', '$companyName', '$supervisorName', '$contractDetails')";
 
     if (mysqli_query($conn, $sqlAddContract)) {
         echo "Contract updated successfully.";
@@ -75,7 +75,7 @@ $companyNames = mysqli_fetch_all($resultCompanyNames, MYSQLI_ASSOC);
             echo "<form method='POST'>";
             echo "<div class='contract'>";
             echo "<label>Start Date:</label><input type='text' class='login-input' name='startDate'><br>";
-            echo "<label>Ending Date:</label><input type='text' class='login-input' name='endingDate'><br>";
+            echo "<label>End Date:</label><input type='text' class='login-input' name='endDate'><br>";
             
             // Dropdown for pharmacy names
             echo "<label>Pharmacy Name:</label>";

@@ -383,12 +383,13 @@ input[type=email]:focus, input[type=password]:focus{
 
   /*----------- testimonials -------*/
 
-  .testimonial {
-    width: 80%;
-    margin: auto;
-    padding-top: 100px;
-    text-align: center;
-  }
+.footer h1{
+  background-color: #fff;
+  margin-bottom: 25px;
+  margin-top: 20px;
+  color: #49e2d3;
+  font-weight: 600;
+}
 
   .testimonial-col {
     flex-basis: 44%;

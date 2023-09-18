@@ -1,11 +1,10 @@
 <?php
     require_once("connect.php");
 
-// Check if cookies are set and get values from cookies
 if (isset($_COOKIE["email"])) {
     $email = $_COOKIE["email"];
 
-    // Get the pharmacy ID from the database
+    
     $sql = "SELECT PatientSSN FROM patients WHERE email='$email'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -50,7 +49,7 @@ $result = $conn->query($sql);
             <th>Quantity</th>
         </tr>
         <?php
-        // Display data from the 'drugs' table
+        
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -68,7 +67,6 @@ $result = $conn->query($sql);
     </div>
 
     <?php
-    // Close the database connection
     mysqli_close($conn);
     ?>
 </body>

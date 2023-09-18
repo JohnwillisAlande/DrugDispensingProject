@@ -349,6 +349,141 @@
                 <li><a href="login.html">LogIn</a></li>
             </ul>
         </div>
+    </div>
+    <div class="content">
+    <h1>REGISTRATION <ion-icon name="people-circle-outline"></ion-icon></h1>
+    <p class="para">Welcome Kindly Register Your Details Below </p>
+
+    <form onsubmit="event.preventDefault(); sendData();">
+        <!-- User type selection -->
+        
+            <label onclick="choose('Patient')">
+                <input type="radio" name="userType" value="Patient">
+                <ion-icon name="person"></ion-icon> Patient
+            </label>
+            <label onclick="choose('Doctor')">
+                <input type="radio" name="userType" value="Doctor">
+                <ion-icon name="medkit-outline"></ion-icon> Doctor
+            </label>
+            <label onclick="choose('Supervisor')">
+                <input type="radio" name="userType" value="Supervisor">
+                <ion-icon name="people"></ion-icon> Supervisor
+            </label>
+            <label onclick="choose('Pharmacy')">
+                <input type="radio" name="userType" value="Pharmacy">
+                <ion-icon name="cart"></ion-icon> Pharmacy
+            </label>
+            <label onclick="choose('PharmaceuticalCompany')">
+                <input type="radio" name="userType" value="PharmaceuticalCompany">
+                <ion-icon name="business"></ion-icon> Pharmaceutical Company
+            </label>
+        
+        <div id="userTypeSelection" >
+            <!-- Patient fields -->
+            <div id="patientFields" style="display: none;">
+                <input type="text" class="login-input" id="patientName" placeholder="Name">
+                <br>
+                <input type="number" class="login-input" id="patientSSN" placeholder="SSN">
+                <br>
+                <div>
+                    <h6>Date Of Birth</h6>
+                </div>
+                <input type="date" class="login-input" id="patientDOB" placeholder="DOB">
+                <br>
+                <input type="text" class="login-input" id="patientEmail" placeholder="Email">
+                <br>
+                <input type="password" class="login-input" id="patientPassword" placeholder="Password">
+                <br>
+                <input type="text" class="login-input" id="patientContact" placeholder="Contact">
+                <br>
+                <input type="text" class="login-input" id="patientDoctorName" placeholder="Doctor Name">
+                <br>
+                <input type="text" class="login-input" id="patientAddress" placeholder="Address">
+                <br>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
+                </div>
+
+            </div>
+
+            <!-- Doctor fields -->
+            <div id="doctorFields" style="display: none;">
+                <br>
+                <input type="text" class="login-input" id="doctorName" placeholder="Name">
+                <br>
+                <input type="number" class="login-input" id="doctorSSN" placeholder="SSN">
+                <br>
+                <input type="text" class="login-input" id="doctorEmail" placeholder="Email">
+                <br>
+                <input type="password" class="login-input" id="doctorPassword" placeholder="Password">
+                <br>
+                <input type="text" class="login-input" id="doctorSpecialty" placeholder="Specialty">
+                <br>
+                <input type="text" class="login-input" id="doctorContact" placeholder="Contact">
+                <br>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
+                </div>
+
+            </div>
+
+            <!-- Supervisor fields -->
+            <div id="supervisorFields" style="display: none;">
+                <br>
+                <input type="text" class="login-input" id="supervisorName" placeholder="Name">
+                <br>
+                <input type="text" class="login-input" id="supervisorEmail" placeholder="Email">
+                <br>
+                <input type="password" class="login-input" id="supervisorPassword" placeholder="Password">
+                <br>
+                <input type="text" class="login-input" id="supervisorContact" placeholder="Contact">
+                <br>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
+                </div>
+
+            </div>
+
+            <!-- Pharmacy fields -->
+            <div id="pharmacyFields" style="display: none;">
+                <br>
+                <input type="text" class="login-input" id="pharmacyName" placeholder="Name">
+                <br>
+                <input type="text" class="login-input" id="pharmacyEmail" placeholder="Email">
+                <br>
+                <input type="password" class="login-input" id="pharmacyPassword" placeholder="Password">
+                <br>
+                <input type="text" class="login-input" id="pharmacyContact" placeholder="Contact">
+                <br>
+                <input type="text" class="login-input" id="pharmacyAddress" placeholder="Address">
+                <br />
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
+                </div>
+
+            </div>
+
+            <!-- Pharmaceutical Company fields -->
+            <div id="companyFields" style="display: none;">
+                <br>
+                <input type="text" class="login-input" id="companyName" placeholder="Name">
+                <br>
+                <input type="text" class="login-input" id="companyEmail" placeholder="Email">
+                <br>
+                <input type="password" class="login-input" id="companyPassword" placeholder="Password">
+                <br>
+                <input type="text" class="login-input" id="companyContact" placeholder="Contact">
+                <br>
+                <div style="flex-direction: row; justify-content:space-between;">
+                    <button type="submit"><span></span>Register</button>
+                    <button style="margin-left:200px" onclick="handleNav()"><span></span>Login</button>
+                </div>
+
+            </div>
         </div>
         <div class="content">
             <h1>REGISTRATION <ion-icon name="people-circle-outline"></ion-icon>
