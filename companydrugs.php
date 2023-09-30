@@ -5,15 +5,18 @@ $companyID = "";
 $tradename = "";
 $formula = "";
 $price = "";
+$category = "";
+$drugImage = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Validate and sanitize user inputs
     $tradename = $_POST["tradename"] ?? "";
     $formula = $_POST["formula"] ?? "";
     $price = $_POST["price"] ?? "";
+    $category = $_POST["category"] ?? "";
 
     // Check if the inputs are not empty
-    if (empty($tradename) || empty($formula) || empty($price)) {
+    if (empty($tradename) || empty($formula) || empty($price) || empty($category)) {
         echo "Error: Please fill in all the fields.";
     } else {
         // Check if cookies are set and get values from cookies
@@ -27,13 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $row = $result->fetch_assoc();
                 $companyID = $row["companyID"];
 
-                // Store data in the 'drugs' table
-                $sql = "INSERT INTO drugs (companyID, tradename, formula, price) VALUES ('$companyID', '$tradename', '$formula', '$price')";
+                // Handle file upload for drugImage
+                if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0){
+                    $imageData = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
 
-                if ($conn->query($sql) === TRUE) {
-                    echo "Data stored successfully.";
+                    // Store data in the 'drugs' table
+                    $sql = "INSERT INTO drugs (companyID, tradename, formula, price, category, drugImage) VALUES ('$companyID', '$tradename', '$formula', '$price', '$category', '$imageData')";
+
+                    if ($conn->query($sql) === TRUE) {
+                        echo "Data stored successfully.";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
                 } else {
-                    echo "Error: " . $sql . "<br>" . $conn->error;
+                    echo "Error: File upload failed.";
                 }
             } else {
                 echo "Error: Company ID not found in database.";
@@ -58,7 +68,7 @@ $result = mysqli_query($conn,$sql1);
 </head>
 
 <body>
-<div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+    <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
             <img src="images/afyahealth.png" class="logo">
             <ul>
@@ -67,32 +77,38 @@ $result = mysqli_query($conn,$sql1);
                 <li><a href="CompanyContracts.php">Contracts</a></li>
             </ul>
         </div>
-    <h1>Pharmaceutical Company Drugs</h1>
+        <h1>Pharmaceutical Company Drugs</h1>
 
-    <form method="post" action="companydrugs.php" class="form-container">
-      
-        <label for="tradename">Trade Name:</label>
-        <input type="text" name="tradename" required><br>
+        <form method="post" action="companydrugs.php" class="form-container" enctype="multipart/form-data">
 
-        <label for="formula">Formula:</label>
-        <input type="text" name="formula" required><br>
+            <label for="tradename">Trade Name:</label>
+            <input type="text" name="tradename" required><br>
 
-        <label for="price">Price:</label>
-        <input type="number" step="0.01" name="price" required><br>
+            <label for="formula">Formula:</label>
+            <input type="text" name="formula" required><br>
 
-        <input type="submit" value="Submit">
-    </form>
+            <label for="price">Price:</label>
+            <input type="number" step="0.01" name="price" required><br>
 
-    <br>
-    <h1>Drug Data Table</h1>
-    <table>
-        <tr>
-            <th>Company ID</th>
-            <th>Trade Name</th>
-            <th>Formula</th>
-            <th>Price</th>
-        </tr>
-        <?php
+            <label for="category">Category:</label>
+            <input type="text" name="category" required><br>
+
+            <label for="image">Choose a photo:</label>
+            <input type="file" name="image" required><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <br>
+        <h1>Drug Data Table</h1>
+        <table>
+            <tr>
+                <th>Company ID</th>
+                <th>Trade Name</th>
+                <th>Formula</th>
+                <th>Price</th>
+            </tr>
+            <?php
         
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -107,7 +123,7 @@ $result = mysqli_query($conn,$sql1);
             echo "<tr><td colspan='4'>No data found</td></tr>";
         }
         ?>
-    </table>
+        </table>
 
 </body>
 

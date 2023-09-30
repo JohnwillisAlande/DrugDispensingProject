@@ -38,23 +38,24 @@ if (isset($_COOKIE["userType"]) && $_COOKIE["userType"] !== "Admin") {
 <body>
     <div class="background-container" style="position: absolute; top: -10; right: 5; padding: 10px;">
         <div class="navbar">
+            <div id='userName'>User</div>
             <img src="images/afyahealth.png" class="logo">
             <ul>
-                <li><a href="login.html">LogOut</a></li>
+                <li onClick="handleLogOut()" style="z-index:3; color:white">LogOut</li>
             </ul>
         </div>
     </div>
 
     <div class="form-container">
-    <div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;">
-        <div class="navbar2"><a href="?table=Patients">Patients</a></div>
-        <div class="navbar2"><a href="?table=Doctors">Doctors</a></div>
-        <div class="navbar2"><a href="?table=Supervisor">Supervisors</a></div>
-        <div class="navbar2"><a href="?table=Pharmacy">Pharmacies</a></div>
-        <div class="navbar2"><a href="?table=PharmaceuticalCompany">Pharmaceutical Companies</a></div>
-    </div>
+        <div style="flex-direction: row; display: flex; width: 1000px; justify-content: space-between;">
+            <div class="navbar2"><a href="?table=Patients">Patients</a></div>
+            <div class="navbar2"><a href="?table=Doctors">Doctors</a></div>
+            <div class="navbar2"><a href="?table=Supervisor">Supervisors</a></div>
+            <div class="navbar2"><a href="?table=Pharmacy">Pharmacies</a></div>
+            <div class="navbar2"><a href="?table=PharmaceuticalCompany">Pharmaceutical Companies</a></div>
+        </div>
 
-    <?php
+        <?php
     require_once 'Connect.php';
 
     $tableName = "Patients"; 
@@ -203,27 +204,46 @@ if (isset($_COOKIE["userType"]) && $_COOKIE["userType"] !== "Admin") {
     getTableData($conn, $tableName);
     ?>
 
-    <script>
-    function updateEditSQL(row) {
-        var cells = row.getElementsByTagName("td");
-        var editSQL = "";
+        <script>
+        var name = getCookie('name')
 
-        for (var i = 0; i < cells.length - 1; i++) {
-            var cell = cells[i];
-            var columnName = cell.getAttribute("data-column");
-            var cellValue = cell.textContent;
-
-            editSQL += columnName + "='" + cellValue + "', ";
+        function getCookie(key) {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.startsWith(key + '=')) {
+                    return cookie.substring(key.length + 1);
+                }
+            }
+            return null;
         }
+        document.getElementById('userName').innerHTML = name
+        document.getElementById('userName').style.color = 'cyan'
 
-        editSQL = editSQL.slice(0, -2);
-
-        var editLink = row.querySelector("a.edit-link");
-        var editURL = editLink.getAttribute("href");
-        var updatedURL = editURL.split("editSQL=")[0] + "editSQL=" + encodeURIComponent(editSQL);
-        editLink.setAttribute("href", updatedURL);
-    }
-    </script>
+        function updateEditSQL(row) {
+            var
+                cells = row.getElementsByTagName("td");
+            var editSQL = "";
+            for (var i = 0; i < cells.length - 1; i++) {
+                var cell = cells[i];
+                var columnName = cell.getAttribute("data-column");
+                var cellValue = cell.textContent;
+                editSQL += columnName + "='" + cellValue + "', ";
+            }
+            editSQL = editSQL.slice(0, -2);
+            var
+                editLink = row.querySelector("a.edit-link");
+            var editURL = editLink.getAttribute("href");
+            var
+                updatedURL = editURL.split("editSQL=")[0] + " editSQL=" + encodeURIComponent(editSQL);
+            editLink.setAttribute(" href", updatedURL);
+        }
+        const handleLogOut = () => {
+            console.log()
+            document.cookie = ''
+            window.location.href = 'login.html';
+        }
+        </script>
 
 
 </body>
