@@ -74,6 +74,11 @@
     color: #640d9e;
   }
 
+  .active, .navbar ul li:hover {
+    background: lightcyan;
+    border-radius: 1px;
+  }
+
   .content {
     width: 100%;
     position: absolute;
@@ -295,7 +300,7 @@ input[type=email]:focus, input[type=password]:focus{
   }
 
   .purpose-col {
-    flex-basis: 31%;
+    flex-basis: 24%;
     background: #9dd7fd;
     border-radius: 10px;
     margin-bottom: 5%;
@@ -377,6 +382,24 @@ input[type=email]:focus, input[type=password]:focus{
   }
 
   .layer:hover h3 {
+    bottom: 49%;
+    opacity: 1;
+  }
+
+  .layer a {
+    width: 100%;
+    font-weight: 500;
+    color: #640d9e;
+    font-size: 21px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    opacity: 100;
+    transition: 0.5s;
+  }
+
+  .layer:hover a {
     bottom: 49%;
     opacity: 1;
   }
@@ -528,3 +551,79 @@ input[type=email]:focus, input[type=password]:focus{
     transform: scale(1.05);
     transition-duration: 0.4s;
   }
+
+  /*.sub-menu-1 {
+    display: none;
+  }
+
+  .navbar ul li:hover .sub-menu-1{
+    display: block;
+    position: absolute;
+    background: rgb(1, 44, 62);
+    margin-top: 15px;
+    margin-left: -15px;
+  }
+
+  .navbar ul li:hover .sub-menu-1 ul{
+    display: block;
+    margin: 10px;
+  }
+
+  .navbar ul li:hover .sub-menu-1 ul li{
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted #fff;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+  }*/
+
+
+  /* Style the dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  top: 100%; /* Position the dropdown below the "Drugs" link */
+  left: 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Style the dropdown links */
+.dropdown-content li {
+  padding: 10px;
+}
+
+/* Style the hover effect on the dropdown links */
+.dropdown-content li:hover {
+  background-color: lightcyan;
+  border-radius: 1px;
+}
+
+/* Style the active menu item */
+/*.active {
+  background: lightcyan;
+  border-radius: 1px;
+}
+
+/* Style the underline for the active menu item */
+/*.active::after {
+  content: '';
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+}*/
+

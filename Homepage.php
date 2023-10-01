@@ -9,9 +9,13 @@
 
 <body>
  <section class="background-containers">
-    <div class="navbar">
-        <img src="images/afyahealth.png" class="logo">
-    </div>
+   <div class="navbar">
+            <img src="images/afyahealth.png" class="logo">
+            <ul>
+                <li class="active"><a href="#">Homepage</a></li>
+                <li><a href="drugDisplay.php">Drugs</a></li>
+            </ul>
+        </div>
     <div class="content">
         <h1>Welcome to Afya Health</h1>
 

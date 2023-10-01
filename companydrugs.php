@@ -6,7 +6,6 @@ $tradename = "";
 $formula = "";
 $price = "";
 $category = "";
-$drugImage = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Validate and sanitize user inputs
@@ -15,32 +14,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $price = $_POST["price"] ?? "";
     $category = $_POST["category"] ?? "";
 
-    // Check if the inputs are not empty
+    /
     if (empty($tradename) || empty($formula) || empty($price) || empty($category)) {
         echo "Error: Please fill in all the fields.";
     } else {
-        // Check if cookies are set and get values from cookies
+        
         if (isset($_COOKIE["email"])) {
             $email = $_COOKIE["email"];
 
-            // Get the company ID from the database
+            
             $sql = "SELECT companyID FROM pharmaceuticalcompany WHERE email='$email'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $companyID = $row["companyID"];
 
-                // Handle file upload for drugImage
-                if(isset($_FILES["image"]) && $_FILES["image"]["error"] == 0){
-                    $imageData = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+                
+                if (isset($_FILES["image"]) && $_FILES["image"]["error"] == 0) {
+                    $imageFile = $_FILES["image"]["tmp_name"];
+                    $targetDirectory = "images/"; 
+                    $targetFileName = $targetDirectory . basename($_FILES["image"]["name"]);
 
-                    // Store data in the 'drugs' table
-                    $sql = "INSERT INTO drugs (companyID, tradename, formula, price, category, drugImage) VALUES ('$companyID', '$tradename', '$formula', '$price', '$category', '$imageData')";
+                    /
+                    if (move_uploaded_file($imageFile, $targetFileName)) {
+                        
+                        $sql = "INSERT INTO drugs (companyID, tradename, formula, price, category, Images) VALUES ('$companyID', '$tradename', '$formula', '$price', '$category', '$targetFileName')";
 
-                    if ($conn->query($sql) === TRUE) {
-                        echo "Data stored successfully.";
+                        if ($conn->query($sql) === TRUE) {
+                            echo "Data stored successfully.";
+                        } else {
+                            echo "Error: " . $sql . "<br>" . $conn->error;
+                        }
                     } else {
-                        echo "Error: " . $sql . "<br>" . $conn->error;
+                        echo "Error: File upload failed.";
                     }
                 } else {
                     echo "Error: File upload failed.";
@@ -54,9 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 
-// Retrieve data from the 'drugs' table
-$sql1 = "SELECT * FROM drugs";
-$result = mysqli_query($conn,$sql1);
+
+$sql1 = "SELECT * FROM drugs WHERE companyID = '$companyID'";
+$result = mysqli_query($conn, $sql1);
 ?>
 
 <!DOCTYPE html>
@@ -65,6 +71,12 @@ $result = mysqli_query($conn,$sql1);
 <head>
     <title>Pharmaceutical Company Drugs</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        img {
+            max-width: 200px; 
+            max-height: 200px; 
+        }
+    </style>
 </head>
 
 <body>
@@ -107,22 +119,24 @@ $result = mysqli_query($conn,$sql1);
                 <th>Trade Name</th>
                 <th>Formula</th>
                 <th>Price</th>
+                <th>Category</th>
             </tr>
             <?php
-        
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>";
-                echo "<td>" . $row["CompanyID"] . "</td>";
-                echo "<td>" . $row["TradeName"] . "</td>";
-                echo "<td>" . $row["Formula"] . "</td>";
-                echo "<td>" . $row["Price"] . "</td>";
-                echo "</tr>";
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>" . $row["CompanyID"] . "</td>";
+                    echo "<td>" . $row["TradeName"] . "</td>";
+                    echo "<td>" . $row["Formula"] . "</td>";
+                    echo "<td>" . $row["Price"] . "</td>";
+                    echo "<td>" . $row["Category"] . "</td>";
+                    echo "<td><img src='" . $row["Images"] . "'></td>";
+                    echo "</tr>";
+                }
+            } else {
+                echo "<tr><td colspan='6'>No data found</td></tr>";
             }
-        } else {
-            echo "<tr><td colspan='4'>No data found</td></tr>";
-        }
-        ?>
+            ?>
         </table>
 
 </body>
