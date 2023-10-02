@@ -41,7 +41,7 @@ if (isset($_COOKIE["userType"]) && $_COOKIE["userType"] !== "Admin") {
             <div id='userName'>User</div>
             <img src="images/afyahealth.png" class="logo">
             <ul>
-                <li onClick="handleLogOut()" style="z-index:3; color:white">LogOut</li>
+                <li onClick="handleLogOut()" style="z-index:4; color:white">LogOut</li>
             </ul>
         </div>
     </div>

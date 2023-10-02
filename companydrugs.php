@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $price = $_POST["price"] ?? "";
     $category = $_POST["category"] ?? "";
 
-    /
+    
     if (empty($tradename) || empty($formula) || empty($price) || empty($category)) {
         echo "Error: Please fill in all the fields.";
     } else {
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     $targetDirectory = "images/"; 
                     $targetFileName = $targetDirectory . basename($_FILES["image"]["name"]);
 
-                    /
+                    
                     if (move_uploaded_file($imageFile, $targetFileName)) {
                         
                         $sql = "INSERT INTO drugs (companyID, tradename, formula, price, category, Images) VALUES ('$companyID', '$tradename', '$formula', '$price', '$category', '$targetFileName')";
@@ -85,13 +85,13 @@ $result = mysqli_query($conn, $sql1);
             <img src="images/afyahealth.png" class="logo">
             <ul>
                 <li><a href="pharmaceuticalCompany.html">Dashboard</a></li>
-                <li><a href="companydrugs.php">Drugs</a></li>
+                <li class="active"><a href="companydrugs.php">Drugs</a></li>
                 <li><a href="CompanyContracts.php">Contracts</a></li>
             </ul>
         </div>
         <h1>Pharmaceutical Company Drugs</h1>
 
-        <form method="post" action="companydrugs.php" class="form-container" enctype="multipart/form-data">
+        <form id="myForm" method="post" action="companydrugs.php" class="form-container" enctype="multipart/form-data">
 
             <label for="tradename">Trade Name:</label>
             <input type="text" name="tradename" required><br>
@@ -138,6 +138,27 @@ $result = mysqli_query($conn, $sql1);
             }
             ?>
         </table>
+
+        <script>
+    // Check if the form should be cleared based on local storage
+if (localStorage.getItem("clearFormOnRefresh") === "true") {
+    clearForm();
+    // Remove the flag from local storage to avoid clearing on subsequent refreshes
+    localStorage.removeItem("clearFormOnRefresh");
+}
+
+// Function to clear the form
+function clearForm() {
+    document.getElementById("myForm").reset();
+}
+
+// Attach an event listener to the form submit button
+document.getElementById("myFormSubmitButton").addEventListener("click", function() {
+    // Set a flag in local storage to clear the form on the next refresh
+    localStorage.setItem("clearFormOnRefresh", "true");
+});
+
+  </script>
 
 </body>
 

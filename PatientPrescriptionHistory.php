@@ -35,7 +35,7 @@ $result = $conn->query($sql);
             <img src="images/afyahealth.png" class="logo">
             <ul>
                 <li><a href="patient.html">Dashboard</a></li>
-                <li><a href="PatientPrescriptionHistory.php">Prescriptions</a></li>
+                <li class="active"><a href="PatientPrescriptionHistory.php">Prescriptions</a></li>
                 <li><a href="login.html">Logout</a></li>
             </ul>
         </div>

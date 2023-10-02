@@ -77,19 +77,19 @@
           <div class="client-col">
               <img src="images/calpol.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Calpol">View Details</a>
+                <a href="drugDetails.php?tradename=Calpol" title="Calpol">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/penicillin2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Penicillin">View Details</a>
+                <a href="drugDetails.php?tradename=Penicillin" title="Penicillin">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/ciprosafe2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Ciprosafe">View Details</a>
+                <a href="drugDetails.php?tradename=Ciprosafe" title="Ciprosafe">View Details</a>
               </div>
           </div>
  </section>
@@ -103,7 +103,7 @@
           <div class="client-col">
               <img src="images/panadol2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Panadol">View Details</a>
+                <a href="drugDetails.php?tradename=Panadol" title="Panadol">View Details</a>
               </div>
           </div>
           <div class="client-col">
@@ -115,7 +115,7 @@
           <div class="client-col">
               <img src="images/hedex2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Hedex">View Details</a>
+                <a href="drugDetails.php?tradename=Hedex" title="Hedex">View Details</a>
               </div>
           </div>
  </section>
@@ -129,21 +129,21 @@
           <div class="client-col">
               <img src="images/prozac2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Prozac">View Details</a>
+                <a href="drugDetails.php?tradename=Prozac" title="Prozac">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/amitriptyline2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Amitriptyline">View Details</a>
+                <a href="drugDetails.php?tradename=Amitriptyline" title="Amitriptyline">View Details</a>
               </div>
           </div>
-          <!--<div class="client-col">
-              <img src="images/ciprosafe2.jpg">
+          <div class="client-col">
+              <img src="images/citalopram2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Ciprosafe">View Details</a>
+                <a href="drugDetails.php?tradename=Citalopram" title="Citalopram">View Details</a>
               </div>
-          </div>-->
+          </div>
  </section>
 
 <!----------About Us---------->
@@ -155,21 +155,21 @@
           <div class="client-col">
               <img src="images/deepheat2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="DeepHeat">View Details</a>
+                <a href="drugDetails.php?tradename=DeepHeat" title="DeepHeat">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/diclac2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Diclac">View Details</a>
+                <a href="drugDetails.php?tradename=Diclac" title="Diclac">View Details</a>
               </div>
           </div>
-          <!--<div class="client-col">
-              <img src="images/ciprosafe2.jpg">
+          <div class="client-col">
+              <img src="images/deflam2.jpg">
               <div class="layer">
-                <a href="Homepage.php" title="Ciprosafe">View Details</a>
+                <a href="drugDetails.php?tradename=Deflam" title="Deflam">View Details</a>
               </div>
-          </div>-->
+          </div>
  </section>
 
  <section class="cta">

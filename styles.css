@@ -234,7 +234,7 @@ input[type=email]:focus, input[type=password]:focus{
   }
 
   .background-container {
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -627,3 +627,26 @@ input[type=email]:focus, input[type=password]:focus{
   bottom: -10px;
 }*/
 
+.section.page:after {content:"";display:block;visibility:hidden;height:0;clear:both;}
+.section.page {padding: 34px 0; background: white;}
+.section.page h1 {
+    font-size: 24px;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: normal;
+}
+.section.page .media-details h1 {
+    text-align: left;
+}
+.section.page p {width: 475px; margin-left: auto; margin-right: auto; }
+.section.page .media-details h1 .price {color: #9d9f4e; padding-right: 10px; font-size: 34px;}
+
+.wrapper {width: 980px; margin: 0 auto;}
+
+.media-details {
+  width: 460px;
+  float: right;
+}
+.media-details form {
+  margin-left: 0;
+}
