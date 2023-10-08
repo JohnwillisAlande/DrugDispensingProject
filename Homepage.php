@@ -16,8 +16,10 @@
                 <li><a href="drugDisplay.php">Drugs</a></li>
             </ul>
         </div>
+    <div class="content"><h1 id="current-time">12:00:00</h1></div>
     <div class="content">
         <h1>Welcome to Afya Health</h1>
+        <h2>    .    </h2>
 
         <div class="button">
         <button onclick="redirectToSignUpPage()"><span></span>Sign Up</button>
@@ -136,6 +138,15 @@
         function redirectToLoginPage() {
             window.location.href = "login.html";
         }
+    </script>
+    <script>
+        let time = document.getElementById("current-time");
+
+        setInterval(() => {
+            let d = new Date();
+            time.innerHTML = d.toLocaleTimeString();
+        },1000);
+    
     </script>
 
 </body>
