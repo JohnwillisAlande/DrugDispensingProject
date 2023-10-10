@@ -116,8 +116,8 @@
 
  <!----------Call to action---------->
 <section class="cta">
-    <h1>In Case Of Any Inquiries Or Concerns</h1>
-    <a href="">CONTACT US</a>
+    <h1>IN CASE OF ANY ENQUIRIES OR CONCERNS</h1>
+    <a href="" class="hero-btn">CONTACT US</a>
 </section>
 
 <!----------About Us---------->

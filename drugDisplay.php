@@ -45,23 +45,23 @@
         <p>Have a look at some types of the drugs that can be found on our web application</p>
 
         <div class="row">
-            <div class="purpose-col">
+            <div class="drug-col">
                 <h3>Antibiotics</h3>
                 <p>Antibiotics are medications used to treat bacterial infections
                      by inhibiting the growth or killing bacteria.</p>
             </div>
-            <div class="purpose-col">
+            <div class="drug-col">
                 <h3>Painkillers</h3>
                 <p>Painkillers, also known as analgesics, help reduce or alleviate pain,
                      often by blocking pain signals in the nervous system.</p>
             </div>
-            <div class="purpose-col">
+            <div class="drug-col">
                 <h3>Antidepressants</h3>
                 <p>Antidepressants are drugs prescribed to manage and alleviate symptoms
                      of depression and other mood disorders by affecting neurotransmitter
                       levels in the brain.</p>
             </div>
-            <div class="purpose-col">
+            <div class="drug-col">
                 <h3>Relief Creams</h3>
                 <p>Relief creams are topical ointments or gels applied to the skin to provide
                      localized relief from pain, itching, inflammation, or skin conditions.</p>
@@ -77,19 +77,19 @@
           <div class="client-col">
               <img src="images/calpol.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Calpol" title="Calpol">View Details</a>
+                <a href="drugDetails.php?tradename=Calpol" title="Calpol" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/penicillin2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Penicillin" title="Penicillin">View Details</a>
+                <a href="drugDetails.php?tradename=Penicillin" title="Penicillin" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/ciprosafe2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Ciprosafe" title="Ciprosafe">View Details</a>
+                <a href="drugDetails.php?tradename=Ciprosafe" title="Ciprosafe" class="hero-btn">View Details</a>
               </div>
           </div>
  </section>
@@ -103,19 +103,19 @@
           <div class="client-col">
               <img src="images/panadol2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Panadol" title="Panadol">View Details</a>
+                <a href="drugDetails.php?tradename=Panadol" title="Panadol" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/sonamoja2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Sonadol" title="SonaMoja">View Details</a>
+                <a href="drugDetails.php?tradename=Sonadol" title="SonaMoja" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/hedex2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Hedex" title="Hedex">View Details</a>
+                <a href="drugDetails.php?tradename=Hedex" title="Hedex" class="hero-btn">View Details</a>
               </div>
           </div>
  </section>
@@ -129,19 +129,19 @@
           <div class="client-col">
               <img src="images/prozac2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Prozac" title="Prozac">View Details</a>
+                <a href="drugDetails.php?tradename=Prozac" title="Prozac" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/amitriptyline2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Amitriptyline" title="Amitriptyline">View Details</a>
+                <a href="drugDetails.php?tradename=Amitriptyline" title="Amitriptyline" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/citalopram2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Citalopram" title="Citalopram">View Details</a>
+                <a href="drugDetails.php?tradename=Citalopram" title="Citalopram" class="hero-btn">View Details</a>
               </div>
           </div>
  </section>
@@ -155,19 +155,19 @@
           <div class="client-col">
               <img src="images/deepheat2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=DeepHeat" title="DeepHeat">View Details</a>
+                <a href="drugDetails.php?tradename=DeepHeat" title="DeepHeat" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/diclac2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Diclac" title="Diclac">View Details</a>
+                <a href="drugDetails.php?tradename=Diclac" title="Diclac" class="hero-btn">View Details</a>
               </div>
           </div>
           <div class="client-col">
               <img src="images/deflam2.jpg">
               <div class="layer">
-                <a href="drugDetails.php?tradename=Deflam" title="Deflam">View Details</a>
+                <a href="drugDetails.php?tradename=Deflam" title="Deflam" class="hero-btn">View Details</a>
               </div>
           </div>
  </section>
