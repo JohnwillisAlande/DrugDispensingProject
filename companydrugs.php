@@ -72,10 +72,10 @@ $result = mysqli_query($conn, $sql1);
     <title>Pharmaceutical Company Drugs</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        img {
-            max-width: 200px; 
-            max-height: 200px; 
-        }
+    img {
+        max-width: 200px;
+        max-height: 200px;
+    }
     </style>
 </head>
 
@@ -140,25 +140,24 @@ $result = mysqli_query($conn, $sql1);
         </table>
 
         <script>
-    // Check if the form should be cleared based on local storage
-if (localStorage.getItem("clearFormOnRefresh") === "true") {
-    clearForm();
-    // Remove the flag from local storage to avoid clearing on subsequent refreshes
-    localStorage.removeItem("clearFormOnRefresh");
-}
+        // Check if the form should be cleared based on local storage
+        if (localStorage.getItem("clearFormOnRefresh") === "true") {
+            clearForm();
+            // Remove the flag from local storage to avoid clearing on subsequent refreshes
+            localStorage.removeItem("clearFormOnRefresh");
+        }
 
-// Function to clear the form
-function clearForm() {
-    document.getElementById("myForm").reset();
-}
+        // Function to clear the form
+        function clearForm() {
+            document.getElementById("myForm").reset();
+        }
 
-// Attach an event listener to the form submit button
-document.getElementById("myFormSubmitButton").addEventListener("click", function() {
-    // Set a flag in local storage to clear the form on the next refresh
-    localStorage.setItem("clearFormOnRefresh", "true");
-});
-
-  </script>
+        // Attach an event listener to the form submit button
+        document.getElementById("myFormSubmitButton").addEventListener("click", function() {
+            // Set a flag in local storage to clear the form on the next refresh
+            localStorage.setItem("clearFormOnRefresh", "true");
+        });
+        </script>
 
 </body>
 

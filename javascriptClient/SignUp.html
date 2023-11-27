@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div>
+        <div>
+            <form id="loginForm">
+                <label for="name">
+                    <input id="name" value="name" placeholder="name" />
+                </label>
+
+                <label for="name">
+                    <input id="name" value="name" placeholder="name" />
+                </label>
+                <label for="name">
+                    <input id="name" value="name" placeholder="name" />
+                </label>
+                <label for="name">
+                    <input id="name" value="name" placeholder="name" />
+                </label>
+                <button type="submit">Sign Up</button>
+
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+
+        const data = { name: name, username: username, password: password, email: email }
+
+        // Make a POST request to the server for login
+        fetch('http://localhost:3000/signIn', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Invalid credentials');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Save the JWT token in localStorage or sessionStorage
+                localStorage.setItem('token', data.token);
+                console.log('Login successful');
+            })
+            .catch(error => {
+                console.error('Login failed:', error.message);
+            });
+    });
+</script>
+
+</html>

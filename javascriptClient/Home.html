@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<script>
+    fetch('http://localhost:4000/value', {
+        'method': 'GET',
+        'headers': {
+            'Content-Type': 'application/json'
+        },
+    }).
+        then((response) => {
+            return response.json(); // Assuming the response is JSON
+        })
+        .then((data) => {
+            console.log(data);
+            const divElement = document.querySelector("div");
+            divElement.innerHTML = data.key; // Update 'someKey' with the actual key in your JSON response
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+</script>
+
+<body>
+    <div>
+        Some Word
+    </div>
+</body>
+
+</html>
