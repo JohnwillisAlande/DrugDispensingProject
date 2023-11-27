@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<style>
+    #loginForm {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #form_container_1 {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+
+    }
+
+    #form_container_2 {
+        display: flex;
+        width: 40%;
+        height: 40%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    input {
+        padding: 10px;
+        width: 100%
+    }
+
+    #signInButton {
+        padding: 10px;
+        width: 200px
+    }
+
+    #submit {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+</style>
+
+<body>
+    <div id="form_container_1">
+        <div>LOG IN API USER</div>
+        <div id="form_container_2">
+            <form id="loginForm">
+                <label for="email">
+                    <input id="email" placeholder="Email" name="email" required />
+                </label>
+
+                <label for="password">
+                    <input id="password" placeholder="Password" name="password" required />
+                </label>
+
+                <div id="submit">
+                    <button type="submit" id="signInButton">Sign In</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+
+            const data = {password: password, email: email };
+
+            fetch('http://localhost:4000/SignIn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data), // Pass the data object here
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        console.log('Invalid credentials');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Save the userToken in localStorage or sessionStorage
+                    localStorage.setItem('userToken', data.userToken);
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('SignIn failed:', error.message);
+                });
+        });
+    </script>
+</body>
+
+
+</html>
