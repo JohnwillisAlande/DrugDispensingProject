@@ -82,7 +82,7 @@
  </section>
 
      <!----------Testimonials---------->
-     <section class="testimonial">
+     <section class="client">
         <h1>What Our Clients Say</h1>
         <p>We are pleased to have you all trust our platform</p>
 

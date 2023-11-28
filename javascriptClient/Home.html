@@ -1,29 +1,174 @@
 <!DOCTYPE html>
 <html>
-<script>
-    fetch('http://localhost:4000/value', {
-        'method': 'GET',
-        'headers': {
-            'Content-Type': 'application/json'
-        },
-    }).
-        then((response) => {
-            return response.json(); // Assuming the response is JSON
-        })
-        .then((data) => {
-            console.log(data);
-            const divElement = document.querySelector("div");
-            divElement.innerHTML = data.key; // Update 'someKey' with the actual key in your JSON response
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-</script>
+<head>
+        <title>API Home Dashboard</title>
+       
+    <style>
+        /* Add CSS styles here */
+        /* *{
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        } */
+        .container{
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .navbar {
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    width: 120px;
+    cursor: pointer;
+  }
+  .navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+  }
 
+  .navbar ul li a {
+    text-decoration: none;
+    color: #49e2d3;
+    text-transform: uppercase;
+  }
+
+  .navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+  }
+
+  .navbar ul li:hover:after {
+    width: 100%;
+    background: #fff;
+    color: #640d9e;
+  }
+
+  .active, .navbar ul li:hover {
+    background: lightcyan;
+    border-radius: 1px;
+  }
+  .row{
+    display: flex;
+    height: 88%;
+    align-items: center;
+  }
+  .col{
+    flex-basis: 50%;
+  }
+  h1{
+    color: #fff;
+    font-size: 100px;
+  }
+  p{
+    color: #fff;
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .card{
+    width: 300px;
+    height: 230px;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-position: center;
+    background-size: cover;
+  }
+  .card1{
+    background-image: url(images/diclac2.jpg);
+  }
+  .card2{
+    background-image: url(images/diclac2.jpg);
+  }
+  .card3{
+    background-image: url(images/diclac2.jpg);
+  }
+  .card4{
+    background-image: url(images/diclac2.jpg);
+  }
+    </style>
+</head>
 <body>
     <div>
-        Some Word
+        <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+            <div class="navbar">
+                <img src="images/afyahealth.png" class="logo">
+                <nav>
+                <ul>
+                    <li class="active"><a href="#">Dashboard</a></li>
+                    <li><a href="#">Access</a></li>
+                    <li><a href="#">Access</a></li>
+                </ul>
+                </nav>
+            </div>
+
+        <div class="row">
+            <div class="col">
+                <h1>Afya Health API</h1>
+                <p>The Afya Health API is a comprehensive and user-friendly interface that enables seamless
+                     integration with Afya Health's healthcare services and data. 
+                     Designed to enhance accessibility and interoperability, this API empowers developers and healthcare institutions
+                     to securely retrieve and interact with patient information, medical records, and other essential health data. 
+                    Leveraging state-of-the-art technology, the Afya Health API facilitates the creation of innovative healthcare applications, 
+                    fostering improved patient care, streamlined workflows, and enhanced collaboration within the healthcare ecosystem.
+                    Please note that you should refer to the official documentation or contact Afya Health directly for the most accurate and up-to-date
+                    information about their API..</p>
+            </div>
+            <div class="col">
+                <div class="card card1">
+                    <h5>Users</h5>
+                    <p>To provide efficient and accessible drug dispensing services</p>
+                    <div class="layer">
+                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
+                    </div>
+                    <button id="userButton" class="button">User Button</button>
+                </div>
+                <div class="card card2">
+                    <h5>User Drugs</h5>
+                    <p>To provide efficient and accessible drug dispensing services</p>
+                    <div class="layer">
+                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
+                    </div>
+                    <button id="usersAndDrugsButton" class="button">Users and Drugs</button>
+                </div>
+                <div class="card card3">
+                    <h5>Drugs</h5>
+                    <p>To provide efficient and accessible drug dispensing services</p>
+                    <div class="layer">
+                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
+                    </div>
+                    <button id="drugsButton" class="button">Drugs Button</button>
+                </div>
+                <div class="card card4">
+                    <h5>Drugs By User</h5>
+                    <p>To provide efficient and accessible drug dispensing services</p>
+                    <div class="layer">
+                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
+                    </div>
+                    <button id="drugsByUserButton" class="button">Drugs by User Button</button>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </body>
-
 </html>

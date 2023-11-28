@@ -2,7 +2,7 @@ const connection = require("./conn");
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const fs = require("fs");
-const bcrypt = requir("bcrypt");
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -41,6 +41,16 @@ app.post("/SignIn", (req, res) => {
   } else {
     res.send({ proceed: false });
   }
+});
+
+app.get("/SignIn", (req, res) => {
+  fs.readFile("../javascriptClient/SignIn.html", (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result.toString());
+    }
+  });
 });
 
 app.post("/SignUp", async (req, res) => {
@@ -87,7 +97,7 @@ app.post("/SignUp", async (req, res) => {
 });
 
 app.get("/SignUp", (req, res) => {
-  fs.readFile("../javascriptclient/SignUp.html", (err, result) => {
+  fs.readFile("../javascriptClient/SignUp.html", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -112,7 +122,7 @@ function authenticateToken(req, res, next) {
   });
 }
 
-app.get("/Hom", (req, res) => {
+app.get("/Home", (req, res) => {
   let file;
   fs.readFile("../javascriptclient/Home.html", (err, result) => {
     if (err) {
@@ -126,7 +136,6 @@ app.get("/Hom", (req, res) => {
 });
 
 app.get("/value", (req, res) => {
-  res.send({ key: "value" });
 });
 
 app.listen(4000, () => {
