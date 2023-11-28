@@ -1,174 +1,104 @@
 <!DOCTYPE html>
 <html>
-<head>
-        <title>Patients Dashboard</title>
-       
-    <style>
-        /* Add CSS styles here */
-        /* *{
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-        } */
-        .container{
-            width: 100%;
-            height: 100vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .navbar {
-    width: 85%;
-    margin: auto;
-    padding: 35px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    width: 120px;
-    cursor: pointer;
-  }
-  .navbar ul li {
-    list-style: none;
-    display: inline-block;
-    margin: 0 20px;
-    position: relative;
-  }
+<style>
+    #loginForm {
+        display: flex;
+        flex-direction: column;
+        height: 80%;
+        width: 100%;
+        justify-content: space-between;
+    }
 
-  .navbar ul li a {
-    text-decoration: none;
-    color: #49e2d3;
-    text-transform: uppercase;
-  }
+    #form_container_1 {
+        display: flex;
+        width: 100%;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
 
-  .navbar ul li::after {
-    content: '';
-    height: 3px;
-    width: 0;
-    background: #009688;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
-  }
+    }
 
-  .navbar ul li:hover:after {
-    width: 100%;
-    background: #fff;
-    color: #640d9e;
-  }
+    #form_container_2 {
+        display: flex;
+        width: 40%;
+        height: 40%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
-  .active, .navbar ul li:hover {
-    background: lightcyan;
-    border-radius: 1px;
-  }
-  .row{
-    display: flex;
-    height: 88%;
-    align-items: center;
-  }
-  .col{
-    flex-basis: 50%;
-  }
-  h1{
-    color: #fff;
-    font-size: 100px;
-  }
-  p{
-    color: #fff;
-    font-size: 11px;
-    line-height: 15px;
-  }
-  .card{
-    width: 300px;
-    height: 230px;
-    display: inline-block;
-    border-radius: 10px;
-    padding: 15px 25px;
-    box-sizing: border-box;
-    cursor: pointer;
-    margin: 10px 15px;
-    background-position: center;
-    background-size: cover;
-  }
-  .card1{
-    background-image: url(images/diclac2.jpg);
-  }
-  .card2{
-    background-image: url(images/diclac2.jpg);
-  }
-  .card3{
-    background-image: url(images/diclac2.jpg);
-  }
-  .card4{
-    background-image: url(images/diclac2.jpg);
-  }
-    </style>
-</head>
+    input {
+        padding: 10px;
+        width: 100%
+    }
+
+    #signInButton {
+        padding: 10px;
+        width: 200px
+    }
+
+    #submit {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+</style>
+
 <body>
-    <div>
-        <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
-            <div class="navbar">
-                <img src="./images/afyahealth.png" class="logo">
-                <nav>
-                <ul>
-                    <li class="active"><a href="patient.html">Dashboard</a></li>
-                    <li><a href="PatientPrescriptionHistory.php">Prescriptions</a></li>
-                    <li><a href="login.html">Logout</a></li>
-                </ul>
-                </nav>
-            </div>
+    <div id="form_container_1">
+        <div>LOG IN API USER</div>
+        <div id="form_container_2">
+            <form id="loginForm">
+                <label for="email">
+                    <input id="email" placeholder="Email" name="email" required />
+                </label>
 
-        <div class="row">
-            <div class="col">
-                <h1>Afya Health API</h1>
-                <p>The Afya Health API is a comprehensive and user-friendly interface that enables seamless
-                     integration with Afya Health's healthcare services and data. 
-                     Designed to enhance accessibility and interoperability, this API empowers developers and healthcare institutions
-                     to securely retrieve and interact with patient information, medical records, and other essential health data. 
-                    Leveraging state-of-the-art technology, the Afya Health API facilitates the creation of innovative healthcare applications, 
-                    fostering improved patient care, streamlined workflows, and enhanced collaboration within the healthcare ecosystem.
-                    Please note that you should refer to the official documentation or contact Afya Health directly for the most accurate and up-to-date
-                    information about their API..</p>
-            </div>
-            <div class="col">
-                <div class="card card1">
-                    <h5>Users</h5>
-                    <p>To provide efficient and accessible drug dispensing services</p>
-                    <div class="layer">
-                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
-                    </div>
-                    <button id="userButton" class="button">User Button</button>
+                <label for="password">
+                    <input id="password" placeholder="Password" name="password" required />
+                </label>
+
+                <div id="submit">
+                    <button type="submit" id="signInButton">Sign In</button>
                 </div>
-                <div class="card card2">
-                    <h5>User Drugs</h5>
-                    <p>To provide efficient and accessible drug dispensing services</p>
-                    <div class="layer">
-                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
-                    </div>
-                    <button id="usersAndDrugsButton" class="button">Users and Drugs</button>
-                </div>
-                <div class="card card3">
-                    <h5>Drugs</h5>
-                    <p>To provide efficient and accessible drug dispensing services</p>
-                    <div class="layer">
-                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
-                    </div>
-                    <button id="drugsButton" class="button">Drugs Button</button>
-                </div>
-                <div class="card card4">
-                    <h5>Drugs By User</h5>
-                    <p>To provide efficient and accessible drug dispensing services</p>
-                    <div class="layer">
-                        <a href="#" title="Calpol" class="hero-btn">View Details</a>
-                    </div>
-                    <button id="drugsByUserButton" class="button">Drugs by User Button</button>
-                </div>
-            </div>
+
+            </form>
         </div>
     </div>
-    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+
+            const data = {password: password, email: email };
+
+            fetch('http://localhost:4000/SignIn', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data), // Pass the data object here
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        console.log('Invalid credentials');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Save the userToken in localStorage or sessionStorage
+                    localStorage.setItem('userToken', data.userToken);
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.error('SignIn failed:', error.message);
+                });
+        });
+    </script>
 </body>
+
+
 </html>

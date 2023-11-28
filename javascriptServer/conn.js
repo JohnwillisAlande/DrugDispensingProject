@@ -2,6 +2,7 @@ const mysql = require("mysql2");
 
 // Create a connection pool
 const conn = () => {
+  console.log("Connection Established")
   return mysql.createPool({
     host: "localhost",
     user: "root",
