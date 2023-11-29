@@ -1,233 +1,250 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-        <title>API Home Dashboard</title>
-       
-    <style>
-        .container{
-            width: 100%;
-            height: 100vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        .navbar {
-    width: 85%;
-    margin: auto;
-    padding: 35px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .logo {
-    width: 120px;
-    cursor: pointer;
-  }
-  .navbar ul li {
-    list-style: none;
-    display: inline-block;
-    margin: 0 20px;
-    position: relative;
-  }
+  <title>API Home Dashboard</title>
 
-  .navbar ul li a {
-    text-decoration: none;
-    color: #49e2d3;
-    text-transform: uppercase;
-  }
+  <style>
+    .container {
+      width: 100%;
+      height: 100vh;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
 
-  .navbar ul li::after {
-    content: '';
-    height: 3px;
-    width: 0;
-    background: #009688;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
-  }
+    .navbar {
+      width: 85%;
+      margin: auto;
+      padding: 35px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .navbar ul li:hover:after {
-    width: 100%;
-    background: #fff;
-    color: #640d9e;
-  }
+    .logo {
+      width: 120px;
+      cursor: pointer;
+    }
 
-  .active, .navbar ul li:hover {
-    background: lightcyan;
-    border-radius: 1px;
-  }
-  .row{
-    display: flex;
-    height: 88%;
-    align-items: center;
-  }
-  .col{
-    flex-basis: 50%;
-  }
-  h1{
-    color: #fff;
-    font-size: 100px;
-  }
-  p{
-    color: #fff;
-    font-size: 11px;
-    line-height: 15px;
-  }
-  .card{
-    width: 300px;
-    height: 230px;
-    display: inline-block;
-    border-radius: 10px;
-    padding: 15px 25px;
-    box-sizing: border-box;
-    cursor: pointer;
-    margin: 10px 15px;
-    background-position: center;
-    background-size: cover;
-  }
-  .card1{
-    background-image: url(images/diclac2.jpg);
-  }
-  .card2{
-    background-image: url(images/diclac2.jpg);
-  }
-  .card3{
-    background-image: url(images/diclac2.jpg);
-  }
-  .card4{
-    background-image: url(images/diclac2.jpg);
-  }
-  button {
-    width: 200px;
-    padding: 15px 0;
-    text-align: center;
-    margin: 20px 10px;
-    border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #009688;
-    background: transparent;
-    color: goldenrod;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
+    .navbar ul li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 20px;
+      position: relative;
+    }
 
-  span {
-    background: #009688;
-    height: 100%;
-    width: 0;
-    border-radius: 25px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0.5s;
-  }
+    .navbar ul li a {
+      text-decoration: none;
+      color: #49e2d3;
+      text-transform: uppercase;
+    }
 
-  button:hover span {
-    width: 100%;
-  }
+    .navbar ul li::after {
+      content: '';
+      height: 3px;
+      width: 0;
+      background: #009688;
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      transition: 0.5s;
+    }
 
-  button:hover {
-    border: none;
-  }
-  h2, p {
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif; /* Replace 'Your Preferred Font' with the actual font you want to use */
-}
+    .navbar ul li:hover:after {
+      width: 100%;
+      background: #fff;
+      color: #640d9e;
+    }
 
-/* Additional styling for h2 and p if needed */
-h2 {
-    font-size: 24px; /* Adjust the font size as needed */
-    margin-bottom: 10px; /* Add space below h2 for better spacing */
-}
+    .active,
+    .navbar ul li:hover {
+      background: lightcyan;
+      border-radius: 1px;
+    }
 
-p {
-    font-size: 16px; /* Adjust the font size as needed */
-    line-height: 1.5; /* Adjust the line height for better readability */
-}
+    .row {
+      display: flex;
+      height: 88%;
+      align-items: center;
+    }
 
-    </style>
-</head>
-<body>
-    <div>
-        <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
-            <div class="navbar">
-                <img src="images/afyahealth.png" class="logo">
-                <nav>
-                <ul>
-                    <li class="active"><a href="#">Dashboard</a></li>
-                    <li><a href="#">Access</a></li>
-                    <li><a href="#">Access</a></li>
-                </ul>
-                </nav>
-            </div>
+    .col {
+      flex-basis: 50%;
+    }
 
-        <div class="row">
-            <div class="col">
-                <h1>Afya Health API</h1>
-                <p>The Afya Health API is a comprehensive and user-friendly interface that enables seamless
-                     integration with Afya Health's healthcare services and data. 
-                     Designed to enhance accessibility and interoperability, this API empowers developers and healthcare institutions
-                     to securely retrieve and interact with patient information, medical records, and other essential health data. 
-                    Leveraging state-of-the-art technology, the Afya Health API facilitates the creation of innovative healthcare applications, 
-                    fostering improved patient care, streamlined workflows, and enhanced collaboration within the healthcare ecosystem.
-                    Please note that you should refer to the official documentation or contact Afya Health directly for the most accurate and up-to-date
-                    information about their API..</p>
-            </div>
-            <div class="col">
-              <div class="card card1">
-                <h2>Users</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('Users')"><span></span>Subscribe</button>
-            </div>
-            <div class="card card2">
-                <h2>User Drugs</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('UserDrugs')"><span></span>Subscribe</button>
-            </div>
-            <div class="card card3">
-                <h2>Drugs</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('drugs')"><span></span>Subscribe</button>
-            </div>
-            <div class="card card4">
-                <h2>Drugs By User</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('DrugsByUser')"><span></span>Subscribe</button>
-            </div>
-            </div>
-        </div>
-    </div>
-    </div>
+    h1 {
+      color: #fff;
+      font-size: 100px;
+    }
 
-    <script>
-      function subscribeToApi(apiName) {
-          var confirmation = confirm(`Do you want to subscribe to the ${apiName} API?`);
-          
-          if (confirmation) {
-              // Redirect to the API page based on the button pressed
-              window.location.href = `api/${apiName.toLowerCase()}.html`;
-          } else {
-              // Display "API access denied" message for 5 seconds
-              var deniedMessage = document.createElement('div');
-              deniedMessage.innerHTML = 'API ACCESS DENIED X!!';
-              deniedMessage.style.position = 'fixed';
-              deniedMessage.style.top = '50%';
-              deniedMessage.style.left = '50%';
-              deniedMessage.style.transform = 'translate(-50%, -50%)';
-              deniedMessage.style.backgroundColor = '#ff0000';
-              deniedMessage.style.color = '#ffffff';
-              deniedMessage.style.padding = '20px';
-              document.body.appendChild(deniedMessage);
+    p {
+      color: #fff;
+      font-size: 11px;
+      line-height: 15px;
+    }
 
-              setTimeout(function() {
-                  deniedMessage.remove();
-              }, 3000);
-          }
+    .card {
+      width: 300px;
+      height: 230px;
+      display: inline-block;
+      border-radius: 10px;
+      padding: 15px 25px;
+      box-sizing: border-box;
+      cursor: pointer;
+      margin: 10px 15px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .card1 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    .card2 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    .card3 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    .card4 {
+      background-image: url(images/diclac2.jpg);
+    }
+  </style>
+
+  <script>
+   const handleButton = (event) => {
+      const trigger = event.target.id;
+      const apiToken = localStorage.getItem(`${trigger}`);
+
+      if (trigger === "DrugsAPI") {
+        window.location = `/${trigger}.html`;
       }
+
+      fetch(`http://localhost:4000/APIAuth/${trigger}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': apiToken,
+        },
+      })
+        .then(response => {
+         return response.json()
+        }).then((data)=>{
+          console.log(data)
+          if (data.proceed) {
+            window.location = `/${trigger}.html`;
+          } else {
+            subscribeToApi(trigger);
+          }
+        })
+        .catch(error => {
+          console.error('Request failed:', error.message);
+        });
+    };
+
+  </script>
+</head>
+
+<body>
+  <div>
+    <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+      <div class="navbar">
+        <img src="images/afyahealth.png" class="logo">
+        <nav>
+          <ul>
+            <li class="active"><a href="#">Dashboard</a></li>
+            <li><a href="#">Access</a></li>
+            <li><a href="#">Access</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h1>Afya Health API</h1>
+          <p>The Afya Health API is a comprehensive and user-friendly interface that enables seamless
+            integration with Afya Health's healthcare services and data.
+            Designed to enhance accessibility and interoperability, this API empowers developers and healthcare
+            institutions
+            to securely retrieve and interact with patient information, medical records, and other essential health
+            data.
+            Leveraging state-of-the-art technology, the Afya Health API facilitates the creation of innovative
+            healthcare applications,
+            fostering improved patient care, streamlined workflows, and enhanced collaboration within the healthcare
+            ecosystem.
+            Please note that you should refer to the official documentation or contact Afya Health directly for the most
+            accurate and up-to-date
+            information about their API..</p>
+        </div>
+        <div class="col">
+          <div class="card card1">
+            <h5>Users</h5>
+            <p>To provide efficient and accessible drug dispensing services</p>
+            <button onclick="handleButton(event)" class="button" id="UserAPI">User Button</button>
+          </div>
+          <div class="card card2">
+            <h5>User Drugs</h5>
+            <p>To provide efficient and accessible drug dispensing services</p>
+            <button onclick="handleButton(event)" id="UsersAndDrugsAPI" class="button">Users and Drugs</button>
+          </div>
+          <div class="card card3">
+            <h5>Drugs</h5>
+            <p>To provide efficient and accessible drug dispensing services</p>
+            <button onclick="handleButton(event)" id="DrugsAPI" class="button">Drugs Button</button>
+          </div>
+          <div class="card card4">
+            <h5>Drugs By User</h5>
+            <p>To provide efficient and accessible drug dispensing services</p>
+            <button onclick="handleButton(event)" id="DrugsByUserAPI" class="button">Drugs by User Button</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function subscribeToApi(apiName) {
+      var confirmation = confirm(`Do you want to subscribe to the ${apiName} API?`);
+
+      if (confirmation) {
+        const username = localStorage.getItem("username")
+
+        fetch(`http://localhost:4000/APISub`, {
+          method: "POST",
+          body: JSON.stringify({ apiName: apiName, username: username })
+        }).then((response) => {
+          return response.json()
+        }).then((data)=>{
+          console.log(data)
+          localStorage.setItem(apiName, data.token)
+          window.location = `${apiName}.html`
+        }).catch((error) => {
+          console.error(error)
+        })
+
+      } else {
+        // Display "API access denied" message for 5 seconds
+        var deniedMessage = document.createElement('div');
+        deniedMessage.innerHTML = 'API ACCESS DENIED X!!';
+        deniedMessage.style.position = 'fixed';
+        deniedMessage.style.top = '50%';
+        deniedMessage.style.left = '50%';
+        deniedMessage.style.transform = 'translate(-50%, -50%)';
+        deniedMessage.style.backgroundColor = '#ff0000';
+        deniedMessage.style.color = '#ffffff';
+        deniedMessage.style.padding = '20px';
+        document.body.appendChild(deniedMessage);
+
+        setTimeout(function () {
+          deniedMessage.remove();
+        }, 3000);
+      }
+    }
   </script>
 </body>
+
 </html>

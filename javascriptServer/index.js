@@ -12,8 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const conn = connection();
 
-// Secret key for signing and verifying the JWT
 const userkey = "AxSr3fa23gsh2vi9h";
+const UserAPIKey = "AxSr3fauuih659h";
+const UsersAndDrugsAPIKey = "tGg6fg56gCHvt6";
+const DrugsByUserAPIKey = "Yuin6F565gvyb5g8";
+
+// Generate a random 6-digit verification code
+const generateVerificationCode = () => {
+  return Math.floor(10000 + Math.random() * 90000);
+};
 
 app.post("/SignIn", (req, res) => {
   const { email, password } = req.body;
@@ -55,11 +62,6 @@ app.post("/SignIn", (req, res) => {
   );
 });
 
-// Generate a random 6-digit verification code
-const generateVerificationCode = () => {
-  return Math.floor(10000 + Math.random() * 90000);
-};
-
 app.post("/SignUp", async (req, res) => {
   const { name, username, password, email } = req.body;
   let data = req.body;
@@ -97,20 +99,6 @@ app.post("/SignUp", async (req, res) => {
 
 app.get("/SignUp", (req, res) => {
   fs.readFile("../javascriptClient/SignUp.html", (err, result) => {
-    if (err) {
-      console.error(err);
-    } else {
-      res.send(result.toString());
-    }
-  });
-});
-
-app.get("/Apis/Home", authenticateToken, (req, res) => {
-  res.json({ message: "This is a protected resource" });
-});
-
-app.get("/SignIn", (req, res) => {
-  fs.readFile("../javascriptclient/SignIn.html", (err, result) => {
     if (err) {
       console.error(err);
     } else {
@@ -165,7 +153,7 @@ app.get("/Apis/drugs/category", (req, res) => {
 });
 
 // Get drugs by user (assuming the user information is stored in req.user)
-app.get("/Apis/drugs/user", authenticateToken, (req, res) => {
+app.get("/Apis/drugs/user", authenticateAPIToken, (req, res) => {
   const userId = req.user.userId; // Assuming the user ID is in the token payload
   const sql = `SELECT * FROM drugs WHERE userId = ${userId}`;
   conn.query(sql, (err, result) => {
@@ -178,17 +166,78 @@ app.get("/Apis/drugs/user", authenticateToken, (req, res) => {
   });
 });
 
-function authenticateToken(req, res, next) {
+app.post("/APISub", (req, res) => {
+  const { apiname, username } = req.body;
+  var token;
+  if (apiname === "UserAPI") {
+    token = jwt.sign({ username: username }, UserAPIKey, {
+      expiresIn: "1h",
+    });
+  } else if (apiname === "UsersAndDrugsAPI") {
+    token = jwt.sign({ username: username }, UsersAndDrugsAPIKey, {
+      expiresIn: "1h",
+    });
+  } else {
+    token = jwt.sign({ username: username }, DrugsByUserAPIKey, {
+      expiresIn: "1h",
+    });
+  }
+  res.send({ token: token });
+});
+
+function authenticateAPIToken(req, res, next) {
   const token = req.header("Authorization");
+  const api = req.query.apiname;
 
   if (!token) return res.send({ message: "Unauthorized" });
 
-  jwt.verify(token, userkey, (err, user) => {
-    if (err) return res.send({ message: "Forbidden" });
-    req.user = user;
-    next();
-  });
+  if (api === "UserAPI") {
+    jwt.verify(token, UserAPIKey, (err, user) => {
+      if (err) return res.send({ proceed: false });
+      req.user = user;
+      next();
+    });
+  } else if (api === "UsersAndDrugsAPI") {
+    jwt.verify(token, UsersAndDrugsAPIKey, (err, user) => {
+      if (err) return res.send({ proceed: false });
+      req.user = user;
+      next();
+    });
+  } else {
+    jwt.verify(token, DrugsByUserAPIKey, (err, user) => {
+      if (err) return res.send({ proceed: false });
+      req.user = user;
+      next();
+    });
+  }
 }
+
+app.get("/SignIn", (req, res) => {
+  fs.readFile("../javascriptclient/SignIn.html", (err, result) => {
+    if (err) {
+      console.error(err);
+    } else {
+      res.send(result.toString());
+    }
+  });
+});
+
+app.get("/APIAuth/:apiname", authenticateAPIToken, (req, res) => {
+  res.send({ proceed: true });
+});
+
+app.get("/UserAPI", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/UserAPI.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
 
 app.get("/Home", (req, res) => {
   let file;
@@ -203,7 +252,7 @@ app.get("/Home", (req, res) => {
   });
 });
 
-app.get("/drugs", (req, res) => {
+app.get("/DrugsAPI", (req, res) => {
   let file;
   fs.readFile("../javascriptClient/drugs.html", (err, result) => {
     if (err) {
@@ -216,47 +265,7 @@ app.get("/drugs", (req, res) => {
   });
 });
 
-app.get("/Users", (req, res) => {
-  let file;
-  fs.readFile("../javascriptClient/Users.html", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      file = result.toString();
-      res.send(file);
-      console.log(file);
-    }
-  });
-});
-
-app.get("/DrugsByUser", (req, res) => {
-  let file;
-  fs.readFile("../javascriptClient/DrugsByUser.html", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      file = result.toString();
-      res.send(file);
-      console.log(file);
-    }
-  });
-});
-
-app.get("/UserDrugs", (req, res) => {
-  let file;
-  fs.readFile("../javascriptClient/UserDrugs.html", (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      file = result.toString();
-      res.send(file);
-      console.log(file);
-    }
-  });
-});
-
-app.get("/value", (req, res) => {
-});
+app.get("/value", (req, res) => {});
 
 app.listen(4000, () => {
   console.error("listening on port 4000");

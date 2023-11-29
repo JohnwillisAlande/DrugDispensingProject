@@ -73,25 +73,26 @@
             const password = document.getElementById('password').value;
             const email = document.getElementById('email').value;
 
-            const data = {password: password, email: email };
+            const data = { password: password, email: email };
 
             fetch('http://localhost:4000/SignIn', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data), // Pass the data object here
+                body: JSON.stringify(data),
             })
-                .then(response => {
-                    if (!response.ok) {
-                        console.log('Invalid credentials');
-                    }
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    // Save the userToken in localStorage or sessionStorage
-                    localStorage.setItem('userToken', data.userToken);
-                    console.log(data);
+                    // Save the userToken in localStorage
+                    localStorage.setItem('userToken', data.token);
+
+                    // Redirect to the Home page if authentication is successful
+                    if (data.proceed) {
+                        window.location.href = '/Home';
+                    } else {
+                        console.error('Authentication failed');
+                    }
                 })
                 .catch(error => {
                     console.error('SignIn failed:', error.message);
