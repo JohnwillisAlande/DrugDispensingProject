@@ -131,6 +131,22 @@ function authenticateToken(req, res, next) {
   });
 }
 
+app.get("/Home", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/Home.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
+app.get("/value", (req, res) => {
+});
+
 app.listen(4000, () => {
   console.error("listening on port 4000");
 });
