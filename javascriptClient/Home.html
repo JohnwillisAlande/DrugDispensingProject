@@ -113,6 +113,55 @@
     .card4 {
       background-image: url(images/diclac2.jpg);
     }
+    button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: goldenrod;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  span {
+    background: #009688;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+  }
+
+  button:hover span {
+    width: 100%;
+  }
+
+  button:hover {
+    border: none;
+  }
+  h2, p {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif; /* Replace 'Your Preferred Font' with the actual font you want to use */
+}
+
+/* Additional styling for h2 and p if needed */
+h2 {
+    font-size: 24px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Add space below h2 for better spacing */
+}
+
+p {
+    font-size: 16px; /* Adjust the font size as needed */
+    line-height: 1.5; /* Adjust the line height for better readability */
+}
   </style>
 
   <script>
@@ -184,22 +233,22 @@
           <div class="card card1">
             <h5>Users</h5>
             <p>To provide efficient and accessible drug dispensing services</p>
-            <button onclick="handleButton(event)" class="button" id="UserAPI">User Button</button>
+            <button onclick="handleButton(event)" class="button" id="UserAPI"><span></span>User Button</button>
           </div>
           <div class="card card2">
             <h5>User Drugs</h5>
             <p>To provide efficient and accessible drug dispensing services</p>
-            <button onclick="handleButton(event)" id="UsersAndDrugsAPI" class="button">Users and Drugs</button>
+            <button onclick="handleButton(event)" id="UsersAndDrugsAPI" class="button"><span></span>Users and Drugs</button>
           </div>
           <div class="card card3">
             <h5>Drugs</h5>
             <p>To provide efficient and accessible drug dispensing services</p>
-            <button onclick="handleButton(event)" id="DrugsAPI" class="button">Drugs Button</button>
+            <button onclick="handleButton(event)" id="DrugsAPI" class="button"><span></span>Drugs Button</button>
           </div>
           <div class="card card4">
             <h5>Drugs By User</h5>
             <p>To provide efficient and accessible drug dispensing services</p>
-            <button onclick="handleButton(event)" id="DrugsByUserAPI" class="button">Drugs by User Button</button>
+            <button onclick="handleButton(event)" id="DrugsByUserAPI" class="button"><span></span>Drugs by User Button</button>
           </div>
         </div>
       </div>
