@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Users API Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drugs API Dashboard</title>
 
   <style>
     .container {
@@ -21,6 +23,29 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .content {
+      width: 100%;
+      position: absolute;
+      top: 20%;
+      transform: translateY(-50%);
+      text-align: center;
+      color: #fff;
+      background-attachment: fixed, scroll;
+      background-repeat: no-repeat, repeat-y;
+      font-size: 20px;
+    }
+
+    .content h1 {
+      font-size: 70px;
+      margin-top: 80px;
+    }
+
+    .content h2 {
+      margin: 20px auto;
+      font-weight: 100;
+      line-height: 25px;
     }
 
     .logo {
@@ -68,6 +93,7 @@
       display: flex;
       height: 88%;
       align-items: center;
+      justify-content: center;
     }
 
     .col {
@@ -212,47 +238,81 @@
 
       <div class="row">
         <div class="col">
-          <h1>Users API</h1>
-          <p>Unlock the Afya Health Users API -Your access point to vital
-            user data. Seamlessly retrieve user information, enabling your
-            healthcare applications to enhance personalized care. Empower efficient
-            service delivery and elevate your healthcare integration experience. Explore
-            the possibilities and elevate your healthcare integration experience with Afya Health Users API.</p>
+          <h1>DRUGS API</h1>
+          <p>Discover the Afya Health Drugs API- Your gateway
+            to essential pharmaceutical drugs data. Access full drug details and
+            specific drug details seamlessly. Empower your healthcare
+            applications with real-time information for efficient drug dispensing
+            and enhanced patient care. Explore the possibilities and elevate your
+            healthcare integration experience with Afya Health.</p>
         </div>
         <div class="col">
           <div class="card card1">
-            <h2>List of All Users from Database</h2>
-            <button onclick="getAllUsers()"><span></span>Get All Users</button>
-            <pre id="allUsersResult"></pre>
+            <h2>List of All Drugs from Database</h2>
+            <button onclick="getAllDrugs()"><span></span>Get All Drugs</button>
+            <pre id="allDrugsResult"></pre>
           </div>
 
           <div class="card card2">
-            <h2>User Details by ID</h2>
-            <label for="userId">Enter User ID:</label>
-            <input type="text" class="login-input" placeholder="ABCD001" id="userID">
-            <button onclick="getUserById()"><span></span>Get User by ID</button>
-            <pre id="userByIdResult"></pre>
+            <h2>Drug Information by ID</h2>
+            <label for="drugId">Enter Drug ID:</label>
+            <input type="text" class="login-input" placeholder="WXYZ001" id="drugId">
+            <button onclick="getDrugById()"><span></span>Get Drug by ID</button>
+            <pre id="drugByIdResult"></pre>
           </div>
 
           <div class="card card3">
-            <h2>User Gender by ID</h2>
-            <label for="userGender">Enter User ID:</label>
-            <input type="text" class="login-input" placeholder="ABCD001" id="userGender">
-            <button onclick="getUserGenderById()"><span></span>Get User Gender by ID</button>
-            <pre id="userGenderByIdResult"></pre>
+            <h2>List of All Drugs by Category/Subcategory</h2>
+            <label for="category">Enter Category:</label>
+            <input type="text" class="login-input" placeholder="Antibiotics" id="category">
+            <button onclick="getDrugsByCategory()"><span></span>Get Drugs by Category</button>
+            <pre id="drugsByCategoryResult"></pre>
           </div>
 
           <div class="card card4">
-            <h2>User Last Login Time by ID</h2>
-            <label for="loginTime">Enter User ID:</label>
-            <input type="text" class="login-input" placeholder="ABCD001" id="loginTime">
-            <button onclick="getUserLoginTimeById()"><span></span>Get User Last Login Time by ID</button>
-            <pre id="userLastLoginTimeByIdResult"></pre>
+            <h2>List of Drugs by User [Secured Resource]</h2>
+            <button onclick="getDrugsByUser()"><span></span>Get Drugs by User</button>
+            <pre id="drugsByUserResult"></pre>
           </div>
         </div>
       </div>
+
+      <script>
+        // JavaScript functions to make API requests
+        async function getAllDrugs() {
+          const response = await fetch('/api/drugs');
+          const data = await response.json();
+          document.getElementById('allDrugsResult').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function getDrugById() {
+          const drugId = document.getElementById("drugId").value;
+          const response = await fetch(`/api/drugs/${drugId}`);
+          const data = await response.json();
+          document.getElementById('drugByIdResult').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function getDrugsByCategory() {
+          const category = document.getElementById("category").value;
+          const response = await fetch(`/api/drugs/category/${category}`);
+          const data = await response.json();
+          document.getElementById('drugsByCategoryResult').textContent = JSON.stringify(data, null, 2);
+        }
+
+        async function getDrugsByUser() {
+          const token = localStorage.getItem('token'); // Assuming you store the token in local storage
+          const response = await fetch('/api/drugs/user', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const data = await response.json();
+          document.getElementById('drugsByUserResult').textContent = JSON.stringify(data, null, 2);
+        }
+      </script>
     </div>
   </div>
+
 </body>
 
 </html>

@@ -173,7 +173,7 @@ app.post("/APISub", (req, res) => {
     token = jwt.sign({ username: username }, UserAPIKey, {
       expiresIn: "1h",
     });
-  } else if (apiname === "UsersAndDrugsAPI") {
+  } else if (apiname === "UserDrugsAPI") {
     token = jwt.sign({ username: username }, UsersAndDrugsAPIKey, {
       expiresIn: "1h",
     });
@@ -239,6 +239,19 @@ app.get("/UserAPI", (req, res) => {
   });
 });
 
+app.get("/UserDrugsAPI", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/UserDrugsAPI.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
 app.get("/Home", (req, res) => {
   let file;
   fs.readFile("../javascriptClient/Home.html", (err, result) => {
@@ -254,7 +267,7 @@ app.get("/Home", (req, res) => {
 
 app.get("/DrugsAPI", (req, res) => {
   let file;
-  fs.readFile("../javascriptClient/drugs.html", (err, result) => {
+  fs.readFile("../javascriptClient/DrugsAPI.html", (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -264,6 +277,20 @@ app.get("/DrugsAPI", (req, res) => {
     }
   });
 });
+
+app.get("/DrugsByUserAPI", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/DrugsByUserAPI.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
 
 app.get("/value", (req, res) => {});
 
