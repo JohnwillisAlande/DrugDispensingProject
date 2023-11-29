@@ -101,7 +101,7 @@
                 })
                 .then(data => {
                     // Save the userToken in localStorage or sessionStorage
-                    localStorage.setItem('userToken', data.userToken);
+                    localStorage.setItem('userToken', data.Token);
                     console.log('Signup successful');
                 })
                 .catch(error => {
