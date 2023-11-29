@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>API Home Dashboard</title>
+        <title>DrugsByUser API Dashboard</title>
        
     <style>
         .container{
@@ -133,6 +133,19 @@
   button:hover {
     border: none;
   }
+  input.login-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: 3px solid #009688;
+    border-radius: 4px;
+    background-color: lightcyan;
+  }
+
+  input.login-input:focus {
+    background-color: cyan;
+  }
   h2, p {
     color: #fff;
     font-family: Arial, Helvetica, sans-serif; /* Replace 'Your Preferred Font' with the actual font you want to use */
@@ -148,7 +161,12 @@ p {
     font-size: 16px; /* Adjust the font size as needed */
     line-height: 1.5; /* Adjust the line height for better readability */
 }
-
+label {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-bottom: 5px; /* Add space below label for better spacing */
+}
     </style>
 </head>
 <body>
@@ -167,67 +185,23 @@ p {
 
         <div class="row">
             <div class="col">
-                <h1>Afya Health API</h1>
-                <p>The Afya Health API is a comprehensive and user-friendly interface that enables seamless
-                     integration with Afya Health's healthcare services and data. 
-                     Designed to enhance accessibility and interoperability, this API empowers developers and healthcare institutions
-                     to securely retrieve and interact with patient information, medical records, and other essential health data. 
-                    Leveraging state-of-the-art technology, the Afya Health API facilitates the creation of innovative healthcare applications, 
-                    fostering improved patient care, streamlined workflows, and enhanced collaboration within the healthcare ecosystem.
-                    Please note that you should refer to the official documentation or contact Afya Health directly for the most accurate and up-to-date
-                    information about their API..</p>
+                <h1>Drugs By Users API</h1>
+                <p>Unveil the Afya Health Drugs By Users API -Unlocking personalized pharmaceutical insights.
+                     Seamlessly access drug details tailored to individual users. Empower your healthcare applications
+                      with real-time information for precise drug dispensing and elevated patient care. 
+                      Explore the possibilities and elevate your healthcare integration experience with Afya Health.</p>
             </div>
             <div class="col">
-              <div class="card card1">
-                <h2>Users</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('Users')"><span></span>Subscribe</button>
-            </div>
-            <div class="card card2">
-                <h2>User Drugs</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('UserDrugs')"><span></span>Subscribe</button>
-            </div>
-            <div class="card card3">
-                <h2>Drugs</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('drugs')"><span></span>Subscribe</button>
-            </div>
-            <div class="card card4">
-                <h2>Drugs By User</h2>
-                <p>To provide efficient and accessible drug dispensing services</p>
-                <button class="button" onclick="subscribeToApi('DrugsByUser')"><span></span>Subscribe</button>
-            </div>
+                <div class="card">
+                    <h2>User Drugs by ID</h2>
+                    <label for="userDrugs">Enter User ID:</label>
+                    <input type="text" class="login-input" placeholder="ABCD001" id="userDrugs">
+                    <button onclick="getUserById()"><span></span>Get User Drugs by ID</button>
+                    <pre id="userDrugsByIdResult"></pre>
+                </div>
             </div>
         </div>
     </div>
     </div>
-
-    <script>
-      function subscribeToApi(apiName) {
-          var confirmation = confirm(`Do you want to subscribe to the ${apiName} API?`);
-          
-          if (confirmation) {
-              // Redirect to the API page based on the button pressed
-              window.location.href = `api/${apiName.toLowerCase()}.html`;
-          } else {
-              // Display "API access denied" message for 5 seconds
-              var deniedMessage = document.createElement('div');
-              deniedMessage.innerHTML = 'API ACCESS DENIED X!!';
-              deniedMessage.style.position = 'fixed';
-              deniedMessage.style.top = '50%';
-              deniedMessage.style.left = '50%';
-              deniedMessage.style.transform = 'translate(-50%, -50%)';
-              deniedMessage.style.backgroundColor = '#ff0000';
-              deniedMessage.style.color = '#ffffff';
-              deniedMessage.style.padding = '20px';
-              document.body.appendChild(deniedMessage);
-
-              setTimeout(function() {
-                  deniedMessage.remove();
-              }, 3000);
-          }
-      }
-  </script>
 </body>
 </html>

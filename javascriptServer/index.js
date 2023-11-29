@@ -216,6 +216,45 @@ app.get("/drugs", (req, res) => {
   });
 });
 
+app.get("/Users", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/Users.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
+app.get("/DrugsByUser", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/DrugsByUser.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
+app.get("/UserDrugs", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/UserDrugs.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
 app.get("/value", (req, res) => {
 });
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drugs API</title>
+    <title>Drugs API Dashboard</title>
 
     <style>
         .container{
@@ -126,6 +126,74 @@
   .card4{
     background-image: url(images/diclac2.jpg);
   }
+  button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: goldenrod;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  span {
+    background: #009688;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+  }
+
+  button:hover span {
+    width: 100%;
+  }
+
+  button:hover {
+    border: none;
+  }
+  input.login-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: 3px solid #009688;
+    border-radius: 4px;
+    background-color: lightcyan;
+  }
+
+  input.login-input:focus {
+    background-color: cyan;
+  }
+  h2, p {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif; /* Replace 'Your Preferred Font' with the actual font you want to use */
+}
+
+/* Additional styling for h2 and p if needed */
+h2 {
+    font-size: 24px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Add space below h2 for better spacing */
+}
+
+p {
+    font-size: 16px; /* Adjust the font size as needed */
+    line-height: 1.5; /* Adjust the line height for better readability */
+}
+label {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-bottom: 5px; /* Add space below label for better spacing */
+}
     </style>
 </head>
 <body>
@@ -141,41 +209,43 @@
                 </ul>
                 </nav>
             </div>
-            
-            <div class="content">
-            <h1>DRUGS API</h1>
-            </div>
 
     <div class="row">
         <div class="col">
+            <h1>DRUGS API</h1>
+            <p>Discover the Afya Health Drugs API- Your gateway
+                 to essential pharmaceutical drugs data. Access full drug details and
+                  specific drug details seamlessly. Empower your healthcare
+                   applications with real-time information for efficient drug dispensing
+                    and enhanced patient care. Explore the possibilities and elevate your
+                     healthcare integration experience with Afya Health.</p>
+        </div>
+        <div class="col">
         <div class="card card1">
             <h2>List of All Drugs from Database</h2>
-            <button onclick="getAllDrugs()">Get All Drugs</button>
+            <button onclick="getAllDrugs()"><span></span>Get All Drugs</button>
             <pre id="allDrugsResult"></pre>
         </div>
 
         <div class="card card2">
             <h2>Drug Information by ID</h2>
             <label for="drugId">Enter Drug ID:</label>
-            <input type="text" id="drugId">
-            <button onclick="getDrugById()">Get Drug by ID</button>
+            <input type="text" class="login-input" placeholder="WXYZ001" id="drugId">
+            <button onclick="getDrugById()"><span></span>Get Drug by ID</button>
             <pre id="drugByIdResult"></pre>
         </div>
-        </div>
 
-
-        <div class="col">
         <div class="card card3">
             <h2>List of All Drugs by Category/Subcategory</h2>
             <label for="category">Enter Category:</label>
-            <input type="text" id="category">
-            <button onclick="getDrugsByCategory()">Get Drugs by Category</button>
+            <input type="text" class="login-input" placeholder="Antibiotics" id="category">
+            <button onclick="getDrugsByCategory()"><span></span>Get Drugs by Category</button>
             <pre id="drugsByCategoryResult"></pre>
         </div>
 
         <div class="card card4">
             <h2>List of Drugs by User [Secured Resource]</h2>
-            <button onclick="getDrugsByUser()">Get Drugs by User</button>
+            <button onclick="getDrugsByUser()"><span></span>Get Drugs by User</button>
             <pre id="drugsByUserResult"></pre>
         </div>
         </div>
