@@ -119,6 +119,65 @@ app.get("/SignIn", (req, res) => {
   });
 });
 
+// Get all drugs from the database
+app.get("/Apis/drugs", (req, res) => {
+  const sql = "SELECT * FROM drugs";
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+// Get drug information by ID
+app.get("/Apis/drugs/:id", (req, res) => {
+  const drugId = req.params.id;
+  const sql = `SELECT * FROM drugs WHERE id = ${drugId}`;
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    } else {
+      if (result.length === 0) {
+        res.status(404).json({ error: "Drug not found" });
+      } else {
+        res.json(result[0]);
+      }
+    }
+  });
+});
+
+// Get drugs by category/subcategory
+app.get("/Apis/drugs/category", (req, res) => {
+  const category = req.params.category;
+  const sql = `SELECT * FROM drugs WHERE category = '${category}'`;
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+// Get drugs by user (assuming the user information is stored in req.user)
+app.get("/Apis/drugs/user", authenticateToken, (req, res) => {
+  const userId = req.user.userId; // Assuming the user ID is in the token payload
+  const sql = `SELECT * FROM drugs WHERE userId = ${userId}`;
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.status(500).json({ error: "Internal Server Error" });
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 function authenticateToken(req, res, next) {
   const token = req.header("Authorization");
 
@@ -134,6 +193,19 @@ function authenticateToken(req, res, next) {
 app.get("/Home", (req, res) => {
   let file;
   fs.readFile("../javascriptClient/Home.html", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      file = result.toString();
+      res.send(file);
+      console.log(file);
+    }
+  });
+});
+
+app.get("/drugs", (req, res) => {
+  let file;
+  fs.readFile("../javascriptClient/drugs.html", (err, result) => {
     if (err) {
       console.log(err);
     } else {
