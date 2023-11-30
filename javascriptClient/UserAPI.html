@@ -1,6 +1,258 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <div>UserAPI page</div>
-    </body>
+
+<head>
+  <title>Users API Dashboard</title>
+
+  <style>
+    .container {
+      width: 100%;
+      height: 100vh;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .navbar {
+      width: 85%;
+      margin: auto;
+      padding: 35px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      width: 120px;
+      cursor: pointer;
+    }
+
+    .navbar ul li {
+      list-style: none;
+      display: inline-block;
+      margin: 0 20px;
+      position: relative;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #49e2d3;
+      text-transform: uppercase;
+    }
+
+    .navbar ul li::after {
+      content: '';
+      height: 3px;
+      width: 0;
+      background: #009688;
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      transition: 0.5s;
+    }
+
+    .navbar ul li:hover:after {
+      width: 100%;
+      background: #fff;
+      color: #640d9e;
+    }
+
+    .active,
+    .navbar ul li:hover {
+      background: lightcyan;
+      border-radius: 1px;
+    }
+
+    .row {
+      display: flex;
+      height: 88%;
+      align-items: center;
+    }
+
+    .col {
+      flex-basis: 50%;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 100px;
+    }
+
+    p {
+      color: #fff;
+      font-size: 11px;
+      line-height: 15px;
+    }
+
+    .card {
+      width: 300px;
+      height: 230px;
+      display: inline-block;
+      border-radius: 10px;
+      padding: 15px 25px;
+      box-sizing: border-box;
+      cursor: pointer;
+      margin: 10px 15px;
+      background-position: center;
+      background-size: cover;
+    }
+
+    .card1 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    .card2 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    .card3 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    .card4 {
+      background-image: url(images/diclac2.jpg);
+    }
+
+    button {
+      width: 200px;
+      padding: 15px 0;
+      text-align: center;
+      margin: 20px 10px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: 2px solid #009688;
+      background: transparent;
+      color: goldenrod;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    span {
+      background: #009688;
+      height: 100%;
+      width: 0;
+      border-radius: 25px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: -1;
+      transition: 0.5s;
+    }
+
+    button:hover span {
+      width: 100%;
+    }
+
+    button:hover {
+      border: none;
+    }
+
+    input.login-input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 4px 0;
+      box-sizing: border-box;
+      border: 3px solid #009688;
+      border-radius: 4px;
+      background-color: lightcyan;
+    }
+
+    input.login-input:focus {
+      background-color: cyan;
+    }
+
+    h2,
+    p {
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      /* Replace 'Your Preferred Font' with the actual font you want to use */
+    }
+
+    /* Additional styling for h2 and p if needed */
+    h2 {
+      font-size: 24px;
+      /* Adjust the font size as needed */
+      margin-bottom: 10px;
+      /* Add space below h2 for better spacing */
+    }
+
+    p {
+      font-size: 16px;
+      /* Adjust the font size as needed */
+      line-height: 1.5;
+      /* Adjust the line height for better readability */
+    }
+
+    label {
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      /* Adjust the font size as needed */
+      margin-bottom: 5px;
+      /* Add space below label for better spacing */
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+      <div class="navbar">
+        <img src="images/afyahealth.png" class="logo">
+        <nav>
+          <ul>
+            <li class="active"><a href="#">Dashboard</a></li>
+            <li><a href="#">Access</a></li>
+            <li><a href="#">Access</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <h1>Users API</h1>
+          <p>Unlock the Afya Health Users API -Your access point to vital
+            user data. Seamlessly retrieve user information, enabling your
+            healthcare applications to enhance personalized care. Empower efficient
+            service delivery and elevate your healthcare integration experience. Explore
+            the possibilities and elevate your healthcare integration experience with Afya Health Users API.</p>
+        </div>
+        <div class="col">
+          <div class="card card1">
+            <h2>List of All Users from Database</h2>
+            <button onclick="getAllUsers()"><span></span>Get All Users</button>
+            <pre id="allUsersResult"></pre>
+          </div>
+
+          <div class="card card2">
+            <h2>User Details by ID</h2>
+            <label for="userId">Enter User ID:</label>
+            <input type="text" class="login-input" placeholder="ABCD001" id="userID">
+            <button onclick="getUserById()"><span></span>Get User by ID</button>
+            <pre id="userByIdResult"></pre>
+          </div>
+
+          <div class="card card3">
+            <h2>User Gender by ID</h2>
+            <label for="userGender">Enter User ID:</label>
+            <input type="text" class="login-input" placeholder="ABCD001" id="userGender">
+            <button onclick="getUserGenderById()"><span></span>Get User Gender by ID</button>
+            <pre id="userGenderByIdResult"></pre>
+          </div>
+
+          <div class="card card4">
+            <h2>User Last Login Time by ID</h2>
+            <label for="loginTime">Enter User ID:</label>
+            <input type="text" class="login-input" placeholder="ABCD001" id="loginTime">
+            <button onclick="getUserLoginTimeById()"><span></span>Get User Last Login Time by ID</button>
+            <pre id="userLastLoginTimeByIdResult"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
