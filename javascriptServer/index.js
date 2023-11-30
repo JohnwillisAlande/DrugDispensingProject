@@ -317,6 +317,70 @@ app.get(
   }
 );
 
+app.get(
+  "/Drugs/:type/:query",
+  (req, res) => {
+    console.log("reached");
+    const { type, query } = req.params;
+    var sql = `SELECT * FROM DRUGS WHERE ${type}='${query}' `;
+
+    conn.query(sql, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.send({ er: err, proceed: false });
+      } else {
+        console.log(result);
+        res.send({ result: result, proceed: true });
+      }
+    });
+  }
+);
+
+app.get("/AllDrugs", (req, res) => {
+  
+  var sql = `SELECT * FROM DRUGS`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ er: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
+
+app.get("/Patients/:type/:query", (req, res) => {
+  console.log("reached");
+  const { type, query } = req.params;
+  var sql = `SELECT * FROM Patients WHERE ${type}='${query}' `;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ er: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
+
+app.get("/AllUsers", (req, res) => {
+  var sql = `SELECT * FROM Patients`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ er: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
+
 app.get("/DrugsByUser/:apiName/:id", authenticateAPIToken, (req, res) => {
   const value = req.params.id;
   console.log("Reached", value);
