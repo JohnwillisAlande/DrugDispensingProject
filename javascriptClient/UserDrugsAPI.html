@@ -196,50 +196,9 @@
   </style>
 </head>
 
-<script>
-  const apiToken = localStorage.getItem("UserAPI")
-  const query = (type) => {
-    const value=document.querySelector("input").value
-    console.log(value)
-    fetch(`http://localhost:4000/UserDrugs/UserDrugsAPI/${type}/${value}`, {
-      method: "GET",
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': apiToken,
-      },
-    })
-      .then(response => {
-        console.log(response)
-        return response.json()
-      }).then((data) => {
-        console.log(data)
-        if (data.proceed) {
-        } else {
-        }
-      })
-      .catch(error => {
-        console.error('Request failed:', error.message);
-      });
-  }
-</script>
-
-<body>
-  <div>
-    <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
-      <div class="navbar">
-        <img src="images/afyahealth.png" class="logo">
-        <nav>
-          <ul>
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li><a href="#">Access</a></li>
-            <li><a href="#">Access</a></li>
-          </ul>
-        </nav>
-      </div>
-
       <div class="row">
         <div class="col">
-          <h1>User Drugs API</h1>
+          <h1>USER DRUGS API</h1>
           <p>Uncover the Afya Health Users and Drugs API -Your bridge to comprehensive
             health data. Seamlessly access user details and pharmaceutical information
             for personalized healthcare applications. Empower efficient service delivery,
@@ -265,7 +224,6 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </body>
-
 </html>
