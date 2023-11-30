@@ -84,12 +84,15 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    // Save the userToken in localStorage
-                    localStorage.setItem('userToken', data.token);
 
-                    // Redirect to the Home page if authentication is successful
                     if (data.proceed) {
-                        window.location.href = '/Home';
+                        // Save the userToken in localStorage
+                        localStorage.setItem('userToken', data.token);
+                        localStorage.setItem('email', data.data[0].email)
+                        localStorage.setItem('username', data.data[0].UserName)
+                        console.log(data.data[0])
+                        // Redirect to the Home page if authentication is successful
+                        window.location.href="/Home"
                     } else {
                         console.error('Authentication failed');
                     }

@@ -113,64 +113,76 @@
     .card4 {
       background-image: url(images/diclac2.jpg);
     }
+
     button {
-    width: 200px;
-    padding: 15px 0;
-    text-align: center;
-    margin: 20px 10px;
-    border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #009688;
-    background: transparent;
-    color: goldenrod;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
+      width: 200px;
+      padding: 15px 0;
+      text-align: center;
+      margin: 20px 10px;
+      border-radius: 25px;
+      font-weight: bold;
+      border: 2px solid #009688;
+      background: transparent;
+      color: goldenrod;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
 
-  span {
-    background: #009688;
-    height: 100%;
-    width: 0;
-    border-radius: 25px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0.5s;
-  }
+    span {
+      background: #009688;
+      height: 100%;
+      width: 0;
+      border-radius: 25px;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: -1;
+      transition: 0.5s;
+    }
 
-  button:hover span {
-    width: 100%;
-  }
+    button:hover span {
+      width: 100%;
+    }
 
-  button:hover {
-    border: none;
-  }
-  h2, p {
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif; /* Replace 'Your Preferred Font' with the actual font you want to use */
-}
+    button:hover {
+      border: none;
+    }
 
-/* Additional styling for h2 and p if needed */
-h2 {
-    font-size: 24px; /* Adjust the font size as needed */
-    margin-bottom: 10px; /* Add space below h2 for better spacing */
-}
+    h2,
+    p {
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      /* Replace 'Your Preferred Font' with the actual font you want to use */
+    }
 
-p {
-    font-size: 16px; /* Adjust the font size as needed */
-    line-height: 1.5; /* Adjust the line height for better readability */
-}
+    /* Additional styling for h2 and p if needed */
+    h2 {
+      font-size: 24px;
+      /* Adjust the font size as needed */
+      margin-bottom: 10px;
+      /* Add space below h2 for better spacing */
+    }
+
+    p {
+      font-size: 16px;
+      /* Adjust the font size as needed */
+      line-height: 1.5;
+      /* Adjust the line height for better readability */
+    }
   </style>
 
   <script>
-   const handleButton = (event) => {
+    const handleButton = (event) => {
       const trigger = event.target.id;
+
+
       const apiToken = localStorage.getItem(`${trigger}`);
 
+      console.log(trigger)
+
       if (trigger === "DrugsAPI") {
-        window.location = `/${trigger}`;
+        return window.location = `/${trigger}`;
       }
 
       fetch(`http://localhost:4000/APIAuth/${trigger}`, {
@@ -181,11 +193,11 @@ p {
         },
       })
         .then(response => {
-         return response.json()
-        }).then((data)=>{
+          return response.json()
+        }).then((data) => {
           console.log(data)
           if (data.proceed) {
-            window.location = `/${trigger}`;
+            window.location = `${trigger}`
           } else {
             subscribeToApi(trigger);
           }
@@ -194,7 +206,43 @@ p {
           console.error('Request failed:', error.message);
         });
     };
+    function subscribeToApi(apiName) {
+      var confirmation = confirm(`Do you want to subscribe to the ${apiName} API?`);
 
+      if (confirmation) {
+        const username = localStorage.getItem("username")
+        const body = { apiName: apiName, username: username }
+        console.log("Body is:", body)
+        fetch(`http://localhost:4000/APISub/${apiName}/${username}`, {
+          method: "POST",
+          body: JSON.stringify(body)
+        }).then((response) => {
+          return response.json()
+        }).then((data) => {
+          localStorage.setItem(apiName, data.token)
+          window.location = `${apiName}`
+        }).catch((error) => {
+          console.error(error)
+        })
+
+      } else {
+        // Display "API access denied" message for 5 seconds
+        var deniedMessage = document.createElement('div');
+        deniedMessage.innerHTML = 'API ACCESS DENIED X!!';
+        deniedMessage.style.position = 'fixed';
+        deniedMessage.style.top = '50%';
+        deniedMessage.style.left = '50%';
+        deniedMessage.style.transform = 'translate(-50%, -50%)';
+        deniedMessage.style.backgroundColor = '#ff0000';
+        deniedMessage.style.color = '#ffffff';
+        deniedMessage.style.padding = '20px';
+        document.body.appendChild(deniedMessage);
+
+        setTimeout(function () {
+          deniedMessage.remove();
+        }, 3000);
+      }
+    }
   </script>
 </head>
 
@@ -248,7 +296,8 @@ p {
           <div class="card card4">
             <h5>Drugs By User</h5>
             <p>To provide efficient and accessible drug dispensing services</p>
-            <button onclick="handleButton(event)" id="DrugsByUserAPI" class="button"><span></span>Drugs by User Button</button>
+            <button onclick="handleButton(event)" id="DrugsByUserAPI" class="button"><span></span>Drugs by User
+              Button</button>
           </div>
         </div>
       </div>
@@ -256,43 +305,7 @@ p {
   </div>
 
   <script>
-    function subscribeToApi(apiName) {
-      var confirmation = confirm(`Do you want to subscribe to the ${apiName} API?`);
 
-      if (confirmation) {
-        const username = localStorage.getItem("username")
-
-        fetch(`http://localhost:4000/APISub`, {
-          method: "POST",
-          body: JSON.stringify({ apiName: apiName, username: username })
-        }).then((response) => {
-          return response.json()
-        }).then((data)=>{
-          console.log(data)
-          localStorage.setItem(apiName, data.token)
-          window.location = `${apiName}`
-        }).catch((error) => {
-          console.error(error)
-        })
-
-      } else {
-        // Display "API access denied" message for 5 seconds
-        var deniedMessage = document.createElement('div');
-        deniedMessage.innerHTML = 'API ACCESS DENIED X!!';
-        deniedMessage.style.position = 'fixed';
-        deniedMessage.style.top = '50%';
-        deniedMessage.style.left = '50%';
-        deniedMessage.style.transform = 'translate(-50%, -50%)';
-        deniedMessage.style.backgroundColor = '#ff0000';
-        deniedMessage.style.color = '#ffffff';
-        deniedMessage.style.padding = '20px';
-        document.body.appendChild(deniedMessage);
-
-        setTimeout(function () {
-          deniedMessage.remove();
-        }, 3000);
-      }
-    }
   </script>
 </body>
 

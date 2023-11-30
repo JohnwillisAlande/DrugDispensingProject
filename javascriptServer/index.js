@@ -12,9 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const conn = connection();
 
-const userkey = "AxSr3fa23gsh2vi9h";
-const UserAPIKey = "AxSr3fauuih659h";
-const UsersAndDrugsAPIKey = "tGg6fg56gCHvt6";
+const userkey = "Yuin6F565gvyb5g8";
+const UserAPIKey = "Yuin6F565gvyb5g8";
+const UserDrugsAPIKey = "Yuin6F565gvyb5g8";
 const DrugsByUserAPIKey = "Yuin6F565gvyb5g8";
 
 // Generate a random 6-digit verification code
@@ -166,28 +166,33 @@ app.get("/Apis/drugs/user", authenticateAPIToken, (req, res) => {
   });
 });
 
-app.post("/APISub", (req, res) => {
-  const { apiname, username } = req.body;
+app.post("/APISub/:apiName/:username", (req, res) => {
+  const { apiName, username } = req.params;
+  console.log(apiName, username);
+
   var token;
-  if (apiname === "UserAPI") {
+  if (apiName === "UserAPI") {
+    // Assuming UserAPIKey is defined somewhere
     token = jwt.sign({ username: username }, UserAPIKey, {
       expiresIn: "1h",
     });
-  } else if (apiname === "UserDrugsAPI") {
-    token = jwt.sign({ username: username }, UsersAndDrugsAPIKey, {
+  } else if (apiName === "UserDrugsAPI") {
+    token = jwt.sign({ username: username }, UserDrugsAPIKey, {
       expiresIn: "1h",
     });
-  } else {
+  } else if (apiName === "DrugsByUserAPI") {
+    // Assuming DrugsByUserAPIKey is defined somewhere
     token = jwt.sign({ username: username }, DrugsByUserAPIKey, {
       expiresIn: "1h",
     });
   }
+
   res.send({ token: token });
 });
 
 function authenticateAPIToken(req, res, next) {
   const token = req.header("Authorization");
-  const api = req.query.apiname;
+  const api = req.params.apiName; // Correctly extracting apiName
 
   if (!token) return res.send({ message: "Unauthorized" });
 
@@ -197,9 +202,12 @@ function authenticateAPIToken(req, res, next) {
       req.user = user;
       next();
     });
-  } else if (api === "UsersAndDrugsAPI") {
-    jwt.verify(token, UsersAndDrugsAPIKey, (err, user) => {
-      if (err) return res.send({ proceed: false });
+  } else if (api === "UserDrugsAPI") {
+    jwt.verify(token, UserDrugsAPIKey, (err, user) => {
+      if (err) {
+        res.send({ proceed: false });
+        return console.error(false);
+      }
       req.user = user;
       next();
     });
@@ -234,7 +242,6 @@ app.get("/UserAPI", (req, res) => {
     } else {
       file = result.toString();
       res.send(file);
-      console.log(file);
     }
   });
 });
@@ -247,7 +254,6 @@ app.get("/UserDrugsAPI", (req, res) => {
     } else {
       file = result.toString();
       res.send(file);
-      console.log(file);
     }
   });
 });
@@ -260,7 +266,6 @@ app.get("/Home", (req, res) => {
     } else {
       file = result.toString();
       res.send(file);
-      console.log(file);
     }
   });
 });
@@ -273,7 +278,6 @@ app.get("/DrugsAPI", (req, res) => {
     } else {
       file = result.toString();
       res.send(file);
-      console.log(file);
     }
   });
 });
@@ -286,11 +290,29 @@ app.get("/DrugsByUserAPI", (req, res) => {
     } else {
       file = result.toString();
       res.send(file);
-      console.log(file);
     }
   });
 });
 
+app.get(
+  "/UserDrugs/:apiname/:type/:query",
+  authenticateAPIToken,
+  (req, res) => {
+    console.log("reached");
+    const { type, query } = req.params;
+    var sql = `SELECT * FROM PRESCRIPTION WHERE ${type}='${query}' `;
+
+    conn.query(sql, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.send({ er: err, proceed: false });
+      } else {
+        console.log(result);
+        res.send({ result: result, proceed: true });
+      }
+    });
+  }
+);
 
 app.get("/value", (req, res) => {});
 
