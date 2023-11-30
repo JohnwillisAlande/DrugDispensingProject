@@ -1,228 +1,215 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>UserDrugs API Dashboard</title>
+        <title>UserDrugs API Dashboard</title>
+       
+    <style>
+        .container{
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .navbar {
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    width: 120px;
+    cursor: pointer;
+  }
+  .navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+  }
 
-  <style>
-    .container {
-      width: 100%;
-      height: 100vh;
-      background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-    }
+  .navbar ul li a {
+    text-decoration: none;
+    color: #49e2d3;
+    text-transform: uppercase;
+  }
 
-    .navbar {
-      width: 85%;
-      margin: auto;
-      padding: 35px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+  .navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+  }
 
-    .logo {
-      width: 120px;
-      cursor: pointer;
-    }
+  .navbar ul li:hover:after {
+    width: 100%;
+    background: #fff;
+    color: #640d9e;
+  }
 
-    .navbar ul li {
-      list-style: none;
-      display: inline-block;
-      margin: 0 20px;
-      position: relative;
-    }
+  .active, .navbar ul li:hover {
+    background: lightcyan;
+    border-radius: 1px;
+  }
+  .row{
+    display: flex;
+    height: 88%;
+    align-items: center;
+  }
+  .col{
+    flex-basis: 50%;
+  }
+  h1{
+    color: #fff;
+    font-size: 100px;
+  }
+  p{
+    color: #fff;
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .card{
+    width: 300px;
+    height: 230px;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-position: center;
+    background-size: cover;
+  }
+  .card1{
+    background-image: url(images/diclac2.jpg);
+  }
+  .card2{
+    background-image: url(images/diclac2.jpg);
+  }
+  .card3{
+    background-image: url(images/diclac2.jpg);
+  }
+  .card4{
+    background-image: url(images/diclac2.jpg);
+  }
+  button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: goldenrod;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .navbar ul li a {
-      text-decoration: none;
-      color: #49e2d3;
-      text-transform: uppercase;
-    }
+  span {
+    background: #009688;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+  }
 
-    .navbar ul li::after {
-      content: '';
-      height: 3px;
-      width: 0;
-      background: #009688;
-      position: absolute;
-      left: 0;
-      bottom: -10px;
-      transition: 0.5s;
-    }
+  button:hover span {
+    width: 100%;
+  }
 
-    .navbar ul li:hover:after {
-      width: 100%;
-      background: #fff;
-      color: #640d9e;
-    }
+  button:hover {
+    border: none;
+  }
+  input.login-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border: 3px solid #009688;
+    border-radius: 4px;
+    background-color: lightcyan;
+  }
 
-    .active,
-    .navbar ul li:hover {
-      background: lightcyan;
-      border-radius: 1px;
-    }
+  input.login-input:focus {
+    background-color: cyan;
+  }
+  h2, p {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif; /* Replace 'Your Preferred Font' with the actual font you want to use */
+}
 
-    .row {
-      display: flex;
-      height: 88%;
-      align-items: center;
-    }
+/* Additional styling for h2 and p if needed */
+h2 {
+    font-size: 24px; /* Adjust the font size as needed */
+    margin-bottom: 10px; /* Add space below h2 for better spacing */
+}
 
-    .col {
-      flex-basis: 50%;
-    }
-
-    h1 {
-      color: #fff;
-      font-size: 100px;
-    }
-
-    p {
-      color: #fff;
-      font-size: 11px;
-      line-height: 15px;
-    }
-
-    .card {
-      width: 300px;
-      height: 230px;
-      display: inline-block;
-      border-radius: 10px;
-      padding: 15px 25px;
-      box-sizing: border-box;
-      cursor: pointer;
-      margin: 10px 15px;
-      background-position: center;
-      background-size: cover;
-    }
-
-    .card1 {
-      background-image: url(images/diclac2.jpg);
-    }
-
-    .card2 {
-      background-image: url(images/diclac2.jpg);
-    }
-
-    .card3 {
-      background-image: url(images/diclac2.jpg);
-    }
-
-    .card4 {
-      background-image: url(images/diclac2.jpg);
-    }
-
-    button {
-      width: 200px;
-      padding: 15px 0;
-      text-align: center;
-      margin: 20px 10px;
-      border-radius: 25px;
-      font-weight: bold;
-      border: 2px solid #009688;
-      background: transparent;
-      color: goldenrod;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    span {
-      background: #009688;
-      height: 100%;
-      width: 0;
-      border-radius: 25px;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      z-index: -1;
-      transition: 0.5s;
-    }
-
-    button:hover span {
-      width: 100%;
-    }
-
-    button:hover {
-      border: none;
-    }
-
-    input.login-input {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 4px 0;
-      box-sizing: border-box;
-      border: 3px solid #009688;
-      border-radius: 4px;
-      background-color: lightcyan;
-    }
-
-    input.login-input:focus {
-      background-color: cyan;
-    }
-
-    h2,
-    p {
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-      /* Replace 'Your Preferred Font' with the actual font you want to use */
-    }
-
-    /* Additional styling for h2 and p if needed */
-    h2 {
-      font-size: 24px;
-      /* Adjust the font size as needed */
-      margin-bottom: 10px;
-      /* Add space below h2 for better spacing */
-    }
-
-    p {
-      font-size: 16px;
-      /* Adjust the font size as needed */
-      line-height: 1.5;
-      /* Adjust the line height for better readability */
-    }
-
-    label {
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 16px;
-      /* Adjust the font size as needed */
-      margin-bottom: 5px;
-      /* Add space below label for better spacing */
-    }
-  </style>
+p {
+    font-size: 16px; /* Adjust the font size as needed */
+    line-height: 1.5; /* Adjust the line height for better readability */
+}
+label {
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px; /* Adjust the font size as needed */
+    margin-bottom: 5px; /* Add space below label for better spacing */
+}
+    </style>
 </head>
+<body>
+    <div>
+        <div class="container" style="position: absolute; top: -10; right: 5; padding: 10px;">
+            <div class="navbar">
+                <img src="images/afyahealth.png" class="logo">
+                <nav>
+                <ul>
+                    <li class="active"><a href="#">Dashboard</a></li>
+                    <li><a href="#">Access</a></li>
+                    <li><a href="#">Access</a></li>
+                </ul>
+                </nav>
+            </div>
 
-      <div class="row">
-        <div class="col">
-          <h1>USER DRUGS API</h1>
-          <p>Uncover the Afya Health Users and Drugs API -Your bridge to comprehensive
-            health data. Seamlessly access user details and pharmaceutical information
-            for personalized healthcare applications. Empower efficient service delivery,
-            enhance patient care, and elevate your healthcare integration with Afya Health.
-            Explore the possibilities and elevate your healthcare integration experience with Afya Health.</p>
+        <div class="row">
+            <div class="col">
+                <h1>USER DRUGS API</h1>
+                <p>Uncover the Afya Health Users and Drugs API -Your bridge to comprehensive
+                     health data. Seamlessly access user details and pharmaceutical information
+                      for personalized healthcare applications. Empower efficient service delivery,
+                       enhance patient care, and elevate your healthcare integration with Afya Health.
+                       Explore the possibilities and elevate your healthcare integration experience with Afya Health.</p>
+            </div>
+            <div class="col">
+                <div class="card card1">
+                    <h2>Drug Purchase By Category</h2>
+                    <label for="categoryPurchased">Enter Drug Category:</label>
+                    <input type="text" class="login-input" placeholder="Antibiotics" id="categoryPurchased">
+                    <button onclick="getUserById()"><span></span>Drugs Purchased In This Category</button>
+                    <pre id="userByIdResult"></pre>
+                </div>
+            
+                <div class="card card2">
+                    <h2>Drug Purchase By Date</h2>
+                    <label for="dateOfPurchase">Enter Date:</label>
+                    <input type="date" class="login-input" placeholder="12/12/2023" id="dateOfPurchase">
+                    <button onclick="getUserGenderById()"><span></span>Drugs Purchased On This Date</button>
+                    <pre id="userGenderByIdResult"></pre>
+                </div>
+            </div>
         </div>
-        <div class="col">
-          <div class="card card1">
-            <h2>Drug Purchase By Category</h2>
-            <label for="categoryPurchased">Enter Drug Category:</label>
-            <input type="text" class="login-input" placeholder="Antibiotics" id="categoryPurchased">
-            <button onclick="query('tradeName')"><span></span>Drugs Purchased In This Category</button>
-            <pre id="userByIdResult"></pre>
-          </div>
-
-          <div class="card card2">
-            <h2>Drug Purchase By Date</h2>
-            <label for="dateOfPurchase">Enter Date:</label>
-            <input type="date" class="login-input" placeholder="12/12/2023" id="dateOfPurchase">
-            <button onclick="query('datePrescribed')"><span></span>Drugs Purchased On This Date</button>
-            <pre id="userGenderByIdResult"></pre>
-          </div>
-        </div>
-      </div>
     </div>
     </div>
 </body>
