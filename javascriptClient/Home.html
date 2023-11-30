@@ -170,7 +170,7 @@ p {
       const apiToken = localStorage.getItem(`${trigger}`);
 
       if (trigger === "DrugsAPI") {
-        window.location = `/${trigger}.html`;
+        window.location = `/${trigger}`;
       }
 
       fetch(`http://localhost:4000/APIAuth/${trigger}`, {
@@ -185,7 +185,7 @@ p {
         }).then((data)=>{
           console.log(data)
           if (data.proceed) {
-            window.location = `/${trigger}.html`;
+            window.location = `/${trigger}`;
           } else {
             subscribeToApi(trigger);
           }
@@ -238,7 +238,7 @@ p {
           <div class="card card2">
             <h2>User Drugs</h2>
             <p>To provide efficient and accessible drug dispensing services</p>
-            <button onclick="handleButton(event)" id="UsersAndDrugsAPI" class="button"><span></span>Users and Drugs</button>
+            <button onclick="handleButton(event)" id="UserDrugsAPI" class="button"><span></span>Users and Drugs</button>
           </div>
           <div class="card card3">
             <h2>Drugs</h2>
@@ -270,7 +270,7 @@ p {
         }).then((data)=>{
           console.log(data)
           localStorage.setItem(apiName, data.token)
-          window.location = `${apiName}.html`
+          window.location = `${apiName}`
         }).catch((error) => {
           console.error(error)
         })

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Users API Dashboard</title>
+  <title>DrugsByUser API Dashboard</title>
 
   <style>
     .container {
@@ -212,42 +212,19 @@
 
       <div class="row">
         <div class="col">
-          <h1>Users API</h1>
-          <p>Unlock the Afya Health Users API -Your access point to vital
-            user data. Seamlessly retrieve user information, enabling your
-            healthcare applications to enhance personalized care. Empower efficient
-            service delivery and elevate your healthcare integration experience. Explore
-            the possibilities and elevate your healthcare integration experience with Afya Health Users API.</p>
+          <h1>Drugs By Users API</h1>
+          <p>Unveil the Afya Health Drugs By Users API -Unlocking personalized pharmaceutical insights.
+            Seamlessly access drug details tailored to individual users. Empower your healthcare applications
+            with real-time information for precise drug dispensing and elevated patient care.
+            Explore the possibilities and elevate your healthcare integration experience with Afya Health.</p>
         </div>
         <div class="col">
-          <div class="card card1">
-            <h2>List of All Users from Database</h2>
-            <button onclick="getAllUsers()"><span></span>Get All Users</button>
-            <pre id="allUsersResult"></pre>
-          </div>
-
-          <div class="card card2">
-            <h2>User Details by ID</h2>
-            <label for="userId">Enter User ID:</label>
-            <input type="text" class="login-input" placeholder="ABCD001" id="userID">
-            <button onclick="getUserById()"><span></span>Get User by ID</button>
-            <pre id="userByIdResult"></pre>
-          </div>
-
-          <div class="card card3">
-            <h2>User Gender by ID</h2>
-            <label for="userGender">Enter User ID:</label>
-            <input type="text" class="login-input" placeholder="ABCD001" id="userGender">
-            <button onclick="getUserGenderById()"><span></span>Get User Gender by ID</button>
-            <pre id="userGenderByIdResult"></pre>
-          </div>
-
-          <div class="card card4">
-            <h2>User Last Login Time by ID</h2>
-            <label for="loginTime">Enter User ID:</label>
-            <input type="text" class="login-input" placeholder="ABCD001" id="loginTime">
-            <button onclick="getUserLoginTimeById()"><span></span>Get User Last Login Time by ID</button>
-            <pre id="userLastLoginTimeByIdResult"></pre>
+          <div class="card">
+            <h2>User Drugs by ID</h2>
+            <label for="userDrugs">Enter User ID:</label>
+            <input type="text" class="login-input" placeholder="ABCD001" id="userDrugs">
+            <button onclick="getUserById()"><span></span>Get User Drugs by ID</button>
+            <pre id="userDrugsByIdResult"></pre>
           </div>
         </div>
       </div>
