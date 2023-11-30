@@ -193,6 +193,7 @@ app.post("/APISub/:apiName/:username", (req, res) => {
 function authenticateAPIToken(req, res, next) {
   const token = req.header("Authorization");
   const api = req.params.apiName; // Correctly extracting apiName
+  console.log(api, token);
 
   if (!token) return res.send({ message: "Unauthorized" });
 
@@ -213,7 +214,9 @@ function authenticateAPIToken(req, res, next) {
     });
   } else {
     jwt.verify(token, DrugsByUserAPIKey, (err, user) => {
-      if (err) return res.send({ proceed: false });
+      if (err) {
+        return res.send({ proceed: false });
+      }
       req.user = user;
       next();
     });
@@ -313,6 +316,85 @@ app.get(
     });
   }
 );
+
+app.get(
+  "/Drugs/:type/:query",
+  (req, res) => {
+    console.log("reached");
+    const { type, query } = req.params;
+    var sql = `SELECT * FROM DRUGS WHERE ${type}='${query}' `;
+
+    conn.query(sql, (err, result) => {
+      if (err) {
+        console.error(err);
+        res.send({ er: err, proceed: false });
+      } else {
+        console.log(result);
+        res.send({ result: result, proceed: true });
+      }
+    });
+  }
+);
+
+app.get("/AllDrugs", (req, res) => {
+  
+  var sql = `SELECT * FROM DRUGS`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ er: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
+
+app.get("/Patients/:type/:query", (req, res) => {
+  console.log("reached");
+  const { type, query } = req.params;
+  var sql = `SELECT * FROM Patients WHERE ${type}='${query}' `;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ er: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
+
+app.get("/AllUsers", (req, res) => {
+  var sql = `SELECT * FROM Patients`;
+
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ er: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
+
+app.get("/DrugsByUser/:apiName/:id", authenticateAPIToken, (req, res) => {
+  const value = req.params.id;
+  console.log("Reached", value);
+  var sql = `SELECT * FROM PRESCRIPTION WHERE PatientID='${value}' `;
+  conn.query(sql, (err, result) => {
+    if (err) {
+      console.error(err);
+      res.send({ err: err, proceed: false });
+    } else {
+      console.log(result);
+      res.send({ result: result, proceed: true });
+    }
+  });
+});
 
 app.get("/value", (req, res) => {});
 
