@@ -194,6 +194,33 @@
       /* Add space below label for better spacing */
     }
   </style>
+
+  <script>
+  const apiToken = localStorage.getItem("UserAPI")
+  const query = (type) => {
+    const value=document.querySelector("input").value
+    console.log(value)
+    fetch(`http://localhost:4000/UserDrugs/UserDrugsAPI/${type}/${value}`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': apiToken,
+      },
+    })
+      .then(response => {
+        console.log(response)
+        return response.json()
+      }).then((data) => {
+        console.log(data)
+        if (data.proceed) {
+        } else {
+        }
+      })
+      .catch(error => {
+        console.error('Request failed:', error.message);
+      });
+  }
+</script>
 </head>
 
 <body>
