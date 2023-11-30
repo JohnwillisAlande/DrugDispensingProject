@@ -175,14 +175,12 @@
   <script>
     const handleButton = (event) => {
       const trigger = event.target.id;
-
-
       const apiToken = localStorage.getItem(`${trigger}`);
 
       console.log(trigger)
 
       if (trigger === "DrugsAPI") {
-        window.location = `/${trigger}`;
+       return window.location = `/${trigger}`;
       }
 
       fetch(`http://localhost:4000/APIAuth/${trigger}`, {
