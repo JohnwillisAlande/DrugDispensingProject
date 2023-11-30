@@ -7,7 +7,7 @@
         .container{
             width: 100%;
             height: 100vh;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(83, 193, 195, 0.75)), url(./images/hospitalimage11.jpg);
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 255, 0.612)), linear-gradient(rgba(173, 216, 230, 0.435), rgba(255, 255, 255, 0.5)), url(./images/hospitalimage11.jpg);
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -280,33 +280,105 @@ h2 {
       margin-bottom: 5px;
       /* Add space below label for better spacing */
     }
+    .result-section {
+  background-color: #49e2d3;
+  padding: 20px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.result-section:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #00ff00, #ffff00);
+  background-size: 400% 400%;
+  border-radius: 20px;
+  z-index: -1;
+  animation: neon-glow 2s linear infinite;
+}
+
+.result-section h2 {
+  font-size: 30px;
+  color: #fff;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.result-section pre {
+  background-color: #009688;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: auto;
+  max-height: 300px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.result-section pre code {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+@keyframes neon-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
   </style>
-  <script>
-    const apiToken = localStorage.getItem("UserDrugsAPI")
-    const query = (type) => {
-      const value = document.querySelector("input").value
-      console.log(value)
-      fetch(`http://localhost:4000/UserDrugs/UserDrugsAPI/${type}/${value}`, {
-        method: "GET",
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': apiToken,
-        },
-      })
-        .then(response => {
-          console.log(response)
-          return response.json()
-        }).then((data) => {
-          console.log(data)
-          if (data.proceed) {
-          } else {
-          }
-        })
-        .catch(error => {
-          console.error('Request failed:', error.message);
-        });
-    }
-  </script>
+ <script>
+        const apiToken = localStorage.getItem("UserDrugsAPI");
+
+        const displayResult = (data) => {
+            const resultElement = document.getElementById('userByIdResult');
+            resultElement.textContent = JSON.stringify(data, null, 2);
+        };
+
+        const query = (type) => {
+            const value = document.querySelector("input").value;
+            console.log(value);
+
+            fetch(`http://localhost:4000/UserDrugs/UserDrugsAPI/${type}/${value}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': apiToken,
+                },
+            })
+                .then(response => {
+                    console.log(response);
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    if (data.proceed) {
+                        displayResult(data.result);
+                    } else {
+                        displayResult({ error: "No data found", proceed: false });
+                    }
+                })
+                .catch(error => {
+                    console.error('Request failed:', error.message);
+                    displayResult({ error: error.message, proceed: false });
+                });
+        };
+    </script>
 </head>
 <body>
     <div>
@@ -333,22 +405,28 @@ h2 {
             </div>
             <div class="col">
                 <div class="card card1">
-                    <h2>Drug Purchase By Category</h2>
-                    <label for="categoryPurchased">Enter Drug Category:</label>
+                    <h2>Drug Purchase By TradeName</h2>
+                    <label for="categoryPurchased">Enter Drug TradeName:</label>
                     <input type="text" class="login-input" placeholder="Antibiotics" id="categoryPurchased">
-                    <button onclick="getUserById()"><span></span>Drugs Purchased In This Category</button>
-                    <pre id="userByIdResult"></pre>
+                    <button onclick="query('tradeName')"><span></span>Drugs Purchased In This Category</button>
+                    <!-- <pre id="userByIdResult"></pre> -->
                 </div>
             
                 <div class="card card2">
                     <h2>Drug Purchase By Date</h2>
                     <label for="dateOfPurchase">Enter Date:</label>
                     <input type="date" class="login-input" placeholder="12/12/2023" id="dateOfPurchase">
-                    <button onclick="getUserGenderById()"><span></span>Drugs Purchased On This Date</button>
+                    <button onclick="query('datePrescribed')"><span></span>Drugs Purchased On This Date</button>
                     <pre id="userGenderByIdResult"></pre>
                 </div>
             </div>
         </div>
+        <div class="col">
+          <div class="result-section">
+              <h2>QUERY RESULT</h2>
+              <pre id="userByIdResult"></pre>
+          </div>
+      </div>
     </div>
     </div>
 </body>
